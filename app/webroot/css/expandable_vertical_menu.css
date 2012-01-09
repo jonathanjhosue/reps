@@ -1,0 +1,74 @@
+/*
+===================================================
+	Expandable vertical menu style
+===================================================
+*/
+#v_nav {
+ width: 11em;
+ float: right;
+}
+#v_nav, #v_nav ul, #v_nav li {
+ margin: 0;
+ padding: 0;
+ list-style: none;
+}
+#v_nav a {
+ display: block;
+ height: 1.2em;
+ width: 100%;
+ padding: 0.25em;
+ text-decoration: none;
+}
+#v_nav a.span {
+ color: #851025;
+ background-color:#F0F5E4;
+ position: relative;
+ border-color:#FFFFFF #FFFFFF #E0D9D9;
+ border-style:solid;
+ border-width: 1px 1px 1px 0px;
+}
+#v_nav a.span:hover {
+background-color:#F0F5E4;
+ color: #851025; 
+ font-weight:bold;
+}
+#v_nav a.span img {
+ position: absolute;
+ top: 2px;
+ right: 2px;
+ border: 0;
+}
+#v_nav li {
+ border: thin solid white;
+ clear: both;
+}
+#v_nav li ul li {
+ font-size: 85%;
+ border: none;
+ position:relative;
+}
+#v_nav li ul li a {
+ color: #851025;
+ background-color:#FCFFFD;
+ border-color:#FFFFFF #FFFFFF #E0D9D9;
+ border-style:solid;
+ border-width: 1px 1px 1px 0px;
+}
+#v_nav li ul li a:hover {
+background-color:#F0F5E4;
+ color: #851025; 
+ font-weight:bold; 
+ } 
+
+/*dropleft menu styles starts*/
+#v_nav li ul li:hover > ul {
+	visibility:visible;
+} 
+
+#v_nav li ul li ul{
+	position:absolute;
+	left:165px;
+	top:0px;
+	visibility:hidden;
+	width:100%;
+}

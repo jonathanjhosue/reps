@@ -1,0 +1,240 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">	
+        <title> PanamaReps: Content Management System Home:		Hotels	</title>
+        <link rel="icon" type="image/x-icon" href="/beta/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="/beta/favicon.ico">
+        <link href="../../cake.generic.css" type="text/css" rel="stylesheet">
+        <link href="../../cake.cms.css" type="text/css" rel="stylesheet">
+		  <script type="text/javascript" src="../../jquery.js"></script>
+		  <script type="text/javascript">
+			  $(document).ready(function() {
+				 $(".tabLink").each(function(){
+					$(this).click(function(){
+					  tabeId = $(this).attr('id');
+					  $(".tabLink").removeClass("activeLink");
+					  $(this).addClass("activeLink");
+					  $(".tabcontent").addClass("hide");
+					  $("#"+tabeId+"-1").removeClass("hide")   
+					  return false;	  
+					});
+				 });  
+			  });
+			</script>
+    </head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1><a href="/beta/hotels/../">PanamaReps: Content Management System</a></h1>
+		</div>
+		<div id="content">			
+			<br>
+            <br>
+            <br>
+			<div class="hotels view">
+				<div>
+					<p><img src="Images/imagen1.jpg" class="serviceImageMain"></p>
+		       		<div class="serviceImageThumbs">
+						<p><img src="Images/thumb1.jpg" height="75px" onClick="actualizarImagen(1,'Images/imagen1.jpg');" class="transparencia" id="thumb1"></p>
+						<p><img src="Images/thumb1.jpg" height="75px" onClick="actualizarImagen(1,'Images/imagen1.jpg');" class="transparencia" id="thumb1"></p>
+						<p><img src="Images/thumb1.jpg" height="75px" onClick="actualizarImagen(1,'Images/imagen1.jpg');" class="transparencia" id="thumb1"></p>
+		            	<p><img src="Images/thumb1.jpg" height="75px" onClick="actualizarImagen(1,'Images/imagen1.jpg');" class="transparencia" id="thumb1"></p>
+		            	<p><img src="Images/thumb1.jpg" height="75px" onClick="actualizarImagen(1,'Images/imagen1.jpg');" class="transparencia" id="thumb1"></p>
+					</div>						
+					<div class="serviceName"><span class="label">Prueba Lodge</span></div>		
+					<table class="serviceHeader">
+						<tr>
+							<td><span class="label">Category:&nbsp;</span>Categoría de prueba</td>
+							<td><span class="label">Location:&nbsp;</span>Locación de Prueba</td>
+							<td><span class="label">Total Room:</span>&nbsp;20</td>
+					  </tr>
+					</table>
+				</div>  
+				</br>
+				<div class="tab-box"> 
+    				<a href="javascript:;" class="tabLink activeLink" id="cont-1">Overview</a> 
+    				<a href="javascript:;" class="tabLink " id="cont-2">Rooms</a> 
+   				<a href="javascript:;" class="tabLink " id="cont-3">Features</a>
+					<a href="javascript:;" class="tabLink " id="cont-4">Reviews</a>
+					<a href="javascript:;" class="tabLink " id="cont-5">Rates</a> 				
+ 				</div>
+				<!-- overview tab starts -->
+				<div class="tabcontent" id="cont-1-1"> 
+					</br>
+					<div style="border: 1px solid #ddd;">
+						This is a beautiful property to relax and enjoy the marvellous view of Arenal Volcano in Costa Rica. Surrounded by gardens, pastures and animals, our rooms have been designed so that each one offers you a panoramic view of the volcano. Our visitors can take advantage of our spacious gardens for walking and meditation as well as the opportunities to see the daily operations of a typical Costa Rican farm.
+					</div>
+					</br>
+					<div style="border: 1px solid #ddd;">
+						<div style="text-align:left; float:left;">
+							<span class="label">Directions&nbsp;</span>
+						</div>
+						<div style="text-align:right;">
+							<span class="label">Gps Coordinates:&nbsp;</span>
+							<span class="label">N:&nbsp;</span><span>12363&nbsp;</span>
+							<span class="label">E:&nbsp;</span><span>123500&nbsp;</span>
+						</div>
+						</br>
+						<div>
+						1. San José – San Ramón – Arenal Manoa: It's the fastest access route, surrounded of green areas and beautiful forest scenarios, takes 2 hour and a half approximately. 
+						</div>
+					</div>					
+			   </div>
+			   <!-- overview tab ends -->
+				
+				<!-- rooms tab starts -->
+			   <div class="tabcontent hide" id="cont-2-1"> 
+					</br>
+					<!-- room category starts -->
+					<div>
+						<div style="text-align:left; float:left;">
+							<span class="label">Category:&nbsp;</span> <span>Luxury&nbsp;</span>		
+							<span class="label">Rooms:&nbsp;</span> <span>11&nbsp;</span>											
+						</div>							
+						</br>
+						<div style="border: 1px solid #ddd;">
+							<div>
+								<span>Our Junior Suites, has been designed in a way that you can't fail to see any detail of the panoramic view of the Volcano from your own room. Wide open internal and exterior space to make your comfort and enjoy be our presentation letter. &nbsp;</span>	
+							</div>
+							</br>
+							<div>
+								<span class="label">Amenities:&nbsp;</span> 
+								<span>Restaurant, Bar, Swimmingpool, Wet Bar, Internet, Gardens, Laundry Service, Wheelchair Accesible&nbsp;</span>	
+							</div>
+						</div>
+					</div>
+					<!-- room category ends -->
+			   </div> 
+				<!-- rooms tab ends -->			  
+				
+				<!-- features tab starts -->		
+			   <div class="tabcontent hide" id="cont-3-1"> 
+					<dl class="tab">
+						<dt class="altrow">Bar</dt>
+						<dd class="tab altrow">Yes&nbsp;</dd>
+						<dt>Business Center</dt>
+						<dd class="tab">No&nbsp;</dd>
+						<dt class="altrow">Certifications</dt>
+						<dd class="tab altrow">No&nbsp;</dd>	
+						<dt>Childcare</dt>
+						<dd class="tab">No&nbsp;</dd>					
+						<dt class="altrow">Conference Facilities</dt>
+						<dd class="tab altrow">No&nbsp;</dd>	
+						<dt>Fitness Center</dt>
+						<dd class="tab">No&nbsp;</dd>		
+						<dt class="altrow">Free Shuttle Service</dt>
+						<dd class="tab altrow">No&nbsp;</dd>						
+					</dl> 
+					<dl class="tab">
+						<dt class="altrow">Gardens</dt>
+						<dd class="tab altrow">No&nbsp;</dd>		
+						<dt>Gift Shop</dt>
+						<dd class="tab">No&nbsp;</dd>
+						<dt class="altrow">Golf Court</dt>
+						<dd class="tab altrow">No&nbsp;</dd>	
+						<dt>Internet</dt>
+						<dd class="tab">No&nbsp;</dd>	
+						<dt class="altrow">Laundry Service</dt>
+						<dd class="tab altrow">No&nbsp;</dd>
+						<dt>Nature Trails</dt>
+						<dd class="tab">No&nbsp;</dd>	
+						<dt class="altrow">Private Car Park</dt>
+						<dd class="tab altrow">No&nbsp;</dd>					
+					</dl>
+					<dl class="tab">
+						<dt class="altrow">Socialfunctions Services</dt>
+						<dd class="tab altrow">No&nbsp;</dd>		
+						<dt>Restaurant</dt>
+						<dd class="tab">Yes&nbsp;</dd>
+						<dt class="altrow">Swimmingpool</dt>
+						<dd class="tab altrow">Yes&nbsp;</dd>
+						<dt>Tennis Court</dt>
+						<dd class="tab">No&nbsp;</dd>
+						<dt class="altrow">Tour Desk</dt>
+						<dd class="tab altrow">No&nbsp;</dd>
+						<dt>Wet Bar</dt>
+						<dd class="tab">Yes&nbsp;	</dd>	
+						<dt class="altrow">Wheelchair Accessible</dt>
+						<dd class="tab altrow">No&nbsp;</dd>				
+					</dl>
+			   </div> 
+				<!-- features tab ends -->		
+				
+				<!-- review tab starts -->		
+				<div class="tabcontent hide" id="cont-4-1"> 
+				  </br>
+					<div>
+						<fieldset class="tab">
+							<legend class="tab"><span class="label">Traveller Reviews:&nbsp;</span></legend>							
+							<div style="border: 1px solid #ddd;"> <!-- repetir este div por cada review -->
+								<span>Our Junior Suites, has been designed in a way that you can't fail to see any detail of the panoramic view of the Volcano from your own room. Wide open internal and exterior space to make your comfort and enjoy be our presentation letter. &nbsp;</span>	
+							</div>
+							</br>
+							<div style="border: 1px solid #ddd;"> <!-- repetir este div por cada review -->
+								<span>Our Junior Suites, has been designed in a way that you can't fail to see any detail of the panoramic view of the Volcano from your own room. Wide open internal and exterior space to make your comfort and enjoy be our presentation letter. &nbsp;</span>	
+							</div>
+							</br>
+						</fieldset>
+						<fieldset class="tab">
+							<legend class="tab"><span class="label">Staff Reviews:&nbsp;</span></legend>							
+							<div style="border: 1px solid #ddd;"> <!-- repetir este div por cada review -->
+								<span>Our Junior Suites, has been designed in a way that you can't fail to see any detail of the panoramic view of the Volcano from your own room. Wide open internal and exterior space to make your comfort and enjoy be our presentation letter. &nbsp;</span>	
+							</div>
+						</fieldset>					
+					</div>
+			   </div>
+				<!-- review tab ends -->	
+					
+				<!-- rates tab starts -->	
+				<div class="tabcontent hide" id="cont-5-1"> 
+				  </br>
+					<!-- room category starts -->
+					<div>
+						<div style="text-align:left; float:left;">
+							<span class="label">Category:&nbsp;</span> <span>Luxury&nbsp;</span>												
+						</div>							
+						</br>
+						<table class="tab" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<th>Validity Starts</th><th>Validity Ends</th><th>Single Rack</th><th>Single Net</th><th>Double Rack</th><th>Double Net</th><th>Triple Rack</th><th>Triple Net</th><th>Quadruple Rack</th><th>Quadruple Net</th><th>Child Rack</th><th>Child Net</th><th>Infant Rack</th><th>Infant Net</th>
+								</tr>
+								<tr class="altrow">
+									<td>2011-08-31</td>
+									<td>2011-08-31</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>12</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- room category ends -->
+					</br>
+			   </div>
+				<!-- rates tab ends -->	          	
+			</div>
+			<div class="actions">
+				 <ul>
+					  <li><a href="/beta/Hotels/edit/1">Edit Hotel</a></li>
+					  <li><a onClick="return confirm('Are you sure you want to delete this Hotel?');" href="/beta/Hotels/delete/1">Delete Hotel</a></li>
+					  <li><a href="/beta/Hotels">List Hotels</a></li>
+					  <li><a href="/beta/Hotels/add">New Hotel</a></li>
+				 </ul>
+			</div>
+		</div>
+		<div id="footer">
+			<a target="_blank" href="http://www.cakephp.org/"><img border="0" alt="CakePHP: the rapid development php framework" src="/beta/img/cake.power.gif"></a>								   	</div>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,159 @@
+/* SVN FILE: $Id$ */
+/**
+ *
+ * PHP versions 4 and 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.app.webroot.css
+ * @since         CakePHP(tm)
+ * @version       $Revision$
+ * @modifiedby    $LastChangedBy$
+ * @lastmodified  $Date$
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+ */
+
+* {
+	margin:0;
+	padding:0;
+}
+
+
+/* Layout */
+.serviceImageMain
+{
+	float:left;
+	padding-right:4px;
+	height:375px;
+	width:700px;
+	
+}
+.tab-box { 
+  border-bottom: 1px solid #DDD;
+  padding-bottom:5px;
+  width:69.5%;
+}
+
+.tab-box a {
+  border:1px solid #DDD;
+  color:#666666;
+  padding: 5px 15px;
+  text-decoration:none;
+  background-color: #eee;
+}
+
+.tab-box a.activeLink { 
+  background-color: #fff; 
+  border-bottom: 0; 
+  padding: 6px 15px;
+}
+
+.tabcontent { 
+	border: 1px solid #ddd; 
+	border-top: 0; 
+	padding: 5px;
+	width:68.5%;
+	min-height:200px;
+}
+
+.hide { display: none;}
+
+/* Tables */
+
+table.serviceHeader{
+	width:60%;
+	border:none;
+	/*font-size: 110%;*/
+	margin-bottom:0px;
+	padding:0px;
+}
+table.serviceHeader tr td{
+	/*font-size: 110%;*/
+	margin-bottom:0px;
+	padding:0px;
+	text-align:left;
+}
+table.tab{
+	font-size:80%;
+}
+
+/* Paging */
+div.paging {
+	background:#fff;
+	color: #ccc;
+	margin-bottom: 2em;
+}
+div.paging div.disabled {
+	color: #ddd;
+	display: inline;
+}
+div.paging span {
+}
+div.paging span.current {
+	color: #000;
+}
+div.paging span a {
+}
+
+/* Scaffold View */
+dl.tab {
+	line-height: 2em;
+	width: 32%;
+	float:left;
+}
+
+dd.tab {
+	margin-left: 14em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+
+fieldset.tab{
+	border: none;
+	padding: 1px 10px;	
+	margin-top: 0px;
+	min-height: 90px;
+}
+
+fieldset legend.tab{
+	font-weight: bold;
+	font-size:inherit;
+	color:#333333;
+}
+
+/* Forms */
+
+label {
+	display: block;
+	font-size: 110%;
+	padding-right: 20px;
+}
+
+.serviceName{
+	text-align:center;
+	width:60%;
+	float:left;
+}
+
+span.label{
+	/*font-size: 110%;*/
+	font-weight:bold;
+}
+
+
+/* Notices and Errors */
+
+/*  Actions  */
+
+
+/* Related */
+
+
+/* Debugging */

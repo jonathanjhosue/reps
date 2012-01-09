@@ -1,0 +1,46 @@
+/* cake.cms_pageNav.css Document */
+
+/******* Layout Divs   *******/
+
+#pageNav {
+    background-color: #F0F5E4;
+    border-bottom: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    float: right;
+    font: small Verdana,sans-serif;
+    padding: 0;
+    width: 150px;
+}
+
+/************ sectionLinks styles **************/
+
+#sectionLinks{
+	margin: 0px;
+	padding: 0px;
+
+}
+
+#sectionLinks h3{
+	padding: 10px 0px 2px 10px;
+	border-bottom: 1px solid #cccccc;
+}
+
+#sectionLinks a:link, #sectionLinks a:visited {
+	display: block;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #cccccc;
+	background-image: url(../images/bg_nav.jpg);
+	font-weight: bold;
+	padding: 3px 0px 3px 10px;
+	color: #364712;
+}
+
+#sectionLinks a:hover{
+	border-top: 1px solid #cccccc;
+	background-color: #F0F5E4;
+	background-image: none;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+
