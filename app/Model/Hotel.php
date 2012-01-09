@@ -9,7 +9,9 @@ class Hotel extends AppModel
 			'HotelCategory' => array('className' => 'HotelCategory')
 			); 
 	var $hasMany = 'Room';  
+        
 	var $displayField = 'hotel_name';
+        
 }  
 ?>
 

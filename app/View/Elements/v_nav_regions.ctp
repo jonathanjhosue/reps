@@ -1,5 +1,5 @@
 <?php
-	echo $this->Html->css('expandable_vertical_menu');
+	echo $this->Html->css('expandable_vertical_menu',null, array("inline"=>false));
 	echo $this->Html->script('expandable_vertical_menu.js');
 ?>
 
@@ -7,7 +7,7 @@
 <ul id="v_nav">
 	<?php 
 		$contPanel = 0;
-print_r($regions);
+
 		foreach($regions as $region): ?>
 		<li>
 			<a onclick="panelexpand('panel_<?php echo $contPanel; ?>', '$totalPanel');return false;" class="span" href="#"><?php echo $region['Region']['name_region']; ?><img alt="" src="plus.png" id="pm<?php echo $contPanel; ?>"></a>

@@ -77,7 +77,10 @@ class RegionsController extends AppController
 				}
 			}
 		}
-		else { $this->redirect('/'); }		  
+		else { 
+                    $this->redirect('/'); 
+                    
+                }		  
 	}
 } 
-?>
+
