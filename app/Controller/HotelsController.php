@@ -1,4 +1,7 @@
 <?php
+
+App::import('Model', 'TiposGlobal'); 
+
 class HotelsController extends AppController
 {
     public $name = 'Hotels';
@@ -14,120 +17,160 @@ class HotelsController extends AppController
 				'hasMany' => array('Room')
 				)
 			);
-		$this->data = $this->Hotel->findAll();*/
+		$this->request->data = $this->Hotel->findAll();*/
 		
 		//Consulta la primer imaegn de cada hotel. Primero se aisla el modelo Image antes de consultar.
-		/*for($i=0; $i < count($this->data); $i++){
+		/*for($i=0; $i < count($this->request->data); $i++){
 			$this->Hotel->Product->Image->unbindModel(array('belongsTo'=>array('Product')));
-			$this->data[$i]['Product']['image'] = $this->Hotel->Product->Image->find('first', array('conditions' => array( 'Image.product_id'=>$this->data[$i]['Product']['id'])));
+			$this->request->data[$i]['Product']['image'] = $this->Hotel->Product->Image->find('first', array('conditions' => array( 'Image.product_id'=>$this->request->data[$i]['Product']['id'])));
 		}*/
 		
 		//Se consultan los Regions Y Locations.
 		$this->set('regions', $this->Hotel->Product->Location->Region->find('all'));  
 		
-		/*$this->set('hotels', $this->data);*/
+		/*$this->set('hotels', $this->request->data);*/
 	}
 	
 	/*
 	 * Description: Consulta los hoteles que se encuentran en un Location particular.
 	 * $id: PK del Location del cual se desean consultar los hoteles.
 	*/
-	function index_by_location($id)
+	public function index_by_location($id)
 	{
-		$this->helpers[] = 'Javascript';
+		$this->helpers[] = 'Js';
 		$this->layout = 'guest';
 		
-		//Consulta todos las instancias de Hotel según el id de Location. Se aisla de Room xq no se necesita mostrar ese modelo.
+		//Consulta todos las instancias de Hotel segï¿½n el id de Location. Se aisla de Room xq no se necesita mostrar ese modelo.
 		$this->Hotel->unbindModel(array(
 				'hasMany' => array('Room')
 				)
 			);
-		$this->data = $this->Hotel->find('all', array(
-			'fields'=> array('Hotel.id', 'Hotel.product_id', 'Hotel.hotel_category_id', 'Hotel.hotel_name', 'Product.id', 'Product.location_id', 'HotelCategory.id', 'HotelCategory.category_name'),
+		$this->request->data = $this->Hotel->find('all', array(
+			'fields'=> array('Hotel.id', 'Hotel.product_id', 'Hotel.hotel_category_id', 'Product.product_name', 'Product.id', 'Product.location_id', 'HotelCategory.id', 'HotelCategory.category_name'),
 			'conditions' => array('Product.location_id' => $id)));
 			
 		//Consulta la primer imagen de cada hotel. Primero se aisla el modelo Image antes de consultar.
-		for($i=0; $i < count($this->data); $i++){
-			$this->Hotel->Product->Image->unbindModel(array('belongsTo'=>array('Product')));
-			$this->data[$i]['Product']['image'] = $this->Hotel->Product->Image->find('first', array('conditions' => array( 'Image.product_id'=>$this->data[$i]['Product']['id'])));
-		}
-			
+                /*$hola;
+                
+		for($i=0; $i < count($this->request->data); $i++){
+			//$this->Hotel->Image->unbindModel(array('belongsTo'=>array('Product')));
+			//$this->request->data[$i]['Hotel']['Image'] = $hola[$i]= $this->Hotel->Image->find('first', array('conditions' => array( 'Image.owner_id'=>$this->request->data[$i]['Product']['id'] )));
+		                       
+                }*/
+		//$this->set('hola', $hola);	
 		//Se consultan los Regions Y Locations.
-		$this->set('regions', $this->Hotel->Product->Location->Region->findAll());  
+		$this->set('regions', $this->Hotel->Product->Location->Region->find('all'));  
 		
 		//Se asigna la variable con los datos de los hoteles.
-		$this->set('hotels', $this->data);
+		$this->set('hotels', $this->request->data);
 	}
 	
 	/*
-	 * Description: Permite recuperar toda la información para la vista de usuario visitante.
+	 * Description: Permite recuperar toda la informaciï¿½n para la vista de usuario visitante.
 	 * $id: identificador del hotel
-	 * $language: identificador del lenguage en que se requiere la información.
+	 * $language: identificador del lenguage en que se requiere la informaciï¿½n.
 	*/
-	function view($id)
+	public function view($id)
 	{	
 		$this->layout = 'guest';
-		$this->helpers[] = 'Javascript';
+		$this->helpers[] = 'Js';
 		
 		$language = $this->Session->read('language');
 		
 		//consulta del hotel (Hotel, Product, HotelCategory, Rooms)
+                $this->Hotel->unbindModel(array('hasMany' => array('Season','Image','Room'),'belongsTo'=>array('Product','HotelCategory'))); 
 		$this->Hotel->id = $id;		
-		$this->data = $this->Hotel->read();	
+                $this->Hotel->recursive = 1;
+		$this->request->data = $this->Hotel->read();	
+		$deb=$this->request->data;
+                //Consulta todos las instancias de Hotel segï¿½n el id de Location. Se aisla de Room xq no se necesita mostrar ese modelo.
+		$this->Hotel->Product->Location->unbindModel(array('hasMany' => array('Product')));                
+                $this->Hotel->Product->Location->id = $this->request->data['Product']['location_id'];	
+                $locationArray=$this->Hotel->Product->Location->read();
+                
+                $this->Hotel->Product->unbindModel(array('belongsTo' => array('Location'),'hasOne'=>array('Hotel')));
+                $this->Hotel->Product->id = $this->request->data['Hotel']['product_id'];	
+                $reviewArray=$this->Hotel->Product->read(); 
+                
+                $this->Hotel->Season->RoomRate->unbindModel(array('belongsTo' => array('Hotel')));
+               // $this->Hotel->Season->id = $this->request->data['Hotel']['product_id'];	
+                $ratesArray=$this->Hotel->Season->RoomRate->find('all',array('conditions'=>array('Season.hotel_id'=>$id))); 
+                
+                $this->request->data['Location']=$locationArray['Location'];
+                $this->request->data['Region']=$locationArray['Region'];
+                $this->request->data['StaffReview']=$reviewArray['StaffReview'];
+                $this->request->data['TravellerReview']=$reviewArray['TravellerReview'];
+                //$this->request->data['RoomRate']=$ratesArray;
+                
+
+                
+                $totalRooms = 0;
+                foreach ($this->request->data['Room'] as $room){
+                    $totalRooms+=$room['count'];                   
+                }
+                
+                $this->request->data['Hotel']['total_rooms']=$totalRooms;
+                //$this->request->data['Product']=$this->Hotel->Product->read();
 		
-		//Consulta de RoomRate para cada Room obtenida, únicamente si el usuario está registrado, de lo contrario no consulta las tarifas.
-		//se crea el nuevo arreglo 'RoomRates' en $this->data['Room'][x] donde x es el índice de la habitación obtenida.
+                $totalRooms = count($this->request->data['Room']);
+		//Consulta de RoomRate para cada Room obtenida, ï¿½nicamente si el usuario estï¿½ registrado, de lo contrario no consulta las tarifas.
+		//se crea el nuevo arreglo 'RoomRates' en $this->request->data['Room'][x] donde x es el ï¿½ndice de la habitaciï¿½n obtenida.
 		if ($this->Session->check('Auth.User'))
 		{
-			$totalRooms = count($this->data['Room']);
+			
 			for($i=0; $i < $totalRooms; $i++)
 			{	
-				$this->Hotel->Room->RoomRate->unbindModel(array(
+				/*$this->Hotel->Room->RoomRate->unbindModel(array(
 					'belongsTo' => array('Room')
 					)			
 				);								
-				$roomRates = $this->Hotel->Room->RoomRate->findAllByRoomId( $this->data['Room'][$i]['id'] );			
-				$this->data['Room'][$i]['room_rate'] = $roomRates; 
+				$roomRates = $this->Hotel->Room->RoomRate->findAllByRoomId( $this->request->data['Room'][$i]['id'] );			
+				$this->request->data['Room'][$i]['room_rate'] = $roomRates; 
+                                 * */
+                                 
 			}	
 		}
 
 		//Consulta de RoomDescription para cada Room obtenida, en el lenguage correspondiente.
-		//se crea el nuevo arreglo 'RoomDescriptions' en $this->data['Room'][x] donde x es el índice de la habitación obtenida.
+		//se crea el nuevo arreglo 'RoomDescriptions' en $this->request->data['Room'][x] donde x es el ï¿½ndice de la habitaciï¿½n obtenida.
 		for($i=0; $i < $totalRooms; $i++)
 		{	
-			$this->Hotel->Room->RoomDescription->unbindModel(array(
+			/*$this->Hotel->Room->RoomDescription->unbindModel(array(
 				'belongsTo' => array('Room', 'Language')
 				)			
 			);							
-			$temp = $this->Hotel->Room->RoomDescription->find('first', array('conditions' => array('RoomDescription.room_id' =>  $this->data['Room'][$i]['id'], 'RoomDescription.language_id' => $language)));						
-			$this->data['Room'][$i]['room_description'] = $temp['RoomDescription']; 
+			$temp = $this->Hotel->Room->RoomDescription->find('first', array('conditions' => array('RoomDescription.room_id' =>  $this->request->data['Room'][$i]['id'], 'RoomDescription.language_id' => $language)));						
+			$this->request->data['Room'][$i]['room_description'] = $temp['RoomDescription']; 
+                         * 
+                         */
 		}		
 			
-		//--Consulta de la información completa de Product(Description, Direction, Review, Location, Image)
-		//se almacena en $this->data['Product']		
+		//--Consulta de la informaciï¿½n completa de Product(Description, Direction, Review, Location, Image)
+		//se almacena en $this->request->data['Product']	
+                /*
 		$this->Hotel->Product->Description->unbindModel(array('belongsTo'=>array('Product', 'Language')));
-		$temp = $this->Hotel->Product->Description->find('first', array('conditions' => array('Description.product_id'=>$this->data['Product']['id'], 'Description.language_id' => $language)));
-		$this->data['Product']['description'] = $temp['Description'];
+		$temp = $this->Hotel->Product->Description->find('first', array('conditions' => array('Description.product_id'=>$this->request->data['Product']['id'], 'Description.language_id' => $language)));
+		$this->request->data['Product']['description'] = $temp['Description'];
 		
 		$this->Hotel->Product->Direction->unbindModel(array('belongsTo'=>array('Product', 'Language')));
-		$temp = $this->Hotel->Product->Direction->find('first', array('conditions' => array('Direction.product_id'=>$this->data['Product']['id'], 'Direction.language_id'=>$language)));
-		$this->data['Product']['direction'] = $temp['Direction'];
+		$temp = $this->Hotel->Product->Direction->find('first', array('conditions' => array('Direction.product_id'=>$this->request->data['Product']['id'], 'Direction.language_id'=>$language)));
+		$this->request->data['Product']['direction'] = $temp['Direction'];
 		
-		if ($this->Session->check('Auth.User')) //Los comentarios de Staff únicamente para usuarios registrados.
+		if ($this->Session->check('Auth.User')) //Los comentarios de Staff ï¿½nicamente para usuarios registrados.
 		{
 			$this->Hotel->Product->Review->unbindModel(array('belongsTo'=>array('Product', 'Language')));
-			//$params['conditions'] =  array('Review.product_id'=>$this->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'S');
-			$this->data['Product']['staff_review'] = $this->Hotel->Product->Review->find('all', array('conditions' => array('Review.product_id'=>$this->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'S')));
+			//$params['conditions'] =  array('Review.product_id'=>$this->request->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'S');
+			$this->request->data['Product']['staff_review'] = $this->Hotel->Product->Review->find('all', array('conditions' => array('Review.product_id'=>$this->request->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'S')));
 		}
 		
 		$this->Hotel->Product->Review->unbindModel(array('belongsTo'=>array('Product', 'Languages')));
-		//$params['conditions'] =  array('Review.product_id'=>$this->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'T');
-		$this->data['Product']['traveller_review'] = $this->Hotel->Product->Review->find('all', array('conditions' => array('Review.product_id'=>$this->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'T')));
+		//$params['conditions'] =  array('Review.product_id'=>$this->request->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'T');
+		$this->request->data['Product']['traveller_review'] = $this->Hotel->Product->Review->find('all', array('conditions' => array('Review.product_id'=>$this->request->data['Product']['id'], 'Review.language_id'=>$language, 'Review.from'=>'T')));
 		
 		$this->Hotel->Product->Image->unbindModel(array('belongsTo'=>array('Product')));
-		$this->data['Product']['image'] = $this->Hotel->Product->Image->find('all', array('conditions' => array( 'Image.product_id'=>$this->data['Product']['id'])));
-		
-		$this->data['Product']['location'] = $this->Hotel->Product->Location->find('first', array('conditions' => array('Location.id'=>$this->data['Product']['location_id'])));
+		$this->request->data['Product']['image'] = $this->Hotel->Product->Image->find('all', array('conditions' => array( 'Image.product_id'=>$this->request->data['Product']['id'])));
+		*/
+		//$this->request->data['Product']['Location'] =$this->Hotel->Product->Location->find('first', array('conditions' => array('Location.id'=>$this->request->data['Product']['location_id'])));
 		
 			
 	
@@ -139,20 +182,21 @@ class HotelsController extends AppController
 		
 		$this->set('languages', $this->Hotel->Language->find('list'));*/
 		
-		//se crean dos javascripts necesarios para la muestra de imágenes.
+		//se crean dos javascripts necesarios para la muestra de imï¿½genes.
 		$jsGalleryDec = '';
 		$contImg = 1;		
-		foreach($this->data['Product']['image'] as $img):
-			$jsGalleryDec = $jsGalleryDec.' var image'.$contImg.'=new Image(); image'.$contImg.'.src="http://www.panamareps.com/beta/app/webroot/img/hotels/'.$img['Image']['image_name'].'";';
+		foreach($this->request->data['Image'] as $img):
+			$jsGalleryDec = $jsGalleryDec.' var image'.$contImg.'=new Image(); image'.$contImg.'.src="'.$this->request->webroot.'img/hotels/'.$img['image_name'].'";';
 			$contImg++;
 		endforeach; 		
 		
 		$jsGalleryFunc = 'var step=1; function slideit(){ if (!document.images) return; document.images.slide.src=eval("image"+step+".src"); if (step<'.($contImg-1).'){step++;} else{step=1;} setTimeout("slideit()",2500); } slideit();';
 
-		//--Se envían las variables hacia el View.
-		$this->set('hotel', $this->data);	
+		//--Se envï¿½an las variables hacia el View.
+		$this->set('hotel', $this->request->data);
+                $this->set('deb', $deb);
 		//Se consultan los Regions Y Locations.
-		$this->set('regions', $this->Hotel->Product->Location->Region->findAll()); 
+		$this->set('regions', $this->Hotel->Product->Location->Region->find('all')); 
 		$this->set('jsGalleryDec', $jsGalleryDec);	
 		$this->set('jsGalleryFunc', $jsGalleryFunc);
 	}
@@ -173,7 +217,7 @@ class HotelsController extends AppController
 	}
 	
 	/*
-	 * Description: Consulta los hoteles que se encuentran en un Location particular con los datos necesarios para la administración.
+	 * Description: Consulta los hoteles que se encuentran en un Location particular con los datos necesarios para la administraciï¿½n.
 	 * $id: PK del Location del cual se desean consultar los hoteles.
 	*/
 	function admin_index_by_location($id)
@@ -184,20 +228,20 @@ class HotelsController extends AppController
 			$this->helpers[] = 'Javascript';
 			$this->layout = 'guest';
 			
-			//Consulta todos las instancias de Hotel según el id de Location. Se aisla de Room xq no se necesita mostrar ese modelo.
+			//Consulta todos las instancias de Hotel segï¿½n el id de Location. Se aisla de Room xq no se necesita mostrar ese modelo.
 			$this->Hotel->unbindModel(array('hasMany' => array('Room')));
-			$this->data = $this->Hotel->find('all', array(
-				'fields'=> array('Hotel.id', 'Hotel.product_id', 'Hotel.hotel_category_id', 'Hotel.hotel_name', 'Product.id', 'Product.location_id', 'HotelCategory.id', 'HotelCategory.category_name'),
+			$this->request->data = $this->Hotel->find('all', array(
+				'fields'=> array('Hotel.id', 'Hotel.product_id', 'Hotel.hotel_category_id', 'Product.product_name', 'Product.id', 'Product.location_id', 'HotelCategory.id', 'HotelCategory.category_name'),
 				'conditions' => array('Product.location_id' => $id)));
 			
-			//Se consultan los Regions Y Locations para el menú.
+			//Se consultan los Regions Y Locations para el menï¿½.
 			$this->set('regions', $this->Hotel->Product->Location->Region->findAll()); 
 			
-			//El ID de región lo utiliza el View para extraer el nombre de la región a la que pertenecen los Hotels consultados.
+			//El ID de regiï¿½n lo utiliza el View para extraer el nombre de la regiï¿½n a la que pertenecen los Hotels consultados.
 			$this->set('actual_location', $id);
 			
 			//Se asigna la variable con los datos de los hoteles.
-			$this->set('hotels', $this->data);
+			$this->set('hotels', $this->request->data);
 		}
 		else { $this->redirect('/Hotels'); }
 	}
@@ -208,16 +252,16 @@ class HotelsController extends AppController
 		if ($this->Session->read('Auth.User.rol') == 'admin')
 		{
 			$this->Hotel->id = $id;		
-			$this->data = $this->Hotel->read();		
-			$this->set('hotel', $this->data);
+			$this->request->data = $this->Hotel->read();		
+			$this->set('hotel', $this->request->data);
 			
 			$this->Session->write('hotelId', $id);
-			$this->Session->write('productId', $this->data['Hotel']['product_id']);
+			$this->Session->write('productId', $this->request->data['Hotel']['product_id']);
 			$this->Session->write('productAsoId', $id);
-			$this->Session->write('productName', $this->data['Hotel']['hotel_name']);
+			$this->Session->write('productName', $this->request->data['Hotel']['hotel_name']);
 			$this->Session->write('controller', $this->params['controller']);
 			
-			$this->Hotel->Product->id = $this->data['Hotel']['product_id'];
+			$this->Hotel->Product->id = $this->request->data['Hotel']['product_id'];
 			$this->Hotel->Product->unbindModel(array(
 					'hasOne' => array('Hotel')
 					)
@@ -240,9 +284,9 @@ class HotelsController extends AppController
 		$this->layout = 'admin';
 		if ($this->Session->read('Auth.User.rol') == 'admin')
 		{ 
-			if (!empty($this->data))    
+			if (!empty($this->request->data))    
 			{   
-				if($this->Hotel->saveAll($this->data))    
+				if($this->Hotel->saveAll($this->request->data))    
 				{
 					$this->Session->setFlash('Hotel Saved!!');
 					$this->redirect(array('action'=>'view', 'id'=>$this->Hotel->id));
@@ -277,7 +321,7 @@ class HotelsController extends AppController
 		{
 			$this->Hotel->id = $id; 
 	
-			if (empty($this->data))
+			if (empty($this->request->data))
 			{
 				$this->set('locations', $this->Hotel->Product->Location->find('list')); 
 				$this->set('hotelCategories', $this->Hotel->HotelCategory->find('list'));
@@ -286,10 +330,10 @@ class HotelsController extends AppController
 					'hasMany' => array('Room')
 					)
 				);
-				$this->data = $this->Hotel->read();			
+				$this->request->data = $this->Hotel->read();			
 			}
 			else{
-				if($this->Hotel->saveAll($this->data))
+				if($this->Hotel->saveAll($this->request->data))
 				{
 					$this->Session->setFlash('Hotel Saved!!');
 					$this->redirect(array('action'=>'view', 'id'=>$this->Hotel->id));    

@@ -28,9 +28,9 @@
 				<td><?php echo $hotel['HotelCategory']['category_name']; ?></td>				
 				<td><?php echo $actual_location; ?></td>
 				<td class="actions">
-					<?php echo $html->link('View', array('action'=>'view', 'id'=>$hotel['Hotel']['id']) ); ?>
-					<?php echo $html->link('Edit', array('action'=>'edit', 'id'=>$hotel['Hotel']['id']) ); ?>
-					<?php echo $html->link('Delete', array('action'=>'delete', 'id'=>$hotel['Hotel']['product_id']), null, 'Are you sure you want to delete '.$hotel['Hotel']['hotel_name']); ?>
+					<?php echo $this->Html->link('View', array('action'=>'view', 'id'=>$hotel['Hotel']['id']) ); ?>
+					<?php echo $this->Html->link('Edit', array('action'=>'edit', 'id'=>$hotel['Hotel']['id']) ); ?>
+					<?php echo $this->Html->link('Delete', array('action'=>'delete', 'id'=>$hotel['Hotel']['product_id']), null, 'Are you sure you want to delete '.$hotel['Hotel']['hotel_name']); ?>
 				</td>
 			</tr>
 			<?php endforeach; ?> 

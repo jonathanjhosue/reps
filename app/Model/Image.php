@@ -2,7 +2,7 @@
 class Image extends AppModel
 {
 	var $name = 'Image';
-	var $belongsTo = 'Product';
+	//var $belongsTo = 'Product';
 
 	function isUploadedFile($params){
 		$val = array_shift($params);

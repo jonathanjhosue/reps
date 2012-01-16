@@ -3,8 +3,7 @@ class Review extends AppModel
 {
 	var $name = 'Review';
 	var $belongsTo = array(
-			'Product' => array('className' => 'Product'),
-			'Language' => array('className' => 'Language')
+			'Product' => array('className' => 'Product')			
 			);
 }
 ?>

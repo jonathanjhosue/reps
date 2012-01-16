@@ -8,11 +8,11 @@
 			<table cellspacing="0" cellpadding="0" border="1" style="width:27%; clear:none; float:left; margin-right:0.5%;">
 				<tbody>
 					<tr>
-						<td><?php echo $html->link($html->image('hotels/'.$hotel['Product']['image']['Image']['image_name'], array('alt' => $hotel['Hotel']['hotel_name'], 'width'=>'100%')),array('action'=>'view', 'id'=>$hotel['Hotel']['id']), array('escape'=>false) );
+						<td><?php echo $this->Html->link($this->Html->image('hotels/'.$hotel['Image'][0]['image_name'], array('alt' => $hotel['Product']['product_name'], 'width'=>'100%')),array('action'=>'view', $hotel['Hotel']['id']), array('escape'=>false) );
 						?> </td>
 					</tr>
 					<tr>
-						<td><?php echo $html->link($hotel['Hotel']['hotel_name'], array('action'=>'view', 'id'=>$hotel['Hotel']['id'])); ?><br/>
+						<td><?php echo $this->Html->link($hotel['Product']['product_name'], array('action'=>'view', $hotel['Hotel']['id'])); ?><br/>
 							<?php echo $hotel['HotelCategory']['category_name']; ?>
 						</td>
 					</tr>
@@ -20,4 +20,5 @@
 			</table>
 		</td> 
 		<?php endforeach; ?>
+
 </div>

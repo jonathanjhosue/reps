@@ -3,13 +3,11 @@ class Product extends AppModel
 {
 	var $name = 'Product';
 	var $belongsTo = 'Location';
-	var $hasMany = array(
-			'ProductName' => array('className' => 'ProductName'),
-			'Review' => array('className' => 'Review'),
-			'Direction' => array('className' => 'Direction'),
-			'Description' => array('className' => 'Description'),
-			'Image' => array('className' => 'Image')
-			);
+	var $hasMany = array(			
+			'StaffReview' => array('className' => 'Review','conditions'=>array('StaffReview.staff' =>'1',),'order'=> array('StaffReview.review_date'=>'ASC'))	,
+                        'TravellerReview' => array('className' => 'Review','conditions'=>array('TravellerReview.staff' =>'0',),'order'=> array('TravellerReview.review_date'=>'ASC'))		
+					
+            );
 	var $hasOne = 'Hotel';
 }
 ?>

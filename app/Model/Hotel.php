@@ -1,4 +1,5 @@
 <?php  
+App::import('Model','TiposGlobal');
 class Hotel extends AppModel  
 {  
 	var $scaffold = 'admin';
@@ -8,9 +9,13 @@ class Hotel extends AppModel
 			'Product' => array('className' => 'Product'),
 			'HotelCategory' => array('className' => 'HotelCategory')
 			); 
-	var $hasMany = 'Room';  
+	var $hasMany = array(
+                        'Room',
+                        'Image'=>array('foreignKey'=>'owner_id','conditions'=>array('Image.type'=>TiposGlobal::PRODUCT_TYPE_HOTEL)),
+                        'Season'
+                        );  
         
-	var $displayField = 'hotel_name';
+	var $displayField = 'hotel_name';       
         
 }  
 ?>
