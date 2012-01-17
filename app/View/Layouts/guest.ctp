@@ -13,6 +13,7 @@
 		echo $this->Html->css('cake.cms_pageNav.css');
 
 		echo $scripts_for_layout;
+                echo $this->Html->css('desing_style.css');
 	?>
 </head>
 <body>
@@ -26,7 +27,7 @@
 						}else{ echo $this->Html->link($this->Html->image('_log_in.png', array('alt' => 'Login', 'width'=>'15%')), array('controller' => 'users', 'action' => 'login'), array('escape'=>false)); }
 				?>
 				&nbsp;&nbsp;					
-				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Español', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
+				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Espaï¿½ol', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
 				&nbsp;&nbsp;
 				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>						
 			</div>

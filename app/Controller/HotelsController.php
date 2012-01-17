@@ -78,13 +78,22 @@ class HotelsController extends AppController
 		$language = $this->Session->read('language');
 		
 		//consulta del hotel (Hotel, Product, HotelCategory, Rooms)
-                $this->Hotel->unbindModel(array('hasMany' => array('Season','Image','Room'),'belongsTo'=>array('Product','HotelCategory'))); 
-		$this->Hotel->id = $id;		
-                $this->Hotel->recursive = 1;
+                //$this->Hotel->unbindModel(array('hasMany' => array('Season','Image','Room'),'belongsTo'=>array('Product','HotelCategory'))); 
+		//$this->Hotel->Room->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Hotel'))); 
+                $this->Hotel->unbindModel(array('hasMany' => array('Season')));
+                $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('Activities'))); 
+                //$this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'belongsTo'=>array('Location')));
+                $this->Hotel->Product->StaffReview->unbindModel(array('belongsTo'=>array('Product')));
+                $this->Hotel->Product->TravellerReview->unbindModel(array('belongsTo'=>array('Product')));
+                $this->Hotel->Season->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Hotel'))); 
+                $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'))); 
+                $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Room'))); 
+                $this->Hotel->id = $id;		
+                $this->Hotel->recursive = 3;
 		$this->request->data = $this->Hotel->read();	
-		$deb=$this->request->data;
+		//$deb=$this->request->data;
                 //Consulta todos las instancias de Hotel seg�n el id de Location. Se aisla de Room xq no se necesita mostrar ese modelo.
-		$this->Hotel->Product->Location->unbindModel(array('hasMany' => array('Product')));                
+		/*$this->Hotel->Product->Location->unbindModel(array('hasMany' => array('Product')));                
                 $this->Hotel->Product->Location->id = $this->request->data['Product']['location_id'];	
                 $locationArray=$this->Hotel->Product->Location->read();
                 
@@ -101,7 +110,7 @@ class HotelsController extends AppController
                 $this->request->data['StaffReview']=$reviewArray['StaffReview'];
                 $this->request->data['TravellerReview']=$reviewArray['TravellerReview'];
                 //$this->request->data['RoomRate']=$ratesArray;
-                
+                */
 
                 
                 $totalRooms = 0;
@@ -112,14 +121,14 @@ class HotelsController extends AppController
                 $this->request->data['Hotel']['total_rooms']=$totalRooms;
                 //$this->request->data['Product']=$this->Hotel->Product->read();
 		
-                $totalRooms = count($this->request->data['Room']);
+                //$totalRooms = count($this->request->data['Room']);
 		//Consulta de RoomRate para cada Room obtenida, �nicamente si el usuario est� registrado, de lo contrario no consulta las tarifas.
 		//se crea el nuevo arreglo 'RoomRates' en $this->request->data['Room'][x] donde x es el �ndice de la habitaci�n obtenida.
-		if ($this->Session->check('Auth.User'))
+		/*if ($this->Session->check('Auth.User'))
 		{
 			
 			for($i=0; $i < $totalRooms; $i++)
-			{	
+			{	*/
 				/*$this->Hotel->Room->RoomRate->unbindModel(array(
 					'belongsTo' => array('Room')
 					)			
@@ -127,14 +136,14 @@ class HotelsController extends AppController
 				$roomRates = $this->Hotel->Room->RoomRate->findAllByRoomId( $this->request->data['Room'][$i]['id'] );			
 				$this->request->data['Room'][$i]['room_rate'] = $roomRates; 
                                  * */
-                                 
+                  /*               
 			}	
-		}
+		}*/
 
 		//Consulta de RoomDescription para cada Room obtenida, en el lenguage correspondiente.
 		//se crea el nuevo arreglo 'RoomDescriptions' en $this->request->data['Room'][x] donde x es el �ndice de la habitaci�n obtenida.
-		for($i=0; $i < $totalRooms; $i++)
-		{	
+		/*for($i=0; $i < $totalRooms; $i++)
+		{*/	
 			/*$this->Hotel->Room->RoomDescription->unbindModel(array(
 				'belongsTo' => array('Room', 'Language')
 				)			
@@ -143,7 +152,7 @@ class HotelsController extends AppController
 			$this->request->data['Room'][$i]['room_description'] = $temp['RoomDescription']; 
                          * 
                          */
-		}		
+		//}		
 			
 		//--Consulta de la informaci�n completa de Product(Description, Direction, Review, Location, Image)
 		//se almacena en $this->request->data['Product']	
@@ -194,7 +203,7 @@ class HotelsController extends AppController
 
 		//--Se env�an las variables hacia el View.
 		$this->set('hotel', $this->request->data);
-                $this->set('deb', $deb);
+                //$this->set('deb', $deb);
 		//Se consultan los Regions Y Locations.
 		$this->set('regions', $this->Hotel->Product->Location->Region->find('all')); 
 		$this->set('jsGalleryDec', $jsGalleryDec);	

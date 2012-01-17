@@ -20,7 +20,7 @@
 ?>
 
 <div class="hotels view">
-    <p><?php print_r($deb); ?></p>
+    <pre><?php print_r($hotel); ?></pre>
 	<div>
 		<p><?php echo $this->Html->image('hotels/'.$hotel['Image'][0]['image_name'], array('class' => 'serviceImageMain', 'name' => 'slide')); ?></p>
 		<?php echo $this->Html->scriptBlock($jsGalleryFunc, array('allowCache'=>true,'safe'=>true,'inline'=>true)); ?>
@@ -34,7 +34,7 @@
 		<table class="serviceHeader">
 			<tr>
 				<td><span class="label">Category:&nbsp;</span><?php echo $hotel['HotelCategory']['category_name']; ?></td>
-				<td><span class="label">Location:&nbsp;</span><?php echo $hotel['Location']['location_name'].', '.$hotel['Region']['name_region']; ?></td>  
+				<td><span class="label">Location:&nbsp;</span><?php echo $hotel['Product']['Location']['location_name'].', '.$hotel['Product']['Location']['Region']['name_region']; ?></td>  
 				<td><span class="label">Total Room:</span>&nbsp;<?php echo $hotel['Hotel']['total_rooms']; ?></td>
 		  </tr>
 		</table>
@@ -118,54 +118,41 @@
 	
 	<!-- features tab starts -->		
 	<div class="tabcontent hide" id="cont-3-1"> 
-		<dl class="tab" style="margin-right:1em;">
-			<dt class="altrow">Bar</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['bar']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt>Business Center</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['business_center']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt class="altrow">Certifications</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['certifications']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>	
-			<dt>Childcare</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['childcare']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>					
-			<dt class="altrow">Conference Facilities</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['conference_facilities']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>	
-			<dt>Fitness Center</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['fitness_center']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>		
-			<dt class="altrow">Free Shuttle Service</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['free_shuttle_service']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>						
-		</dl> 
-		<dl class="tab" style="margin-right:1em;">
-			<dt class="altrow">Gardens</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['gardens']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>		
-			<dt>Gift Shop</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['gift_shop']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt class="altrow">Golf Court</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['golf_court']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>	
-			<dt>Internet</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['internet']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>	
-			<dt class="altrow">Laundry Service</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['laundry_service']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt>Nature Trails</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['nature_trails']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>	
-			<dt class="altrow">Private Car Park</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['private_car_park']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>					
-		</dl>
-		<dl class="tab">
-			<dt class="altrow">Socialfunctions Services</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['socialfunctions_services']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>		
-			<dt>Restaurant</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['restaurant']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt class="altrow">Swimmingpool</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['swimmingpool']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt>Tennis Court</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['tennis_court']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt class="altrow">Tour Desk</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['tour_desk']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>
-			<dt>Wet Bar</dt>
-			<dd class="tab"><?php if($hotel['Hotel']['wet_bar']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;	</dd>	
-			<dt class="altrow">Wheelchair Accessible</dt>
-			<dd class="tab altrow"><?php if($hotel['Hotel']['wheelchair_accessible']==1){echo 'Yes';}else{echo 'No'; } ; ?>&nbsp;</dd>				
-		</dl>
+            <div id="divFeatures" class="">
+		<ul >                    
+           <?php if($hotel['Hotel']['restaurant']): ?>      <li><?php echo $this->Html->image('features/icon/restaurant.png') ?> Restaurant</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['bar']): ?>             <li><?php echo $this->Html->image('features/icon/bar.png') ?> Bar</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['business_center']): ?> <li><?php echo $this->Html->image('features/icon/business_center.png') ?> Business Center</li> <?php endif; ?>                      
+           <?php if($hotel['Hotel']['swimmingpool']): ?>    <li><?php echo $this->Html->image('features/icon/swimmingpool.png') ?> Swimming Pool</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['wet_bar']): ?>         <li><?php echo $this->Html->image('features/icon/wet_bar.png') ?> Wet Bar</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['wheelchair_accessible']): ?> <li><?php echo $this->Html->image('features/icon/wheelchair_accessible.png') ?> Wheelchair Accessible</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['internet']): ?>        <li><?php echo $this->Html->image('features/icon/internet.png') ?> Internet</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['fitness_center']): ?>  <li><?php echo $this->Html->image('features/icon/fitness_center.png') ?> Fitness Center</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['private_car_park']): ?><li><?php echo $this->Html->image('features/icon/private_car_park.png') ?> Private Car Park</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['gift_shop']): ?>       <li><?php echo $this->Html->image('features/icon/gift_shop.png') ?> Gift Shop</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['tour_desk']): ?>       <li><?php echo $this->Html->image('features/icon/tour_desk.png') ?> Tour Desk</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['certifications']): ?>  <li><?php echo $this->Html->image('features/icon/certifications.png') ?> Certifications 
+                                                                <?php echo $hotel['Hotel']['certifications_details'] ?></li> <?php endif; ?>
+           <?php if($hotel['Hotel']['free_shuttle_service']): ?> <li><?php echo $this->Html->image('features/icon/free_shuttle_service.png') ?> Free Shuttle Service 
+                                                                <?php echo $hotel['Hotel']['freeshuttleservice_details'] ?></li> <?php endif; ?>
+           <?php if($hotel['Hotel']['laundry_service']): ?> <li><?php echo $this->Html->image('features/icon/laundry_service.png') ?> Laundry Service</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['gardens']): ?>         <li><?php echo $this->Html->image('features/icon/gardens.png') ?> Gardens</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['nature_trails']): ?>   <li><?php echo $this->Html->image('features/icon/nature_trails.png') ?> Nature Trails</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['socialfunctions_services']): ?>             <li><?php echo $this->Html->image('features/icon/socialfunctions_services.png') ?> Socialfunctions Services</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['golf_court']): ?>      <li><?php echo $this->Html->image('features/icon/golf_court.png') ?> Golf Court</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['tennis_court']): ?>    <li><?php echo $this->Html->image('features/icon/tennis_court.png') ?> Tennis Court</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['conference_facilities']): ?> <li><?php echo $this->Html->image('features/icon/conference_facilities.png') ?> Conference Facilities 
+                                                                      <?php echo $hotel['Hotel']['conferencefacilities_details'] ?> </li>   <?php endif; ?>           
+           <?php if($hotel['Hotel']['childcare']): ?>      <li><?php echo $this->Html->image('features/icon/childcare.png') ?> Child Care</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['spa']): ?>             <li><?php echo $this->Html->image('features/icon/spa.png') ?> Spa</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['beauty_salon']): ?>    <li><?php echo $this->Html->image('features/icon/beauty_salon.png') ?> Beauty Salon</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['room_service']): ?>    <li><?php echo $this->Html->image('features/icon/room_service.png') ?> Room Service</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['concierge']): ?>       <li><?php echo $this->Html->image('features/icon/concierge.png') ?> Concierge</li> <?php endif; ?>
+                                             
+                        						
+		</ul> 
+            </div>
+		
             
             <div>
                 <div style="text-align:left;">
@@ -192,7 +179,7 @@
 			
                         <fieldset class="tab">
                                 <legend class="tab"><span class="label">Staff Reviews:&nbsp;</span></legend>
-                                <?php foreach($hotel['StaffReview'] as $review): ?>		
+                                <?php foreach($hotel['Product']['StaffReview'] as $review): ?>		
                                 <p><?php echo $review['review_date']; ?></p>
                                 <div style="border: 1px solid #ddd; min-height:35px;"> 
                                         <p><?php echo $review['i18n_review']; ?>&nbsp;</p>	
@@ -204,7 +191,7 @@
 			<fieldset class="tab">
 				<legend class="tab"><span class="label">Traveller Reviews:&nbsp;</span></legend>
                                
-				<?php foreach($hotel['TravellerReview'] as $review): ?>	
+				<?php foreach($hotel['Product']['TravellerReview'] as $review): ?>	
                                 
                                 
                                 <p><?php echo $review['review_date']; ?></p>
@@ -248,33 +235,37 @@
 				<table class="tab" cellspacing="0" cellpadding="0">
 					<tbody>
 						<tr>
-							<th>Validity Starts</th><th>Validity Ends</th><th>Single Rack</th><th>Single Net</th><th>Double Rack</th><th>Double Net</th><th>Triple Rack</th><th>Triple Net</th><th>Quadruple Rack</th><th>Quadruple Net</th><th>Child Rack</th><th>Child Net</th><th>Infant Rack</th><th>Infant Net</th>
-						</tr>
-						<?php foreach($hotel['RoomRate'] as $roomRate): ?>
+							<th></th><th>Sgl</th><th>Dbl</th><th>Tpl</th><th>Qdlp</th>
+                                                        <th>Child <?php echo $hotel['Hotel']['child_age_min'].'-'.$hotel['Hotel']['child_age_max'].' y/o' ?></th>
+                                                        <th>Infant <?php echo $hotel['Hotel']['infant_age_min'].'-'.$hotel['Hotel']['infant_age_max'].' y/o' ?></th>
+                                                </tr>
+						<?php foreach($room['RoomRate'] as $roomRate): ?>
 						<tr <?php if($altrow){echo 'class="altrow"'; $altrow = false;}else{$altrow = true;} ?> >
-							<td><?php echo $roomRate['RoomRate']['validity_starts']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['validity_ends']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['single_rack']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['single_net']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['double_rack']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['double_net']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['triple_rack']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['triple_net']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['quadruple_rack']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['quadruple_net']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['child_rack']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['child_net']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['infant_rack']; ?></td>
-							<td><?php echo $roomRate['RoomRate']['infant_net']; ?></td>
+                                                        <td>From: <?php echo $roomRate['Season']['date_start']; ?> To: <?php echo $roomRate['Season']['date_end']; ?></td>
+							<td><?php echo $roomRate['single']; ?></td>
+							<td><?php echo $roomRate['double']; ?></td>
+							<td><?php echo $roomRate['triple']; ?></td>
+							<td><?php echo $roomRate['quadruple']; ?></td>
+                                                        <td><?php echo $roomRate['child']; ?></td>
+                                                        <td><?php echo $roomRate['infant']; ?></td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
-			<br />
+			           
+                        <div style="text-align:left; float:left;">
+					<span class="label">Room Rate Includes: </span> <span><?php echo $room['i18n_include']; ?>&nbsp;</span>												
+				</div>
+                            <br/>
 			<!-- room category ends -->
 			<?php endforeach; ?>	
-		</div>
+                       <br/> 
+		<div style="text-align:left; float:left;">
+                            <span class="label">Notes: </span> <span><?php echo $hotel['Hotel']['room_notes']; ?>&nbsp;</span>												
+                    </div>
+                <br/>
+                        
 	
 	<!-- rates tab ends -->	          	
 </div>
