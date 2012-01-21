@@ -20,7 +20,7 @@
 ?>
 
 <div class="hotels view">
-    <pre><?php print_r($hotel); ?></pre>
+  
 	<div>
 		<p><?php echo $this->Html->image('hotels/'.$hotel['Image'][0]['image_name'], array('class' => 'serviceImageMain', 'name' => 'slide')); ?></p>
 		<?php echo $this->Html->scriptBlock($jsGalleryFunc, array('allowCache'=>true,'safe'=>true,'inline'=>true)); ?>
@@ -66,7 +66,7 @@
 				<span class="label">Description:&nbsp;</span>
 			</div>
 			<div style="border: 1px solid #ddd; min-height:70px;" >
-				<?php echo $hotel['Product']['i18n_description']; ?>
+				<?php echo  $this->I18nKeys->getKey($hotel['Product']['i18n_description']); ?>
 			</div>
 		</div>
 		<br />
@@ -80,7 +80,7 @@
 				<span class="label">E:&nbsp;</span><span><?php echo $hotel['Product']['gpslongitude']; ?>&nbsp;</span>
 			</div>
 			<div style="border: 1px solid #ddd; min-height:50px;">
-				<?php echo $hotel['Product']['i18n_direction']; ?>
+				<?php echo  $this->I18nKeys->getKey($hotel['Product']['i18n_direction']); ?>
 			</div>
 		</div>					
 	</div>
@@ -98,15 +98,15 @@
 			</div>							
 			<div style="border: 1px solid #ddd;">
 				<div>
-					<span><?php echo $room['i18n_description'] ?>&nbsp;</span>	
+					<span><?php echo  $this->I18nKeys->getKey($room['i18n_description']) ?>&nbsp;</span>	
 				</div>
 				<br />
-				<div>
+                                <div class="clsAmenities">
 					<span class="label">Amenities:&nbsp;</span> 
-					<span>
-						<?php if($room['air_conditioning']){ echo 'Air conditioning, '; } if($room['alarm_clock']){ echo 'Alarm clock, '; } if($room['cable_tv']){ echo 'Cable TV, '; } if($room['coffee_maker']){ echo 'Coffee maker, '; } if($room['desk_&_chair']){ echo 'Desk & chair, '; } if($room['free_internet']){ echo 'Free internet, '; } if($room['hairdryer']){ echo 'Hairdryer & mirror, '; } if($room['iron_&_ironing_board']){ echo 'Iron & ironing_board, '; } if($room['jacuzzi']){ echo 'Jacuzzi, '; } if($room['microwave']){ echo 'Microwave, '; } if($room['minibar']){ echo 'Minibar, '; } if($room['orthopedic_matresses']){ echo 'Orthopedic matresses, '; } if($room['refrigerator']){ echo 'Refrigerator, '; } if($room['safe_deposit_box']){ echo 'Safe, '; } if($room['suite_bathrooms']){ echo 'Suite bathrooms, '; } if($room['telephone']){ echo 'Telephone.'; }						
-						?>
-					</span>	
+					
+                                            <?php echo $this->RipsWeb->getAmenitiesList($room) ?>
+                                           
+						
 				</div>
 			</div>
 		</div>
@@ -131,42 +131,44 @@
            <?php if($hotel['Hotel']['private_car_park']): ?><li><?php echo $this->Html->image('features/icon/private_car_park.png') ?> Private Car Park</li> <?php endif; ?>
            <?php if($hotel['Hotel']['gift_shop']): ?>       <li><?php echo $this->Html->image('features/icon/gift_shop.png') ?> Gift Shop</li> <?php endif; ?>
            <?php if($hotel['Hotel']['tour_desk']): ?>       <li><?php echo $this->Html->image('features/icon/tour_desk.png') ?> Tour Desk</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['certifications']): ?>  <li><?php echo $this->Html->image('features/icon/certifications.png') ?> Certifications 
-                                                                <?php echo $hotel['Hotel']['certifications_details'] ?></li> <?php endif; ?>
-           <?php if($hotel['Hotel']['free_shuttle_service']): ?> <li><?php echo $this->Html->image('features/icon/free_shuttle_service.png') ?> Free Shuttle Service 
-                                                                <?php echo $hotel['Hotel']['freeshuttleservice_details'] ?></li> <?php endif; ?>
            <?php if($hotel['Hotel']['laundry_service']): ?> <li><?php echo $this->Html->image('features/icon/laundry_service.png') ?> Laundry Service</li> <?php endif; ?>
            <?php if($hotel['Hotel']['gardens']): ?>         <li><?php echo $this->Html->image('features/icon/gardens.png') ?> Gardens</li> <?php endif; ?>
            <?php if($hotel['Hotel']['nature_trails']): ?>   <li><?php echo $this->Html->image('features/icon/nature_trails.png') ?> Nature Trails</li> <?php endif; ?>
            <?php if($hotel['Hotel']['socialfunctions_services']): ?>             <li><?php echo $this->Html->image('features/icon/socialfunctions_services.png') ?> Socialfunctions Services</li> <?php endif; ?>
            <?php if($hotel['Hotel']['golf_court']): ?>      <li><?php echo $this->Html->image('features/icon/golf_court.png') ?> Golf Court</li> <?php endif; ?>
            <?php if($hotel['Hotel']['tennis_court']): ?>    <li><?php echo $this->Html->image('features/icon/tennis_court.png') ?> Tennis Court</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['conference_facilities']): ?> <li><?php echo $this->Html->image('features/icon/conference_facilities.png') ?> Conference Facilities 
-                                                                      <?php echo $hotel['Hotel']['conferencefacilities_details'] ?> </li>   <?php endif; ?>           
+        
            <?php if($hotel['Hotel']['childcare']): ?>      <li><?php echo $this->Html->image('features/icon/childcare.png') ?> Child Care</li> <?php endif; ?>
            <?php if($hotel['Hotel']['spa']): ?>             <li><?php echo $this->Html->image('features/icon/spa.png') ?> Spa</li> <?php endif; ?>
            <?php if($hotel['Hotel']['beauty_salon']): ?>    <li><?php echo $this->Html->image('features/icon/beauty_salon.png') ?> Beauty Salon</li> <?php endif; ?>
            <?php if($hotel['Hotel']['room_service']): ?>    <li><?php echo $this->Html->image('features/icon/room_service.png') ?> Room Service</li> <?php endif; ?>
            <?php if($hotel['Hotel']['concierge']): ?>       <li><?php echo $this->Html->image('features/icon/concierge.png') ?> Concierge</li> <?php endif; ?>
+           <?php if($hotel['Hotel']['conference_facilities']): ?> <li><?php echo $this->Html->image('features/icon/conference_facilities.png') ?> Conference Facilities 
+                            <input max="50" type="text" value="<?php echo $hotel['Hotel']['conferencefacilities_details'] ?>"> </li>   <?php endif; ?>             
+            <?php if($hotel['Hotel']['certifications']): ?>  <li><?php echo $this->Html->image('features/icon/certifications.png') ?> Certifications 
+               <input max="30" type="text" value="<?php echo $hotel['Hotel']['certifications_details'] ?>"></li> <?php endif; ?>
+           <?php if($hotel['Hotel']['free_shuttle_service']): ?> <li><?php echo $this->Html->image('features/icon/free_shuttle_service.png') ?> Free Shuttle Service 
+                            <input max="30" type="text" value="<?php echo $hotel['Hotel']['freeshuttleservice_details'] ?>"> </li> <?php endif; ?>
                                              
                         						
 		</ul> 
             </div>
 		
             
-            <div>
+            <div id="divDiningAndDrinking">
                 <div style="text-align:left;">
                     <br />
                     <span class="label">Dining & Drinking</span> 
-                    	<span>
-                                <?php 
-                                    if($hotel['Hotel']['vegetarian']){ echo 'Vegetarian '; } 
-                                    if($hotel['Hotel']['kosher']){ echo 'Kosher '; }
-                                ?>
-                        </span>	
+                    	<ul>                            
+                                
+                           <?php if($hotel['Hotel']['vegetarian']): ?>    <li><?php echo $this->Html->image('features/icon/vegetarian.png') ?> Vegetarian</li> <?php endif; ?>
+                           <?php if($hotel['Hotel']['kosher']): ?>       <li><?php echo $this->Html->image('features/icon/kosher.png') ?> Kosher</li> <?php endif; ?>
+                                    
+                                
+                        </ul>	
                 </div>
                 <div style="border: 1px solid #ddd; min-height:70px;" >
-                                    <?php echo $hotel['Hotel']['i18n_dining&drinking']; ?>
+                                    <?php echo  $this->I18nKeys->getKey($hotel['Hotel']['i18n_dining&drinking']); ?>
                 </div>
             </div>
 	</div> 
@@ -182,7 +184,7 @@
                                 <?php foreach($hotel['Product']['StaffReview'] as $review): ?>		
                                 <p><?php echo $review['review_date']; ?></p>
                                 <div style="border: 1px solid #ddd; min-height:35px;"> 
-                                        <p><?php echo $review['i18n_review']; ?>&nbsp;</p>	
+                                        <p><?php echo  $this->I18nKeys->getKey($review['i18n_review']); ?>&nbsp;</p>	
                                 </div>
                                 <br />
                                 <?php endforeach; ?>
@@ -197,7 +199,7 @@
                                 <p><?php echo $review['review_date']; ?></p>
 				<div style="border: 1px solid #ddd; min-height:35px;">
                                     
-					<p><?php echo $review['i18n_review']; ?></p>	
+					<p><?php echo  $this->I18nKeys->getKey($review['i18n_review']); ?></p>	
 				</div>
 				<br />
 				<?php endforeach; ?>
@@ -255,14 +257,14 @@
 			</div>
 			           
                         <div style="text-align:left; float:left;">
-					<span class="label">Room Rate Includes: </span> <span><?php echo $room['i18n_include']; ?>&nbsp;</span>												
+					<span class="label">Room Rate Includes: </span> <span><?php echo $this->I18nKeys->getKey($room['i18n_include']); ?>&nbsp;</span>												
 				</div>
                             <br/>
 			<!-- room category ends -->
 			<?php endforeach; ?>	
                        <br/> 
 		<div style="text-align:left; float:left;">
-                            <span class="label">Notes: </span> <span><?php echo $hotel['Hotel']['room_notes']; ?>&nbsp;</span>												
+                            <span class="label">Notes: </span> <span><?php echo $this->I18nKeys->getKey($hotel['Hotel']['i18n_roomnotes']);//$hotel['I18nKey'][$hotel['Hotel']['i18n_roomnotes']]['value']; ?>&nbsp;</span>												
                     </div>
                 <br/>
                         
@@ -280,3 +282,5 @@
 </div>
 -->
 </div>
+<?php echo $this->element('sql_dump'); ?>
+  <pre><?php print_r($hotel); ?></pre>
