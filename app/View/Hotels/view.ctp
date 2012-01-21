@@ -119,53 +119,16 @@
 	<!-- features tab starts -->		
 	<div class="tabcontent hide" id="cont-3-1"> 
             <div id="divFeatures" class="">
-		<ul >                    
-           <?php if($hotel['Hotel']['restaurant']): ?>      <li><?php echo $this->Html->image('features/icon/restaurant.png') ?> Restaurant</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['bar']): ?>             <li><?php echo $this->Html->image('features/icon/bar.png') ?> Bar</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['business_center']): ?> <li><?php echo $this->Html->image('features/icon/business_center.png') ?> Business Center</li> <?php endif; ?>                      
-           <?php if($hotel['Hotel']['swimmingpool']): ?>    <li><?php echo $this->Html->image('features/icon/swimmingpool.png') ?> Swimming Pool</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['wet_bar']): ?>         <li><?php echo $this->Html->image('features/icon/wet_bar.png') ?> Wet Bar</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['wheelchair_accessible']): ?> <li><?php echo $this->Html->image('features/icon/wheelchair_accessible.png') ?> Wheelchair Accessible</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['internet']): ?>        <li><?php echo $this->Html->image('features/icon/internet.png') ?> Internet</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['fitness_center']): ?>  <li><?php echo $this->Html->image('features/icon/fitness_center.png') ?> Fitness Center</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['private_car_park']): ?><li><?php echo $this->Html->image('features/icon/private_car_park.png') ?> Private Car Park</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['gift_shop']): ?>       <li><?php echo $this->Html->image('features/icon/gift_shop.png') ?> Gift Shop</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['tour_desk']): ?>       <li><?php echo $this->Html->image('features/icon/tour_desk.png') ?> Tour Desk</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['laundry_service']): ?> <li><?php echo $this->Html->image('features/icon/laundry_service.png') ?> Laundry Service</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['gardens']): ?>         <li><?php echo $this->Html->image('features/icon/gardens.png') ?> Gardens</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['nature_trails']): ?>   <li><?php echo $this->Html->image('features/icon/nature_trails.png') ?> Nature Trails</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['socialfunctions_services']): ?>             <li><?php echo $this->Html->image('features/icon/socialfunctions_services.png') ?> Socialfunctions Services</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['golf_court']): ?>      <li><?php echo $this->Html->image('features/icon/golf_court.png') ?> Golf Court</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['tennis_court']): ?>    <li><?php echo $this->Html->image('features/icon/tennis_court.png') ?> Tennis Court</li> <?php endif; ?>
-        
-           <?php if($hotel['Hotel']['childcare']): ?>      <li><?php echo $this->Html->image('features/icon/childcare.png') ?> Child Care</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['spa']): ?>             <li><?php echo $this->Html->image('features/icon/spa.png') ?> Spa</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['beauty_salon']): ?>    <li><?php echo $this->Html->image('features/icon/beauty_salon.png') ?> Beauty Salon</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['room_service']): ?>    <li><?php echo $this->Html->image('features/icon/room_service.png') ?> Room Service</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['concierge']): ?>       <li><?php echo $this->Html->image('features/icon/concierge.png') ?> Concierge</li> <?php endif; ?>
-           <?php if($hotel['Hotel']['conference_facilities']): ?> <li><?php echo $this->Html->image('features/icon/conference_facilities.png') ?> Conference Facilities 
-                            <input max="50" type="text" value="<?php echo $hotel['Hotel']['conferencefacilities_details'] ?>"> </li>   <?php endif; ?>             
-            <?php if($hotel['Hotel']['certifications']): ?>  <li><?php echo $this->Html->image('features/icon/certifications.png') ?> Certifications 
-               <input max="30" type="text" value="<?php echo $hotel['Hotel']['certifications_details'] ?>"></li> <?php endif; ?>
-           <?php if($hotel['Hotel']['free_shuttle_service']): ?> <li><?php echo $this->Html->image('features/icon/free_shuttle_service.png') ?> Free Shuttle Service 
-                            <input max="30" type="text" value="<?php echo $hotel['Hotel']['freeshuttleservice_details'] ?>"> </li> <?php endif; ?>
-                                             
-                        						
-		</ul> 
+		<?php echo $this->RipsWeb->getFeaturesList($hotel['Hotel']) ?>
             </div>
 		
             
             <div id="divDiningAndDrinking">
                 <div style="text-align:left;">
                     <br />
-                    <span class="label">Dining & Drinking</span> 
-                    	<ul>                            
-                                
-                           <?php if($hotel['Hotel']['vegetarian']): ?>    <li><?php echo $this->Html->image('features/icon/vegetarian.png') ?> Vegetarian</li> <?php endif; ?>
-                           <?php if($hotel['Hotel']['kosher']): ?>       <li><?php echo $this->Html->image('features/icon/kosher.png') ?> Kosher</li> <?php endif; ?>
-                                    
-                                
-                        </ul>	
+                    <span class="label"><?php __('Dining & Drinking')?></span> 
+                        <?php echo $this->RipsWeb->getDiningAndDrinkingList($hotel['Hotel']) ?>
+                    	
                 </div>
                 <div style="border: 1px solid #ddd; min-height:70px;" >
                                     <?php echo  $this->I18nKeys->getKey($hotel['Hotel']['i18n_dining&drinking']); ?>

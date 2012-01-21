@@ -10,9 +10,26 @@ root {
     display: block;
 }
 
-#divFeatures ul li{
-display: inline;
-display: 
+
+
+#divDiningAndDrinking ul li,#divFeatures ul li {
+   display: inline-block;
+   width: 250px; 
+}
+.clsAmenities ul li {
+   display: inline-block;
+   width: 170px; 
+}
+#divDiningAndDrinking ul li input,#divFeatures ul li input{
+    display: inline-block;
+    height: 20px;
+    font-size: 90%;
+    max-width: 100px;
+}
+
+
+#divDiningAndDrinking ul li img,#divFeatures ul li img, .clsAmenities ul li img{
+    vertical-align: middle;
     
 }
 

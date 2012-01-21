@@ -74,7 +74,8 @@ class HotelsController extends AppController
 	{	
 		$this->layout = 'guest';
 		$this->helpers[] = 'Js';
-		
+		$this->helpers[] = 'I18nKeys';
+                $this->helpers[] = 'RipsWeb';
 		$language = $this->Session->read('language');
 		
 		//consulta del hotel (Hotel, Product, HotelCategory, Rooms)
@@ -114,10 +115,26 @@ class HotelsController extends AppController
 
                 
                 $totalRooms = 0;
+                $i18n_array= Set::combine($this->request->data['I18nKey'] , '{n}.key','{n}');
+                $i18n_array = array_merge($i18n_array,Set::combine($this->request->data['Product']['I18nKey'] , '{n}.key','{n}'));
+                //$i18n_array = array_merge($i18n_array,Set::combine($this->request->data['Product']['Review']['I18nKey'] , '{n}.key','{n}'));
                 foreach ($this->request->data['Room'] as $room){
-                    $totalRooms+=$room['count'];                   
+                    $totalRooms+=$room['count'];   
+                    $i18n_array=array_merge($i18n_array,Set::combine($room['I18nKey']  , '{n}.key','{n}'));
                 }
                 
+                foreach ($this->request->data['Product']['TravellerReview'] as $review){
+                    $i18n_array=array_merge($i18n_array,Set::combine($review['I18nKey']  , '{n}.key','{n}'));                 
+                }
+                foreach ($this->request->data['Product']['StaffReview'] as $review){
+                    $i18n_array=array_merge($i18n_array,Set::combine($review['I18nKey']  , '{n}.key','{n}'));                 
+                }
+                //$result = Set::combine($this->request->data['I18nKey'] , '{n}.key','{n}');
+                //$result = Set::combine($this->request->data['Product']['I18nKey'] , '{n}.key','{n}');
+                //$result = Set::combine($this->request->data['Room'] , '{n}.I18nKey.{n}.key','{n}.I18nKey.{n}');
+                //$result = Set::classicExtract($this->request->data['Room'] , '{n}.I18nKey.{n}');
+                //$result = Set::combine($result  , '{n}.{n}.{n}.key','{n}.{n}');
+                $this->request->data['I18nKey']=$i18n_array;
                 $this->request->data['Hotel']['total_rooms']=$totalRooms;
                 //$this->request->data['Product']=$this->Hotel->Product->read();
 		

@@ -12,10 +12,23 @@ class Hotel extends AppModel
 	var $hasMany = array(
                         'Room',
                         'Image'=>array('foreignKey'=>'owner_id','conditions'=>array('Image.type'=>TiposGlobal::PRODUCT_TYPE_HOTEL)),
-                        'Season'
+                        'Season',
+                        'I18nKey'=>array(
+                                'foreignKey'=>'owner_id',
+                                'conditions'=>array('I18nKey.type'=>array(
+                                                                TiposGlobal::I18N_TYPE_HOTEL_DININGANDDRINKING,
+                                                                TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES
+                                                          )
+                                                   
+                                              )
+                                   )
                         );  
         
-	var $displayField = 'hotel_name';       
+	var $displayField = 'hotel_name';  
+        
+      
+        
+    
         
 }  
 ?>
