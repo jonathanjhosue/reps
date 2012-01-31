@@ -7,7 +7,7 @@ class I18nKey extends AppModel
         
 	var $displayField = 'value';  
         
-
+        
         
 }  
 ?>

@@ -42,6 +42,6 @@
 			</div>
 		</div>
 	</div>
-	
+		<?php pr( $this->element('sql_dump')); ?>
 </body>
 </html>

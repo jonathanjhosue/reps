@@ -3,6 +3,8 @@ App::import('Model','TiposGlobal');
 class Hotel extends AppModel  
 {  
 	var $scaffold = 'admin';
+        
+        var $primaryKey='product_id';
 	
 	var $name = 'Hotel';
 	var $belongsTo = array(
@@ -11,20 +13,29 @@ class Hotel extends AppModel
 			); 
 	var $hasMany = array(
                         'Room',
-                        'Image'=>array('foreignKey'=>'owner_id','conditions'=>array('Image.type'=>TiposGlobal::PRODUCT_TYPE_HOTEL)),
+                        'Image'=>array('foreignKey'=>'owner_id','conditions'=>array('Image.owner_type'=>TiposGlobal::PRODUCT_TYPE_HOTEL)),
                         'Season',
                         'I18nKey'=>array(
                                 'foreignKey'=>'owner_id',
                                 'conditions'=>array('I18nKey.type'=>array(
                                                                 TiposGlobal::I18N_TYPE_HOTEL_DININGANDDRINKING,
-                                                                TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES
+                                                                TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES,
+                                                                TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION,
+                                                                TiposGlobal::I18N_TYPE_PRODUCT_DIRECTION
                                                           )
                                                    
                                               )
-                                   )
+                                   )   ,     			
+			'Review' => array('foreignKey'=>'product_id','order'=> array('Review.staff'=>'DESC','Review.review_date'=>'DESC'))	
+                        
                         );  
         
-	var $displayField = 'hotel_name';  
+         function setLocale($locale){
+            $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;
+            
+        }
+        
+	//var $displayField = 'Product.product_name';  
         
       
         

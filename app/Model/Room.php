@@ -1,4 +1,5 @@
 <?php  
+App::import('Model','TiposGlobal');
 class Room extends AppModel  
 {  
 	var $name = 'Room';
@@ -16,5 +17,10 @@ class Room extends AppModel
                                             )   
 			);  
 	var $displayField = 'category';
+        
+         function setLocale($locale){
+            $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;
+            
+        }
 }
 ?>

@@ -1,15 +1,16 @@
-<?
+<?php
 class LocationsController extends AppController
 {
 	var $name = 'Locations';
-	//var $scaffold;
+	var $scaffold;
 	
 	/*============BEGINS ADMIN METHODS===================*/
 	
 	/*
-	 * Descripcion: Registrar un nuevo Location. Las variables de sesión 'regionId' y podrían contener
+	 * Descripcion: Registrar un nuevo Location. Las variables de sesiï¿½n 'regionId' y podrï¿½an contener
 	 * el identificador de Region al cuel pertenece el Location.
 	*/
+        /*
 	function admin_add()
 	{	
 		$this->layout = 'admin';
@@ -76,6 +77,6 @@ class LocationsController extends AppController
 				$this->redirect(array('controller'=>$controller, 'action'=>'view', 'id'=>$regionId));	
 			}
 		}
-	}
+	}*/
 } 
 ?>

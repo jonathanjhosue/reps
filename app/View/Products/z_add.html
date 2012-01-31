@@ -1,0 +1,50 @@
+<div id="content">
+	<div class="products form">
+		<form action="/beta/products/add" method="post" id="ProductAddForm">
+			<fieldset style="display: none;">
+				<input type="hidden" value="POST" name="_method">
+			</fieldset>
+			<fieldset>
+				<legend>New Product</legend>
+				<input type="hidden" id="ProductId" value="" name="data[Product][id]">
+				<div class="input select">
+					<label for="ProductLocationId">Location</label>
+					<select id="ProductLocationId" name="data[Product][location_id]">
+						<option value="1">1</option>
+						<option value="2">2</option>
+					</select>
+				</div>
+				<div class="input text">
+					<label for="ProductGpslatitude">Gpslatitude</label>
+					<input type="text" id="ProductGpslatitude" value="" maxlength="5" name="data[Product][gpslatitude]">
+				</div>
+				<div class="input text">
+					<label for="ProductGpslongitude">Gpslongitude</label>
+					<input type="text" id="ProductGpslongitude" value="" maxlength="5" name="data[Product][gpslongitude]">
+				</div>
+			</fieldset>
+			<div class="submit">
+				<input type="submit" value="Submit">
+			</div>
+		</form>
+	</div>
+	<div class="actions">
+		<ul>
+			<li><a href="/beta/Products">List Products</a></li>
+			<li><a href="/beta/locations">List Locations</a></li>
+			<li><a href="/beta/locations/add">New Location</a></li>
+			<li><a href="/beta/hotels">List Hotels</a></li>
+			<li><a href="/beta/hotels/add">New Hotel</a></li>
+			<li><a href="/beta/product_names">List Product Names</a></li>
+			<li><a href="/beta/product_names/add">New Product Name</a></li>
+			<li><a href="/beta/reviews">List Reviews</a></li>
+			<li><a href="/beta/reviews/add">New Review</a></li>
+			<li><a href="/beta/directions">List Directions</a></li>
+			<li><a href="/beta/directions/add">New Direction</a></li>
+			<li><a href="/beta/descriptions">List Descriptions</a></li>
+			<li><a href="/beta/descriptions/add">New Description</a></li>
+			<li><a href="/beta/images">List Images</a></li>
+			<li><a href="/beta/images/add">New Image</a></li>
+		</ul>
+	</div>
+</div>

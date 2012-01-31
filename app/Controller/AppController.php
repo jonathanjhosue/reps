@@ -36,16 +36,28 @@
  */
 class AppController extends Controller {
 
-	var $components = array('Auth', 'Session');
+	//var $components = array('Auth', 'Session');
+        
+            public $components = array(
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+        )
+    );
+
+    function beforeFilter() {
+        $this->Auth->allow('index', 'view');
+    }
 	
-	function beforeFilter()
+	/*function beforeFilter()
 	{
 		if (!$this->Session->check('language'))
 		{
-			$this->Session->write('language', 2); //English por default si el usuario no ha definido lenguage aún.
+			$this->Session->write('language', 2); //English por default si el usuario no ha definido lenguage aï¿½n.
 		}
 		
-		$this->Auth->allow('display','index','view', 'index_by_location');
-	}
+		//$this->Auth->allow('display','index','view', 'index_by_location');
+	}*/
 }
 ?>

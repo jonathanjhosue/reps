@@ -1,0 +1,136 @@
+<div id="content">
+	<div class="products view">
+		<h2>View Product</h2>
+		<dl>
+			<dt class="altrow">Id</dt>
+			<dd class="altrow">1 &nbsp;	</dd>
+			<dt>Location</dt>
+			<dd><a href="/beta/locations/view/1">1</a>&nbsp;</dd>
+			<dt class="altrow">Gpslatitude</dt>
+			<dd class="altrow">	171	&nbsp;</dd>
+			<dt>Gpslongitude</dt>
+			<dd>172	&nbsp;</dd>
+		</dl>
+	</div>
+	<div class="actions">
+		<ul>
+			<li><a href="/beta/Products/edit/1">Edit Product</a> </li>
+			<li><a onclick="return confirm('Are you sure you want to delete #1?');" href="/beta/Products/delete/1">Delete Product</a> </li>
+			<li><a href="/beta/Products">List Products</a> </li>
+			<li><a href="/beta/Products/add">New Product</a> </li>
+			<li><a href="/beta/locations">List Locations</a></li>
+			<li><a href="/beta/locations/add">New Location</a></li>
+			<li><a href="/beta/hotels">List Hotels</a></li>
+			<li><a href="/beta/hotels/add">New Hotel</a></li>
+			<li><a href="/beta/product_names">List Product Names</a></li>
+			<li><a href="/beta/product_names/add">New Product Name</a></li>
+			<li><a href="/beta/reviews">List Reviews</a></li>
+			<li><a href="/beta/reviews/add">New Review</a></li>
+			<li><a href="/beta/directions">List Directions</a></li>
+			<li><a href="/beta/directions/add">New Direction</a></li>
+			<li><a href="/beta/descriptions">List Descriptions</a></li>
+			<li><a href="/beta/descriptions/add">New Description</a></li>
+			<li><a href="/beta/images">List Images</a></li>
+			<li><a href="/beta/images/add">New Image</a></li>
+		</ul>
+	</div>
+	<div class="related">
+		<h3>Related Hotels</h3>
+		<dl>
+			<dt class="altrow">Id</dt>
+			<dd class="altrow">1&nbsp;</dd>
+			<dt>Product Id</dt>
+			<dd>1&nbsp;</dd>
+			<dt class="altrow">Hotel Category Id</dt>
+			<dd class="altrow">1&nbsp;</dd>
+			<dt>Hotel Name</dt>
+			<dd>Nuevo Horizonte&nbsp;</dd>
+			<dt class="altrow">Total Rooms</dt>
+			<dd class="altrow">24&nbsp;</dd>
+			<dt>Features</dt>
+			<dd>????&nbsp;</dd>
+			<dt class="altrow">Infant Age Max</dt>
+			<dd class="altrow">5 &nbsp;</dd>
+			<dt>Child Age Max</dt>
+			<dd>12&nbsp;</dd>
+		</dl>
+		<div class="actions"> <!-- En éste caso sólo está el Edit del hotel, xq un producto sólo tiene un hotel -->
+			<ul>
+				<li><a href="/beta/hotels/edit/1">Edit Hotel</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="related">
+		<h3>Related Product Names</h3>
+		<table cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<th>Product Id</th>
+					<th>Language Id</th>
+					<th>Product Name</th>
+					<th class="actions">Actions</th>
+				</tr>
+				<tr class="altrow">
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>Primer nombre</td>
+					<td class="actions">
+						<a href="/beta/product_names/view/1">View</a>
+						<a href="/beta/product_names/edit/1">Edit</a>
+						<a onclick="return confirm('Are you sure you want to delete #1?');" href="/beta/product_names/delete/1">Delete</a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>1</td>
+					<td>2</td>
+					<td>Segundo nombre</td>
+					<td class="actions">
+						<a href="/beta/product_names/view/2">View</a>
+						<a href="/beta/product_names/edit/2">Edit</a>
+						<a onclick="return confirm('Are you sure you want to delete #2?');" href="/beta/product_names/delete/2">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="actions">
+			<ul>
+				<li><a href="/beta/product_names/add">New Product Name</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="related">
+		<h3>Related Reviews</h3>
+		<div class="actions">
+			<ul>
+				<li><a href="/beta/reviews/add">New Review</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="related">
+		<h3>Related Directions</h3>
+		<div class="actions">
+			<ul>
+				<li><a href="/beta/directions/add">New Direction</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="related">
+		<h3>Related Descriptions</h3>
+		<div class="actions">
+			<ul>
+				<li><a href="/beta/descriptions/add">New Description</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="related">
+		<h3>Related Images</h3>
+		<div class="actions">
+			<ul>
+				<li><a href="/beta/images/add">New Image</a> </li>
+			</ul>
+		</div>
+	</div>
+</div>

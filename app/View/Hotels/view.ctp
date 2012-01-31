@@ -14,9 +14,9 @@
 	echo $this->Html->script('tabcontrol.js');
 	echo $this->Html->scriptBlock($jsGalleryDec, array('allowCache'=>true,'safe'=>true,'inline'=>false));
 	
-	echo $this->element('v_nav_regions');
+	echo $this->element('v_nav_regions',array('cache' => array('time' => '+1 day')));
 	
-	print_r($_SESSION);
+	//print_r($_SESSION);
 ?>
 
 <div class="hotels view">
@@ -34,7 +34,7 @@
 		<table class="serviceHeader">
 			<tr>
 				<td><span class="label">Category:&nbsp;</span><?php echo $hotel['HotelCategory']['category_name']; ?></td>
-				<td><span class="label">Location:&nbsp;</span><?php echo $hotel['Product']['Location']['location_name'].', '.$hotel['Product']['Location']['Region']['name_region']; ?></td>  
+				<td><span class="label">Location:&nbsp;</span><?php echo $hotel['Product']['Location']['location_name'].', '.$hotel['Product']['Location']['Region']['region_name']; ?></td>  
 				<td><span class="label">Total Room:</span>&nbsp;<?php echo $hotel['Hotel']['total_rooms']; ?></td>
 		  </tr>
 		</table>
@@ -66,7 +66,8 @@
 				<span class="label">Description:&nbsp;</span>
 			</div>
 			<div style="border: 1px solid #ddd; min-height:70px;" >
-				<?php echo  $this->I18nKeys->getKey($hotel['Product']['i18n_description']); ?>
+                            <?php echo  $this->I18nKeys->getKeyByType($hotel['Product']['I18nKey'],  TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION); ?>
+			    <?php //echo  $this->I18nKeys->getKey($hotel['Product']['i18n_description']); ?>
 			</div>
 		</div>
 		<br />
@@ -245,5 +246,6 @@
 </div>
 -->
 </div>
-<?php echo $this->element('sql_dump'); ?>
+<pre><?php //print_r($deb); ?></pre>
+
   <pre><?php print_r($hotel); ?></pre>

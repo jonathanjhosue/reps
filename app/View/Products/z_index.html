@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">	<title>
+		PanamaReps: Content Management System Home:		Scaffold :: Index :: Products	</title>
+	<link rel="icon" type="image/x-icon" href="/beta/favicon.ico"><link rel="shortcut icon" type="image/x-icon" href="/beta/favicon.ico"><link href="/beta/css/cake.generic.css" type="text/css" rel="stylesheet"></head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1><a href="/beta/products/../">PanamaReps: Content Management System</a></h1>
+		</div>
+		<div id="content">
+
+			
+			<div class="products index">
+<h2>Products</h2>
+<p>Page 1 of 1, showing 2 records out of 2 total, starting on record 1, ending on 2</p>
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+	<th><a href="/beta/Products/index/page:1/sort:id/direction:asc">Id</a></th>
+	<th><a href="/beta/Products/index/page:1/sort:location_id/direction:asc">Location</a></th>
+	<th><a href="/beta/Products/index/page:1/sort:gpslatitude/direction:desc">Gpslatitude</a></th>
+	<th><a href="/beta/Products/index/page:1/sort:gpslongitude/direction:asc">Gpslongitude</a></th>
+	<th>Actions</th>
+</tr>
+
+	<tr class="altrow">
+		<td>
+			2 
+		</td>
+		<td>
+			<a href="/beta/locations/view/2">2</a>
+		</td>
+		<td>
+			0 
+		</td>
+		<td>
+			1 
+		</td>
+		<td class="actions">
+			<a href="/beta/Products/view/2">View</a>
+			<a href="/beta/Products/edit/2">Edit</a>
+			<a onclick="return confirm('Are you sure you want to delete #2');" href="/beta/Products/delete/2">Delete</a>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			1 
+		</td>
+		<td>
+			<a href="/beta/locations/view/1">1</a>
+		</td>
+		<td>
+			171 
+		</td>
+		<td>
+			172 
+		</td>
+		<td class="actions">
+			<a href="/beta/Products/view/1">View</a>
+			<a href="/beta/Products/edit/1">Edit</a>
+			<a onclick="return confirm('Are you sure you want to delete #1');" href="/beta/Products/delete/1">Delete</a>
+		</td>
+	</tr>
+
+</tbody></table>
+</div>
+<div class="paging">
+	<div class="disabled">&lt;&lt; previous</div>
+ | 
+	 <div class="disabled">next &gt;&gt;</div>
+</div>
+<div class="actions">
+	<ul>
+		<li><a href="/beta/Products/add">New Product</a></li>
+		<li><a href="/beta/locations">List Locations</a></li>
+		<li><a href="/beta/locations/add">New Location</a></li>
+		<li><a href="/beta/hotels">List Hotels</a></li>
+		<li><a href="/beta/hotels/add">New Hotel</a></li>
+		<li><a href="/beta/product_names">List Product Names</a></li>
+		<li><a href="/beta/product_names/add">New Product Name</a></li>
+		<li><a href="/beta/reviews">List Reviews</a></li>
+		<li><a href="/beta/reviews/add">New Review</a></li>
+		<li><a href="/beta/directions">List Directions</a></li>
+		<li><a href="/beta/directions/add">New Direction</a></li>
+		<li><a href="/beta/descriptions">List Descriptions</a></li>
+		<li><a href="/beta/descriptions/add">New Description</a></li>
+	</ul>
+</div>
+		</div>
+		<div id="footer">
+			<a target="_blank" href="http://www.cakephp.org/"><img border="0" alt="CakePHP: the rapid development php framework" src="/beta/img/cake.power.gif"></a>		</div>
+	</div>
+	
+<table cellspacing="0" border="0" summary="Cake SQL Log" id="cakeSqlLog_13131807284e458c3845d934_56575382" class="cake-sql-log">
+<caption>(default) 15 queries took 22 ms</caption>
+<thead>
+<tr><th>Nr</th><th>Query</th><th>Error</th><th>Affected</th><th>Num. rows</th><th>Took (ms)</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>DESCRIBE `products`</td><td></td><td style="text-align: right">4</td><td style="text-align: right">4</td><td style="text-align: right">2</td></tr>
+<tr><td>2</td><td>DESCRIBE `locations`</td><td></td><td style="text-align: right">3</td><td style="text-align: right">3</td><td style="text-align: right">2</td></tr>
+<tr><td>3</td><td>DESCRIBE `regions`</td><td></td><td style="text-align: right">2</td><td style="text-align: right">2</td><td style="text-align: right">1</td></tr>
+<tr><td>4</td><td>DESCRIBE `hotels`</td><td></td><td style="text-align: right">8</td><td style="text-align: right">8</td><td style="text-align: right">2</td></tr>
+<tr><td>5</td><td>DESCRIBE `hotel_categories`</td><td></td><td style="text-align: right">2</td><td style="text-align: right">2</td><td style="text-align: right">2</td></tr>
+<tr><td>6</td><td>DESCRIBE `rooms`</td><td></td><td style="text-align: right">5</td><td style="text-align: right">5</td><td style="text-align: right">2</td></tr>
+<tr><td>7</td><td>DESCRIBE `room_descriptions`</td><td></td><td style="text-align: right">5</td><td style="text-align: right">5</td><td style="text-align: right">2</td></tr>
+<tr><td>8</td><td>DESCRIBE `languages`</td><td></td><td style="text-align: right">2</td><td style="text-align: right">2</td><td style="text-align: right">1</td></tr>
+<tr><td>9</td><td>DESCRIBE `room_rates`</td><td></td><td style="text-align: right">16</td><td style="text-align: right">16</td><td style="text-align: right">2</td></tr>
+<tr><td>10</td><td>DESCRIBE `product_names`</td><td></td><td style="text-align: right">4</td><td style="text-align: right">4</td><td style="text-align: right">1</td></tr>
+<tr><td>11</td><td>DESCRIBE `reviews`</td><td></td><td style="text-align: right">5</td><td style="text-align: right">5</td><td style="text-align: right">2</td></tr>
+<tr><td>12</td><td>DESCRIBE `directions`</td><td></td><td style="text-align: right">4</td><td style="text-align: right">4</td><td style="text-align: right">1</td></tr>
+<tr><td>13</td><td>DESCRIBE `descriptions`</td><td></td><td style="text-align: right">4</td><td style="text-align: right">4</td><td style="text-align: right">1</td></tr>
+<tr><td>14</td><td>SELECT COUNT(*) AS `count` FROM `products` AS `Product` LEFT JOIN `locations` AS `Location` ON (`Product`.`location_id` = `Location`.`id`) LEFT JOIN `hotels` AS `Hotel` ON (`Hotel`.`product_id` = `Product`.`id`)  WHERE 1 = 1   </td><td></td><td style="text-align: right">1</td><td style="text-align: right">1</td><td style="text-align: right">0</td></tr>
+<tr><td>15</td><td>SELECT `Product`.`id`, `Product`.`location_id`, `Product`.`gpslatitude`, `Product`.`gpslongitude`, `Location`.`id`, `Location`.`location_name`, `Location`.`region_id`, `Hotel`.`id`, `Hotel`.`product_id`, `Hotel`.`hotel_category_id`, `Hotel`.`hotel_name`, `Hotel`.`total_rooms`, `Hotel`.`features`, `Hotel`.`infant_age_max`, `Hotel`.`child_age_max` FROM `products` AS `Product` LEFT JOIN `locations` AS `Location` ON (`Product`.`location_id` = `Location`.`id`) LEFT JOIN `hotels` AS `Hotel` ON (`Hotel`.`product_id` = `Product`.`id`)  WHERE 1 = 1   ORDER BY `Product`.`gpslatitude` asc  LIMIT 20</td><td></td><td style="text-align: right">2</td><td style="text-align: right">2</td><td style="text-align: right">1</td></tr>
+</tbody></table>
+</body></html>

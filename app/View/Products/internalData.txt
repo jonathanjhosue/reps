@@ -1,0 +1,47 @@
+------------------------------------
+$product =	Array
+				( 
+					[Product] => Array 
+						( 
+							[id] => 1 
+							[location_id] => 1 
+							[gpslatitude] => 171 
+							[gpslongitude] => 172 
+						) 
+					[Location] => Array 
+						( 
+							[id] => 1 
+							[location_name] => LocationTest 
+							[region_id] => 2 
+						) 
+					[ProductName] => Array 
+						( 
+							[0] => Array 
+								( 
+									[id] => 1 
+									[product_id] => 1 
+									[language_id] => 1 
+									[product_name] => Primer nombre 
+								) 
+							[1] => Array 
+								( 
+									[id] => 2 
+									[product_id] => 1 
+									[language_id] => 2 
+									[product_name] => Segundo nombre 
+								) 
+						) 
+					[Review] => Array ( ) 
+					[Direction] => Array ( ) 
+					[Description] => Array ( ) 
+					[Image] => Array ( ) 
+				) 
+
+				$productName = $product[ProductName];
+				$productName[id], $productName[product_id], ....
+---------------------------------------
+				
+$product[Product][id] => 1;
+$product[Location][location_name] => LocationTest;
+
+$productNames => $product[ProductName];

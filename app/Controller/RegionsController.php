@@ -1,24 +1,38 @@
-<?
+<?php
 class RegionsController extends AppController
 {
 	var $name = 'Regions';
-	$this->layout = 'admin';
+	//var $layout='admin';
 	//var $scaffold;
 
 	/*============BEGINS ADMIN METHODS===================*/
+        
+        function index()
+	{
+            $regions = $this->paginate();
+            if (isset($this->params['requested'])) {
+            return $regions;
+            } else {
+            $this->set(compact('$regions'));
+            }
+
+			//$this->Region->unbindModel(array('hasMany'=>array('Location')));
+			//$this->set('regions', $this->Region->find('all'));
+
+	}
 	
 	function admin_index()
 	{
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$this->Region->unbindModel(array('hasMany'=>array('Location')));
-			$this->set('regions', $this->Region->findAll());
-		}
-		else { $this->redirect('/'); }		
-	}
+            
 
+			//$this->Region->unbindModel(array('hasMany'=>array('Location')));
+			$this->set('regions', $this->Region->find('all'));
+
+	}
+/*
 	function admin_view($id)
 	{
+            
 		if ($this->Session->read('Auth.User.rol') == 'admin')
 		{
 			$this->Region->id = $id;
@@ -81,6 +95,7 @@ class RegionsController extends AppController
                     $this->redirect('/'); 
                     
                 }		  
-	}
-} 
+	}*/
+}
+?>
 

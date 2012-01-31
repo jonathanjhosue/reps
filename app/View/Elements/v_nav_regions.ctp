@@ -7,10 +7,11 @@
 <ul id="v_nav">
 	<?php 
 		$contPanel = 0;
-
+                $regions= $this->requestAction('regions/index');
+               // pr($regions);
 		foreach($regions as $region): ?>
 		<li>
-			<a onclick="panelexpand('panel_<?php echo $contPanel; ?>', '$totalPanel');return false;" class="span" href="#"><?php echo $region['Region']['name_region']; ?><img alt="" src="plus.png" id="pm<?php echo $contPanel; ?>"></a>
+			<a onclick="panelexpand('panel_<?php echo $contPanel; ?>', '$totalPanel');return false;" class="span" href="#"><?php echo $region['Region']['region_name']; ?><img alt="" src="plus.png" id="pm<?php echo $contPanel; ?>"></a>
 			<div id="panel_<?php echo $contPanel; $contPanel++; ?>" style="display:none;">
 				<div id="pageNav">
 					<div id="sectionLinks">

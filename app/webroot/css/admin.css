@@ -1,0 +1,53 @@
+/* 
+    Document   : admin
+    Created on : 25/01/2012, 12:17:14 PM
+    Author     : jonathan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+div.number input,input.number{
+    
+    width: 45px;
+        
+}
+div.name input{
+    
+    width: 350px;
+        
+}
+
+label.text{
+    clear: left;
+    margin: 0 20px;
+     display: inline-block;
+}
+
+div.tinyname, div.name, div.select,div.text, div.number,div.checkbox,div.time{
+     display: inline-block;
+    
+}
+div.tinyname input,div.text input,div.number,div.time{
+   
+    width: 200px;
+        
+}
+div.checkbox{
+    width: 150px;
+}
+input.rateNumber{
+    width: 30px;
+}
+table.RoomRate input.rateNumber{
+    width: 40px;
+    font-size: 12px;
+}
+
+table.RoomRate select{
+ 
+    font-size: 12px;
+}
+
+div.fulltext input{
+    width: 100%;
+}

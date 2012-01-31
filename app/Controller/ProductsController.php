@@ -3,11 +3,12 @@ class ProductsController extends AppController
 {
 	var $name = 'Products';
 	var $scaffold;
+//var $scaffold='admin';
 
-	function beforeFilter()
+	/*function beforeFilter()
 	{
-		parent:beforeFilter();
-		$this->Auth->deny('add','delete','edit', 'view', 'delete');
+		//parent:beforeFilter();
+		//$this->Auth->deny('add','delete','edit', 'view', 'delete');
 	}
 	
 	
@@ -70,6 +71,6 @@ class ProductsController extends AppController
 				$this->redirect(array('action'=>'index'));
 			}
 		}
-	}
+	}*/
 }
 ?>

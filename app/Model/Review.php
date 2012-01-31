@@ -1,4 +1,5 @@
 <?php
+App::import('Model','TiposGlobal');
 class Review extends AppModel
 {
 	var $name = 'Review';
@@ -15,5 +16,10 @@ class Review extends AppModel
                                                         )
                                             )   
 			);  
+
+         function setLocale($locale){
+            $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;
+            
+        }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php $totalPanel = 10; //cada panel pertenece a una región. Según el país en el que se utilice el sistema, se debe indicar la cantidad de regiones=panels que posee.
-		echo $this->element('v_nav_regions'); ?>
+		echo $this->element('v_nav_regions',array('cache' => array('time' => '+1 day'))); ?>
 
 <div class="hotels index_by_location" style="width:85%;">
 	<h2>Hotels</h2>
@@ -12,7 +12,7 @@
 						?> </td>
 					</tr>
 					<tr>
-						<td><?php echo $this->Html->link($hotel['Product']['product_name'], array('action'=>'view', $hotel['Hotel']['id'])); ?><br/>
+						<td><?php echo $this->Html->link($hotel['Product']['product_name'], array('action'=>'view', $hotel['Hotel']['id'],'sd')); ?><br/>
 							<?php echo $hotel['HotelCategory']['category_name']; ?>
 						</td>
 					</tr>
@@ -22,3 +22,4 @@
 		<?php endforeach; ?>
 
 </div>
+<?php pr($hotels) ?>

@@ -1,0 +1,51 @@
+<div id="content">
+	<div class="products form">
+		<form action="/beta/products/edit/1" method="post" id="ProductEditForm">
+			<fieldset style="display: none;">
+				<input type="hidden" value="PUT" name="_method">
+			</fieldset>
+			<fieldset>
+				<legend>Edit Product</legend>
+				<input type="hidden" id="ProductId" value="1" name="data[Product][id]">
+				<div class="input select">
+					<label for="ProductLocationId">Location</label>
+					<select id="ProductLocationId" name="data[Product][location_id]">
+						<option selected="selected" value="1">1</option>
+						<option value="2">2</option>
+					</select>
+				</div>
+				<div class="input text">
+					<label for="ProductGpslatitude">Gpslatitude</label>
+					<input type="text" id="ProductGpslatitude" value="171" maxlength="5" name="data[Product][gpslatitude]">
+				</div>
+				<div class="input text">
+					<label for="ProductGpslongitude">Gpslongitude</label>
+					<input type="text" id="ProductGpslongitude" value="172" maxlength="5" name="data[Product][gpslongitude]">
+				</div>
+			</fieldset>
+			<div class="submit">
+				<input type="submit" value="Submit">
+			</div>
+		</form>
+	</div>
+	<div class="actions">
+		<ul>
+			<li><a onclick="return confirm('Are you sure you want to delete #1');" href="/beta/Products/delete/1">Delete</a></li>
+			<li><a href="/beta/Products">List Products</a></li>
+			<li><a href="/beta/locations">List Locations</a></li>
+			<li><a href="/beta/locations/add">New Location</a></li>
+			<li><a href="/beta/hotels">List Hotels</a></li>
+			<li><a href="/beta/hotels/add">New Hotel</a></li>
+			<li><a href="/beta/product_names">List Product Names</a></li>
+			<li><a href="/beta/product_names/add">New Product Name</a></li>
+			<li><a href="/beta/reviews">List Reviews</a></li>
+			<li><a href="/beta/reviews/add">New Review</a></li>
+			<li><a href="/beta/directions">List Directions</a></li>
+			<li><a href="/beta/directions/add">New Direction</a></li>
+			<li><a href="/beta/descriptions">List Descriptions</a></li>
+			<li><a href="/beta/descriptions/add">New Description</a></li>
+			<li><a href="/beta/images">List Images</a></li>
+			<li><a href="/beta/images/add">New Image</a></li>
+		</ul>
+	</div>
+</div>
