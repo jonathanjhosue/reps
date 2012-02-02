@@ -1,12 +1,32 @@
+<?php	
+    echo $this->Html->scriptBlock(
+            '$(function() {
+		$( "#divRooms" ).accordion({autoHeight: false,navigation: true,collapsible: true});
+                $( "#divReviews" ).accordion({autoHeight: false,navigation: true,collapsible: true});
+                $( "#tabs" ).tabs();
+            });'
+            , array('allowCache'=>true,'safe'=>true,'inline'=>false));
+?>
+
 <h1><?php echo __('Edit Hotel'); ?></h1>
 
 <div class="hotels form">
     <?php $indexI18n=0 ?>
-	<?php echo $this->Form->create('Hotel'); ?>
-
+	<?php echo $this->Form->create('Hotel', array('type' => 'file')); ?>
+<div id="tabs">
+    <ul>
+		<li><a href="#tabs-1"><?php echo __('Hotel'); ?></a></li>
+		<li><a href="#tabs-2"><?php echo __('Images'); ?></a></li>
+		<li><a href="#tabs-3"><?php echo __('Features'); ?></a></li>
+                <li><a href="#tabs-4"><?php echo __('Rooms'); ?></a></li>
+                <li><a href="#tabs-5"><?php echo __('Room Rates'); ?></a></li>
+                <li><a href="#tabs-6"><?php echo __('Reviews'); ?></a></li>
+	</ul>
+    
+    <div id="tabs-1">
     <fieldset id="formHotel1">  
         <legend><?php echo __('Hotel'); ?></legend>
-	<fieldset>		
+			
 	<?php
 		echo $this->Form->input('Product.id',array('readonly'=>true));
                 echo $this->Form->input('id',array('type'=>'hidden'));
@@ -26,12 +46,18 @@
                 echo $this->Form->input('I18nKey.0.type',array('type'=>'hidden','value'=>  TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION));
                 echo $this->Form->input('I18nKey.0.language',array('type'=>'hidden','value'=> 'en'));
                 echo $this->Form->input('I18nKey.0.value',array('type'=>'textarea','label'=>__('Description')));*/
-                
+              
+                ?>
+            
+                        
+                <?php
                 echo $this->RipsWeb->getInputI18nAll($indexI18n,
                                     $this->data['I18nKey'],
                                     'I18nKey',
                                     TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION,
                                     array('label'=>__('Description'),'type'=>'textarea'));
+                ?>
+                <?php
                 echo $this->RipsWeb->getInputI18nAll($indexI18n,
                                     $this->data['I18nKey'],
                                     'I18nKey',
@@ -52,27 +78,33 @@
                 
         ?>
        </fieldset>  
-	<fieldset>
+    </div>
+    <div id="tabs-2">
+	<fieldset  id="fieldsetImages">
 		<legend><?php echo __('Images'); ?></legend>
 	<?php
         for($i=0;$i<Configure::read('Hotels.TotalImages');$i++){
             
-		echo $this->Form->input("Image.$i.image_name",array('label'=>_('Image ').($i+1),'type'=>'file'));
-		if(isset($this->request->data['Image'][$i])){
-                    echo '<label>'.$this->request->data['Image'][$i]['image_name'].'</label>';
-                    echo $this->Form->input("Image.$i.type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_HOTEL));
-                    echo $this->Html->image("image/".$this->request->data['Image'][$i]['id']."/80x80_".$this->request->data['Image'][$i]['image_name']);
+		$img='<div class="img">';
+                 $img.= $this->Form->input("Image.$i.owner_id",array('type'=>'hidden'));
+                 //$img.= $this->Form->input("Image.$i.image_name",array('type'=>'hidden', 'value'=>'Image'.($i+1)));
+                 $img.= $this->Form->input("Image.$i.owner_type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_HOTEL));
+		if(isset($this->request->data['Image'][$i])){                    
+                    $img.= '<label>'.$this->request->data['Image'][$i]['image_name'].'</label>';
+                    $img.= $this->Form->input("Image.$i.id",array('type'=>'hidden'));                    
+                    $img.= $this->Html->image("image/".$this->request->data['Image'][$i]['id']."/80x60_".$this->request->data['Image'][$i]['image_name']);
                 }
+                $img.='</div>';
+                echo $this->Form->input("Image.$i.image_name",array( 'before'=>$img,'label'=>_('Image ').($i+1),'type'=>'file'));
                // echo $this->Form->input('hotels/'.$hotel['Image'][$i]['image_name'], array('height' => '75px', 'style'=> 'padding-bottom:3px;'));
          }
 	?>
 	</fieldset>
     </fieldset>
-
-    
+    </div>
+    <div id="tabs-3">
 	<fieldset class="formHotel2">
-        <legend><?php echo __('Features'); ?></legend>
-        <fieldset>
+        <legend><?php echo __('Features'); ?></legend>        
     <?php
 		echo $this->Form->input('restaurant');
 		echo $this->Form->input('bar');
@@ -121,24 +153,32 @@
                 array('label'=>__('Dining & Drinking'),'type'=>'textarea'));
 	
     ?>
-       </fieldset>  
-     </fieldset>
-    <fieldset class="formHotel3">
+         </fieldset>
+    </div>
+    <div id="tabs-4">  
+    
+    <fieldset class="formHotel3" id='fieldsetRoom'>
         <legend><?php echo __('Rooms'); ?></legend>
   
 
     
 	<fieldset>
 		<legend><?php echo __('Room'); ?></legend>
+                <div id="divRooms">
+                    
 	<?php	
+                //$x=0                    
                 foreach($this->data['Room'] as $i=>$room){
+                    $titulo=($this->data['Room'][$i]['category']!="")?$this->data['Room'][$i]['category']:__('Room ').($i+1);
+                    echo '<h3><a href="#">'.$titulo.'</a></h3>';
+                    echo "<div>";
                     echo $this->Form->input('Room.'.$i.'.id',array('type'=>'hidden','value'=>$room['id']));
                     echo $this->Form->input('Room.'.$i.'.hotel_id',array('type'=>'hidden','value'=>$room['hotel_id']));
                     echo $this->Form->input('Room.'.$i.'.category');
                     echo $this->Form->input('Room.'.$i.'.count',array('size'=>'4','maxlength'=>'3','div'=>'number'));
                     
                     
-                    echo $this->RipsWeb->getInputI18nAll($x=0,
+                    echo $this->RipsWeb->getInputI18nAll($indexI18n,
                                     $room['I18nKey'],
                                     'Room.'.$i.'.I18nKey',
                                     TiposGlobal::I18N_TYPE_ROOM_DESCRIPTION,
@@ -165,20 +205,34 @@
                     echo $this->Form->input('Room.'.$i.'.make_up_mirror');
                     echo $this->Form->input('Room.'.$i.'.balcony');
                     echo $this->Form->input('Room.'.$i.'.private_garden');
+                    
+                    
+                    echo $this->Form->input('Room.'.$i.'.id',array('type'=>'hidden','name'=>"data[Action][DeleteRoom]"));
+                    echo $this->Form->submit(__('Delete'),array('name'=>'delete_room'));
+                    
+                    echo '</div>';
                 }
                 //echo $this->Form->input('Room.0.id');
-
-                
-              
-	?>
+        ?>  
+               </div>
 	</fieldset>
-         <?php echo $this->Form->submit(__('Save'),array('name'=>'save_rooms'));?>   
+        <fieldset class="hotelsActions"> 
+        <?php   
+                
+	    echo $this->Form->input('Action.AddRooms',array('type'=>'text','label'=>__('New Rooms'),'maxlength'=>2,'div'=>'number','value'=>1));
+            echo $this->Form->submit(__('Add'),array('name'=>'add_rooms'));
+            
+        ?>  
+         </fieldset> 
      
     </fieldset>
-    
+        <?php echo $this->Form->submit(__('Save'),array('name'=>'save_rooms'));?> 
+    </div>
+     <div id="tabs-5">  
+      
     <fieldset class="formHotel4">
         <legend><?php echo __('Room Rate'); ?></legend> 
-	<fieldset>		
+			
                 <table class="RoomRate">
                     <thead>
                         <tr>
@@ -206,32 +260,50 @@
                     <tbody>                        
                         
                         <?php
-                               /* echo '<tr>'.
-                        
-                                     '<td>'.$this->Form->input('Season.0.date_start',array('type'=>'date','label'=>false,'div'=>false)).'</td>'.
-                                     '<td>'.$this->Form->input('Season.0.date_end',array('type'=>'date','label'=>false,'div'=>false)).'</td>'.
-                                        '<td>'.$this->Form->text('Room.0.RoomRate.0.single',array('class'=>'rateNumber')).'</td>'.
-                                        '<td>'.$this->Form->text('Room.0.RoomRate.0.double',array('class'=>'rateNumber')).'</td>'.
-                                        '<td>'.$this->Form->text('Room.0.RoomRate.0.triple',array('class'=>'rateNumber')).'</td>'.
-                                        '<td>'.$this->Form->text('Room.0.RoomRate.0.quadruple',array('class'=>'rateNumber')).'</td>'.
-                                        '<td>'.$this->Form->text('Room.0.RoomRate.0.child',array('class'=>'rateNumber')).'</td>'.
-                                        '<td>'.$this->Form->text('Room.0.RoomRate.0.infant',array('class'=>'rateNumber')).'</td>'.
-                                     '</tr>'*/
+                        $y=0;//indice room rate
+                         foreach($this->data['Room'] as $i=>$room){
+                              echo '<tr><th colspan="2">'.$room['category'].'</th><td  colspan="6"></td></tr>';
+                             foreach($this->data['Season'] as $x=>$season){
+                                echo '<tr><td>';
+                                echo $this->Form->input("Season.$x.id",array('type'=>'hidden'));
+                                echo $this->Form->input("Season.$x.hotel_id",array('type'=>'hidden'));
+                                echo $this->Form->input("Season.$x.date_start",array('type'=>'date','label'=>false,'div'=>false)).'</td>'.
+                                     '<td>'.$this->Form->input("Season.$x.date_end",array('type'=>'date','label'=>false,'div'=>false)).'</td>';
+                                
+                                echo '<td>'.$this->Form->input("RoomRate.$x.season_id",array('type'=>'hidden','value'=>$season['id'])).
+                                            $this->Form->input("RoomRate.$x.room_id",array('type'=>'hidden','value'=>$room['id']));
+                                echo       $this->Form->text("RoomRate.$y.single",array('class'=>'rateNumber')).'</td>'.
+                                    '<td>'.$this->Form->text("RoomRate.$y.double",array('class'=>'rateNumber')).'</td>'.
+                                    '<td>'.$this->Form->text("RoomRate.$y.triple",array('class'=>'rateNumber')).'</td>'.
+                                    '<td>'.$this->Form->text("RoomRate.$y.quadruple",array('class'=>'rateNumber')).'</td>'.
+                                    '<td>'.$this->Form->text("RoomRate.$y.child",array('class'=>'rateNumber')).'</td>'.
+                                    '<td>'.$this->Form->text("RoomRate.$y.infant",array('class'=>'rateNumber')).'</td>'.
+                                    '</tr>';
+                                $y++;
+                             }
+                         }
                         ?>
                </tbody>
                     
             </table>
+        <fieldset class="hotelsActions"> 
+                    <?php   
+
+                        echo $this->Form->input('Action.AddSeasons',array('type'=>'text','label'=>__('New Seasons'),'maxlength'=>2,'div'=>'number','value'=>1));
+                        echo $this->Form->submit(__('Add'),array('name'=>'add_seasons'));
+
+                    ?>  
+             </fieldset>
                 <?php
-                /*
-                 echo $this->Form->input('Room.0.I18nKey.0.id');
+         
+               /*  echo $this->Form->input('Room.0.I18nKey.0.id');
                  echo $this->Form->input('Room.0.I18nKey.0.type',array('type'=>'hidden','value'=>TiposGlobal::I18N_TYPE_ROOM_INCLUDE));
                 echo $this->Form->input('Room.0.I18nKey.0.language',array('type'=>'hidden','value'=> 'en'));
                 echo $this->Form->input('Room.0.I18nKey.0.value',array('label'=>__('Include'),'div'=>'fulltext'));
-                 *
-                 */
-                ?>
+                 
+               */ ?>
            
-	</fieldset>
+	
          <?php
            echo $this->RipsWeb->getInputI18nAll($indexI18n,
                                 $this->data['I18nKey'],
@@ -240,28 +312,46 @@
       
                 ?>
      </fieldset>
+     </div>
+    <div id="tabs-6">  
 	<fieldset>
 		<legend><?php echo __('Reviews'); ?></legend>
-                <fieldset id="">
+               
+                     <div id="divReviews">
                 <?php
                 
                 foreach($this->data['Review'] as $i=>$review){
+                    $titulo=($i+1).'=>'.$this->data['Review'][$i]['review_date'];
+                    echo '<h3><a href="#">'.$titulo.'</a></h3>';
+                    echo "<div>";
                     echo $this->Form->input("Review.$i.id");
                     echo $this->Form->input("Review.$i.staff");
                     echo $this->Form->input("Review.$i.review_date",array('type'=>'hidden'));
-                    echo $this->RipsWeb->getInputI18nAll($x=0,
+                    echo $this->RipsWeb->getInputI18nAll($indexI18n,
                                     $review['I18nKey'],
                                     'Review.'.$i.'.I18nKey',
                                     TiposGlobal::I18N_TYPE_REVIEW,
                                     array('label'=>__('Review'),'type'=>'textarea'));  
+                    
+                    echo $this->Form->input('Review.'.$i.'.id',array('type'=>'hidden','name'=>"data[Action][DeleteReview]"));
+                    echo $this->Form->submit(__('Delete'),array('name'=>'delete_review'));
+                    echo "</div>";
                 }
                 
                 
                         //echo $this->Form->input('review_date');
                 ?>
-                </fieldset>
+                     </div>
+                 <fieldset class="hotelsActions"> 
+        <?php   
+                
+	    echo $this->Form->input('Action.AddReviews',array('type'=>'text','label'=>__('New Reviews'),'maxlength'=>2,'div'=>'number','value'=>1));
+            echo $this->Form->submit(__('Add'),array('name'=>'add_reviews'));
+            
+        ?>  
+         </fieldset> 
 	</fieldset>
-  
+        </div>
       <?php echo $this->Form->end(array('label'=>__('Save'),'value'=>__('Save'),'name'=>'save_all'));?>
 </div>
 <div class="actions">

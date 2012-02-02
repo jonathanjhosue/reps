@@ -12,8 +12,13 @@
 		echo $this->Html->css('cake.generic');
                 
                 echo $this->Html->css('admin');
+        echo $this->Html->css('smoothness/jquery-ui.css');
+	echo $this->Html->script('jquery.js');
+        echo $this->Html->script('jquery-ui.js');
 
 		echo $scripts_for_layout;
+                
+
 	?>
 </head>
 <body>

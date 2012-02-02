@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	<title>
+				Hotels	</title>
+	<link href="http://hoteles.com/beta/favicon.ico" type="image/x-icon" rel="icon">
+<link href="http://hoteles.com/beta/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link type="text/css" href="css/jquery-ui.css" rel="stylesheet" />	
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript">
+
+$(function() {
+                    $( "#tabsPRODUCT_DESCRIPTION" ).tabs();
+                });
+</script>
+<script type="text/javascript">
+			$(function(){
+
+				// Tabs
+				//$('#tabs').tabs();
+				
+				
+				
+			});
+		</script>
+</head>
+<body>
+	<div id="container">
+		
+		<div id="content"> <!-- este es el pagecell1 del template-->						
+			
+<h1>Edit Hotel</h1>
+
+<div class="hotels form">
+    	<form action="/beta/admin/Hotels/edit/42" id="HotelAdminEditForm" method="post" accept-charset="utf-8">
+
+    <div style="display:none;"><input name="_method" value="PUT" type="hidden"></div>
+    <fieldset id="formHotel1">  
+        <legend>Hotel</legend>
+	<fieldset>		         
+                        
+                <div id="tabsPRODUCT_DESCRIPTION">
+		  <ul>
+		    <li><a href="#tabsPRODUCT_DESCRIPTION-1"><img src="img/en_flag.png" alt=""></a></li>
+		    <li><a href="#tabsPRODUCT_DESCRIPTION-2"><img src="img/es_flag.png" alt=""></a></li>
+		    <li><a href="#tabsPRODUCT_DESCRIPTION-3"><img src="img/pt_flag.png" alt=""></a></li>
+		  </ul>
+		<div id="tabsPRODUCT_DESCRIPTION-1">
+		  <input name="data[I18nKey][0][id]" value="121" id="I18nKey0Id" type="hidden">
+		  <input name="data[I18nKey][0][type]" value="PRODUCT_DESCRIPTION" id="I18nKey0Type" type="hidden">
+		  <input name="data[I18nKey][0][language]" value="en" id="I18nKey0Language" type="hidden">
+		  <div class="input textarea"><label for="I18nKey0Value">Description (en) </label>
+		      <textarea name="data[I18nKey][0][value]" cols="30" rows="6" id="I18nKey0Value">fdfdsa</textarea>
+		  </div></div>
+		<div id="tabsPRODUCT_DESCRIPTION-2">
+		    <input name="data[I18nKey][1][id]" value="122" id="I18nKey1Id" type="hidden">
+		    <input name="data[I18nKey][1][type]" value="PRODUCT_DESCRIPTION" id="I18nKey1Type" type="hidden">
+		    <input name="data[I18nKey][1][language]" value="es" id="I18nKey1Language" type="hidden">
+		    <div class="input textarea"><label for="I18nKey1Value">Description (es) </label>
+		      <textarea name="data[I18nKey][1][value]" cols="30" rows="6" id="I18nKey1Value">erwtret</textarea>
+		   </div></div>
+		<div id="tabsPRODUCT_DESCRIPTION-3"><input name="data[I18nKey][2][id]" value="123" id="I18nKey2Id" type="hidden">
+		  <input name="data[I18nKey][2][type]" value="PRODUCT_DESCRIPTION" id="I18nKey2Type" type="hidden">
+		  <input name="data[I18nKey][2][language]" value="pt" id="I18nKey2Language" type="hidden">
+		<div class="input textarea"><label for="I18nKey2Value">Description (pt) </label>
+		  <textarea name="data[I18nKey][2][value]" cols="30" rows="6" id="I18nKey2Value">gpidjsgiop 0'09</textarea></div></div>
+	      </div>               
+</fieldset>
+
+     <div id="tabs">
+
+	    <ul>
+		    <li><a href="#tabs-1">First</a></li>
+		    <li><a href="#tabs-2">Second</a></li>
+		    <li><a href="#tabs-3">Third</a></li>
+	    </ul>
+	    <div id="tabs-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+	    <div id="tabs-2">Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</div>
+
+	    <div id="tabs-3">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+    </div>
+
+
+</body></html>

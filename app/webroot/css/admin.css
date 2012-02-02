@@ -43,11 +43,56 @@ table.RoomRate input.rateNumber{
     font-size: 12px;
 }
 
-table.RoomRate select{
+table.RoomRate thead th input.rateNumber{
+    width: 25px;
+    font-size: 12px;
+}
+
+table.RoomRate, table.RoomRate select{
  
     font-size: 12px;
 }
 
 div.fulltext input{
     width: 100%;
+}
+
+#fieldsetImages div.input{
+        border: 1px solid;
+    border-radius: 4px;
+    height: 74px;
+}
+
+#fieldsetImages div.input input, #fieldsetImages input{
+      display: inline;
+       width:auto;
+    
+}
+
+#fieldsetImages div.img{
+    width: 250px;
+    float: left;
+    height: 60px;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+#fieldsetImages div.img label{
+    width: 150px;
+    display: inline-block;
+}
+
+#fieldsetImages img{
+    width: 80px;
+    height: 60px;
+}
+
+.hotelsActions input, .hotelsActions label,.hotelsActions .submit,.hotelsActions text, .hotelsActions .number{
+    display: inline;
+    
+}
+
+.hotelsActions .submit{
+    margin:0px;
+    padding: 0.5em;
 }

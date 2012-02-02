@@ -10,7 +10,9 @@
 <?php $altrow = true; //variable para controlar la distinción entre una línea y otra de una tabla. 
 	//incluye en el view las instrucciones JavaScript para el control del tabpanel.
 	echo $this->Html->css('cake.cms.css', null, array("inline"=>false));
+        echo $this->Html->css('smootness/jquery-ui.css', null, array("inline"=>false));
 	echo $this->Html->script('jquery.js');
+        echo $this->Html->script('jquery.ui.js');
 	echo $this->Html->script('tabcontrol.js');
 	echo $this->Html->scriptBlock($jsGalleryDec, array('allowCache'=>true,'safe'=>true,'inline'=>false));
 	

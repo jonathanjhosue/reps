@@ -102,14 +102,30 @@ class RipsWebHelper  extends AppHelper  {
     }
     
      function getInputI18nAll( &$index18n=0,$i18n_array=array(),$prefix='I18nKey',$type='', $options=array()){
+        
+        $divname=$type.$index18n;
+        
+        $this->Html->scriptBlock(
+                '$(function() {
+                    $( "#tabs'.$divname.'" ).tabs();                    
+                });'                
+                , array('safe'=>true,'inline'=>false));
         $html='';
-        
         $lenguages=Configure::read('Rips.Languages');
-        
-        foreach($lenguages as $language){
-            $html.=$this->getInputI18n($index18n,$i18n_array,$prefix, $type, $language,$options);
+        $html.='<div id="tabs'.$divname.'">';
+        $html.='<ul>';
+        foreach($lenguages as $id=> $language){
+            $html.='<li><a href="#tabs'.$divname.'-'.($id+1).'">'.$this->Html->image($language.'_flag.png').'</a></li>';
             
         }
+        $html.='</ul>';
+        foreach($lenguages as $id=>$language){
+            $html.='<div id="tabs'.$divname.'-'.($id+1).'">';
+            $html.=$this->getInputI18n($index18n,$i18n_array,$prefix, $type, $language,$options);
+            $html.='</div>';
+            
+        }
+        $html.='</div>';
          //$this->data['I18nKey'][2]=array('id'=>'38','language'=>'pt','type'=>'asdgf','owner_id'=>'4','key'=>'sdf','value'=>'gf');
         return $html;       
          //return pr($this->data['I18nKey']);

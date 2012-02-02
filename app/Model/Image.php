@@ -11,9 +11,10 @@ class Image extends AppModel
 					'dir' => 'dir'
 				),
 				'thumbsizes' => array(
-					'80x80' => '80x80',
+					'80x60' => '80x80',
 					'640x480' => '640x480',
 				),
+                            'deleteOnUpdate'=>true,
 				/*'thumbnailMethod'	=> 'php',*/
                             'maxSize'=>2697152,
                             'path'=>'{ROOT}webroot{DS}img{DS}{model}{DS}'
