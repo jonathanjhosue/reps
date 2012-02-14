@@ -16,11 +16,27 @@ class Image extends AppModel
 				),
                             'deleteOnUpdate'=>true,
 				/*'thumbnailMethod'	=> 'php',*/
-                            'maxSize'=>2697152,
+                            'maxSize'=>697152,
                             'path'=>'{ROOT}webroot{DS}img{DS}{model}{DS}'
 			)
 		)
 	);
+        
+        
+        public $validate = array(
+                                'image_name' => array(
+                                                                                               
+                                                 'isWritable' =>     array(
+                                                                            'rule' => array('isWritable', false),
+                                                                            'message' => 'File upload directory was not writable'
+                                                                            ),
+                                                  'isBelowMaxSize'=> array('rule' => array('isBelowMaxSize', 697152, false),
+                                                                       'message' => 'File is larger than the maximum filesize'
+                                                                      )  
+                                    )
+                            );
+        
+        
 /*
 	function isUploadedFile($params){
 		$val = array_shift($params);

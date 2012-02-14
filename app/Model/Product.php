@@ -23,6 +23,14 @@ class Product extends AppModel
 					
             );
         
+        
+        public $validate = array(
+                                'product_name' => array(
+                                                'rule'    => 'notEmpty',
+                                                'message' => 'This field cannot be left blank.'
+                                            )
+                            );
+        
         function setLocale($locale){
             $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;
             

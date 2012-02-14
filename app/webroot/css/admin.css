@@ -6,6 +6,10 @@
         Purpose of the stylesheet follows.
 */
 
+form{
+    font-size: 80%;
+}
+
 div.number input,input.number{
     
     width: 45px;
@@ -53,6 +57,18 @@ table.RoomRate, table.RoomRate select{
     font-size: 12px;
 }
 
+table.RoomRate .submit, table.RoomRate .submit input{
+ 
+   margin: 0px;
+   padding: 0px;
+}
+table.Season div{
+    
+}
+table.Season input{
+    width: 120px;
+}
+
 div.fulltext input{
     width: 100%;
 }
@@ -92,7 +108,58 @@ div.fulltext input{
     
 }
 
+.hotelsActions{
+    text-align: right;
+    
+}
+
 .hotelsActions .submit{
     margin:0px;
     padding: 0.5em;
+}
+
+form{
+    width: auto;
+}
+form div.submit {
+    text-align: right;
+}
+
+fieldset label{
+    font-size: 1em;
+}
+
+.divFeatures .checkbox, .divFeatures .text,.dadDetail .checkbox, .dadDetail .text{
+    width: 220px;
+      display: inline-block;
+      
+      margin: 0px;
+}
+.divFeatures .checkbox  .text{
+
+}
+
+form div.buttongroup {
+    display: inline;
+
+}
+
+hr{
+    margin: 10px 5px;
+    
+}
+
+.error input{
+    border:  solid #ee0000;
+    
+}
+
+.error label{
+    color:  #ee0000;
+    
+}
+
+#fieldsetImages .error-message{
+    display:inline;
+    
 }

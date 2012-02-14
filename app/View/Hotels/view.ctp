@@ -24,12 +24,12 @@
 <div class="hotels view">
   
 	<div>
-		<p><?php echo $this->Html->image('hotels/'.$hotel['Image'][0]['image_name'], array('class' => 'serviceImageMain', 'name' => 'slide')); ?></p>
+		<p><?php echo $this->Html->image('image/'.$hotel['Image'][0]['dir'].'/640x480_'.$hotel['Image'][0]['image_name'], array('class' => 'serviceImageMain', 'name' => 'slide')); ?></p>
 		<?php echo $this->Html->scriptBlock($jsGalleryFunc, array('allowCache'=>true,'safe'=>true,'inline'=>true)); ?>
 		<div class="serviceImageThumbs">
 			<?php for($i=0;$i<5 && $i<count($hotel['Image']);$i++): ?>
               
-			<p><?php echo $this->Html->image('hotels/'.$hotel['Image'][$i]['image_name'], array('height' => '75px', 'style'=> 'padding-bottom:3px;')); ?></p>
+			<p><?php echo $this->Html->image('image/'.$hotel['Image'][$i]['dir'].'/80x60_'.$hotel['Image'][$i]['image_name'], array('height' => '75px', 'style'=> 'padding-bottom:3px;')); ?></p>
 			<?php endfor; ?>
 		</div>						
 		<div class="serviceName"><span class="label"><?php echo $hotel['Product']['product_name']; ?></span></div>		

@@ -5,8 +5,11 @@ class RoomRate extends AppModel
         
 	var $belongsTo = array('Room','Season');
         
-        //var $primaryKey=array('season_id','room_id');
+        var $primaryKey='id';//array('season_id','room_id');
         
+  
+      
+       
         
 }
 ?>

@@ -14,7 +14,7 @@ class Hotel extends AppModel
 	var $hasMany = array(
                         'Room',
                         'Image'=>array('foreignKey'=>'owner_id','conditions'=>array('Image.owner_type'=>TiposGlobal::PRODUCT_TYPE_HOTEL)),
-                        'Season',
+                        'Season'=>array('conditions'=>array('Season.parent_id'=>null)),
                         'I18nKey'=>array(
                                 'foreignKey'=>'owner_id',
                                 'conditions'=>array('I18nKey.type'=>array(
@@ -28,7 +28,15 @@ class Hotel extends AppModel
                                    )   ,     			
 			'Review' => array('foreignKey'=>'product_id','order'=> array('Review.staff'=>'DESC','Review.review_date'=>'DESC'))	
                         
-                        );  
+                        );
+        
+        
+         public $validate = array(
+                                'infant_age_max' =>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.'),
+                                'infant_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.'),
+                                'child_age_max'=>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.'),
+                                'child_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.')             
+                            );
         
          function setLocale($locale){
             $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;

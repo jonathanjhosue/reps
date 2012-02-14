@@ -2,7 +2,7 @@
 
 App::import('Model', 'TiposGlobal'); 
 App::uses('AppController', 'Controller');
-App::uses('Folder', 'Utility');
+
 class HotelsController extends AppController
 {
     public $name = 'Hotels';
@@ -138,15 +138,18 @@ class HotelsController extends AppController
 
                 
                 $totalRooms = 0;
+                /*
                 $i18n_array= Set::combine($this->request->data['I18nKey'] , '{n}.key','{n}');
                  //$i18n_array= Set::remove($i18n_array , '{n}.language.en');
                 $i18n_array = array_merge($i18n_array,Set::combine($this->request->data['Product']['I18nKey'] , '{n}.key','{n}'));
                 //$i18n_array = array_merge($i18n_array,Set::combine($this->request->data['Product']['Review']['I18nKey'] , '{n}.key','{n}'));
+                 * 
+                 */
                 foreach ($this->request->data['Room'] as $room){
                     $totalRooms+=$room['count'];   
-                    $i18n_array=array_merge($i18n_array,Set::combine($room['I18nKey']  , '{n}.key','{n}'));
+                    //$i18n_array=array_merge($i18n_array,Set::combine($room['I18nKey']  , '{n}.key','{n}'));
                 }
-                
+                /*
                 foreach ($this->request->data['Product']['TravellerReview'] as $review){
                     $i18n_array=array_merge($i18n_array,Set::combine($review['I18nKey']  , '{n}.key','{n}'));                 
                 }
@@ -158,7 +161,7 @@ class HotelsController extends AppController
                 //$result = Set::combine($this->request->data['Room'] , '{n}.I18nKey.{n}.key','{n}.I18nKey.{n}');
                 //$result = Set::classicExtract($this->request->data['Room'] , '{n}.I18nKey.{n}');
                 //$result = Set::combine($result  , '{n}.{n}.{n}.key','{n}.{n}');
-                $this->request->data['I18nKey']=$i18n_array;
+                $this->request->data['I18nKey']=$i18n_array;*/
                 $this->request->data['Hotel']['total_rooms']=$totalRooms;
                 //$this->request->data['Product']=$this->Hotel->Product->read();
 		
@@ -236,7 +239,7 @@ class HotelsController extends AppController
 		$jsGalleryDec = '';
 		$contImg = 1;		
 		foreach($this->request->data['Image'] as $img):
-			$jsGalleryDec = $jsGalleryDec.' var image'.$contImg.'=new Image(); image'.$contImg.'.src="'.$this->request->webroot.'img/hotels/'.$img['image_name'].'";';
+			$jsGalleryDec = $jsGalleryDec.' var image'.$contImg.'=new Image(); image'.$contImg.'.src="'.$this->request->webroot.'img/image/'.$img['dir'].'/640x480_'.$img['image_name'].'";';
 			$contImg++;
 		endforeach; 		
 		
@@ -332,6 +335,8 @@ class HotelsController extends AppController
 	function admin_add()    
  	{ 	
             $this->layout = 'admin';
+            $this->helpers[] = 'I18nKeys';
+            $this->helpers[] = 'RipsWeb';
             	if ($this->request->is('post')) {
 			$this->Hotel->create();
                         //$this->set('enviado',$this->request->data);
@@ -394,28 +399,42 @@ class HotelsController extends AppController
 		}else { $this->redirect('/Hotels'); }
  	}
 
-	function admin_edit($id = null)    
+	function admin_edit($id = null, $idAction=null)    
 	{
 		$this->layout = 'admin';
                $this->helpers[] = 'I18nKeys';
                 $this->helpers[] = 'RipsWeb';
                 
                 $this->Hotel->id = $id;
+                $displayTab='';
 		if (!$this->Hotel->exists()) {
 			throw new NotFoundException(__('Invalid hotel'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
                     
                     
-                    if(isset($this->request->data['delete_room'])){
+                    if(isset($this->request->data['Action']['DeleteRoom'])){
                         //$deleteid=
-                        $this->Hotel->Room->delete($this->request->data['Action']['DeleteRoom']);
+                        $this->Hotel->Room->delete(key($this->request->data['Action']['DeleteRoom']));
                         
-                    }if(isset($this->request->data['delete_review'])){
-                        //$deleteid=
-                        $this->Hotel->Review->delete($this->request->data['Action']['DeleteReview']);
+                    }elseif(isset($this->request->data['Action']['DeleteReview'])){
                         
-                    }elseif(isset($this->request->data['add_seasons'])){
+                        $this->Hotel->Review->delete(key($this->request->data['Action']['DeleteReview']));
+                        
+                    }elseif(isset($this->request->data['Action']['DeleteSeason'])){
+                        
+                        $this->Hotel->Season->delete(key($this->request->data['Action']['DeleteSeason']));
+                        
+                    }elseif(isset($this->request->data['Action']['DeleteImage'])){
+                        
+                        $this->Hotel->Image->delete(key($this->request->data['Action']['DeleteImage']));
+                        
+                    }elseif(isset($this->request->data['Action']['AddSeasonException']) ){                         
+                        $row=array('hotel_id'=>$id,'parent_id'=>key($this->request->data['Action']['AddSeasonException']));
+                        
+                         $this->Hotel->Season->save($row);
+                         
+                    }elseif(isset($this->request->data['add_seasons']) ){
                         $c=isset($this->request->data['Action']['AddSeasons'])?$this->request->data['Action']['AddSeasons']:1;
                         $rows=array();
                         for($i=0;$i<$c;$i++){
@@ -424,6 +443,7 @@ class HotelsController extends AppController
                          $this->Hotel->Season->saveMany($rows);
                          
                     }elseif(isset($this->request->data['add_rooms'])){
+                        
                         $c=isset($this->request->data['Action']['AddRooms'])?$this->request->data['Action']['AddRooms']:1;
                         $rows=array();
                         for($i=0;$i<$c;$i++){
@@ -437,24 +457,77 @@ class HotelsController extends AppController
                         $rows=array();
                         for($i=0;$i<$c;$i++){
                             $rows[$i]=array('product_id'=>$id,'review_date'=>date("Y-m-d"));
-                             
-                           
+
                         }
                          $this->Hotel->Review->saveMany($rows);
-                    }elseif(isset($this->request->data['save_rooms'])){
+                    }elseif(isset($this->request->data['save_hotel'])){
+                         
+                         $this->Hotel->unbindModel(array('hasMany'=>array('Room','Season','Review')));     
+                        
+                         if ($this->Hotel->saveAssociated($this->request->data)){                             
+                             
+                         }
+                    }elseif(isset($this->request->data['save_rooms'])){                          
+                        if(isset($this->request->data['Room'])){
+                           $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'),'hasMany'=>array('RoomRate')));
+                           $errores=array();
+                            foreach($this->request->data['Room'] as $h=> $roomData){                                
+                                $this->Hotel->Room->saveAssociated($roomData);
+                                $errores[$h]=$this->Hotel->Room->validationErrors;                               
+                            }  
+                             $this->Hotel->Room->validationErrors=$errores;
+                           //$this->Hotel->Room->saveMany($this->request->data['Room']);
+                           
+                            
+                         }
+                    }elseif(isset($this->request->data['save_reviews'])){
+                           $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product')));
+                           
+                        if(isset($this->request->data['Review'])){
+                             foreach($this->request->data['Review'] as $reviewData){
+                                 
+                                $this->Hotel->Review->saveAssociated($reviewData);                             
+                            }
+                         }
+                    }elseif(isset($this->request->data['save_roomrates'])){
+                          $this->Hotel->unbindModel(array('belongsTo'=>array('Product'),'hasMany'=>array('Room','Season','Review','Image')));     
+                        
+                         if ($this->Hotel->saveAssociated($this->request->data)){                             
+                             
+                         }
+                         if(isset($this->request->data['Room'])){
+                             foreach($this->request->data['Room'] as $h=>$roomData){
+                                 
+                                $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Season','Room')));                                
+                                $this->Hotel->Room->saveAssociated($roomData); 
+                                $this->Hotel->Room->validationErrors[$h]=$this->Hotel->Room->validationErrors;
+                            }
+                         }
+                         /*
+                         if(isset($this->Hotel->validationErrors['Room'])){
+                           $this->Hotel->Room->validationErrors= $this->Hotel->validationErrors['Room'];                         
+                         }*/
+                    }elseif(isset($this->request->data['save_seasons'])){
+                        if(isset($this->request->data['Season'])){
+                             $this->Hotel->Season->setDataArray($this->request->data['Season']);
+                             foreach($this->request->data['Season'] as $reviewData){ 
+                                $this->Hotel->Season->saveAssociated($reviewData);                             
+                            }
+                         } 
+                    }
                          //$this->Hotel->Room->unbindModel(array('hasMany'=>array('RoomRate'))); 
                         
                          /*$roomsData['Hotel']=$this->request->data['Hotel'];*/
                          
                          
-                         $this->Hotel->unbindModel(array('hasMany'=>array('Room'))); 
+                         /*$this->Hotel->unbindModel(array('hasMany'=>array('Room'))); 
                          //$this->set('roomsData',$roomsData);
                          if ($this->Hotel->saveAssociated($this->request->data)){
                              
                              
                          }
-                         /*$roomsData=array();
-                         //$roomsData['Room']=$this->request->data['Room'];
+                         $roomsData=array();
+                         $roomsData['Room']=$this->request->data['Room'];
                          if(isset($this->request->data['Room'])){
                            foreach($this->request->data['Room'] as $roomData){
                                 $this->Hotel->Room->saveAssociated($roomData);
@@ -483,7 +556,7 @@ class HotelsController extends AppController
 			} else {
 				$this->Session->setFlash(__('The rooms could not be saved. Please, try again.'));
 			}*/
-                    }if(isset($this->request->data['save_all'])){
+                    /*}if(isset($this->request->data['save_all'])){
                         //$rooms=  array_splice($this->request->data['Room'], 0);
                     //
                     
@@ -494,22 +567,23 @@ class HotelsController extends AppController
 				$this->Session->setFlash(__('The hotel could not be saved. Please, try again.'));
 			}
                         
-                    }
-                    // $this->redirect(array('action' => 'edit',$id));
+                    }*/
+                    //$this->redirect('edit/'.$id);
                     
-		} else {
+		} else{
                         //$this->Hotel->unbindModel(array('hasMany' => array('Season')));
                         //$this->Hotel->SAunbindModel(array('hasMany' => array('Season')));
-                        $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('Activities','TravellerReview','StaffReview'))); 
-                        //$this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'belongsTo'=>array('Location')));
+                        $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('I18nKey','Activities','TravellerReview','StaffReview'))); 
+                        //$this->Hotel->Product->unbindModel(array('hasMany' => array('Hotel'),'belongsTo'=>array('Location')));
                         $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product')));                        
-                        $this->Hotel->Season->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Hotel'))); 
+                        $this->Hotel->Season->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Hotel','Parent'))); 
                         $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'))); 
-                        $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Room',))); 
+                        $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Room','Season'))); 
+                        $this->Hotel->Season->SeasonException->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Parent','Hotel'))); 
                     
                         $this->Hotel->recursive = 3; 
                         $this->request->data = $this->Hotel->read(null, $id);
-		}
+                }
 		$products = $this->Hotel->Product->find('list');
 		$hotelCategories = $this->Hotel->HotelCategory->find('list');
                 $locations = $this->Hotel->Product->Location->find('list');

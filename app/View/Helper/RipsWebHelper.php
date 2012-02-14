@@ -73,8 +73,7 @@ class RipsWebHelper  extends AppHelper  {
         return $html;       
         
     }
-    
-    
+           
     function getInputI18n( &$index18n=0,$i18n_array=array(),$prefix='I18nKey',$type='', $language='en', $options=array()){
         $html='';       
         if(count($i18n_array)>0){
@@ -129,6 +128,12 @@ class RipsWebHelper  extends AppHelper  {
          //$this->data['I18nKey'][2]=array('id'=>'38','language'=>'pt','type'=>'asdgf','owner_id'=>'4','key'=>'sdf','value'=>'gf');
         return $html;       
          //return pr($this->data['I18nKey']);
+        
+    }
+    
+    function getStringFromDate($d=array()){
+        
+        return is_array($d)?$d['year'].'-'.$d['month'].'-'.$d['day']:$d;       
         
     }
     

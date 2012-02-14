@@ -1184,7 +1184,7 @@ class UploadBehavior extends ModelBehavior {
 			return $finfo->file($filePath);
 		}
 
-		return mime_content_type($filePath);
+		return '';//mime_content_type($filePath);
 	}
 
 	public function _prepareFilesForDeletion(&$model, $field, $data, $options) {
