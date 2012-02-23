@@ -14,8 +14,11 @@
 <h1><?php echo __('Edit Hotel'); ?></h1>
 
 <div class="hotels form">
-    <?php $indexI18n=0 ?>
     
+
+    <?php $indexI18n=0 ;
+   
+    ?>
 	
 <div id="tabs">
     <ul>
@@ -75,13 +78,27 @@
                 
 		echo $this->Form->label('Product.gpslatitude',__('GPS Coordenates'),'text');
                 echo $this->Form->input('Product.gpslatitude',array('label'=>__('Latitude'),'div'=>'tinyname'));
-		echo $this->Form->input('Product.gpslongitude',array('label'=>__('Longitude'),'div'=>'tinyname'));               
+		echo $this->Form->input('Product.gpslongitude',array('label'=>__('Longitude'),'div'=>'tinyname'));  
+                
+                 echo $this->Form->input('Product.map',array('label'=>__('Map URL'))); 
+                
+                 echo "<hr/>";
+                
+                echo $this->RipsWeb->getInputI18nAll($indexI18n,
+                                        $this->data['I18nKey'],
+                                'I18nKey',
+                                TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES,array('label'=>__('Note about the rooms'),'div'=>'fulltext'));
+                
+                echo $this->Form->input('child_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
+                 $this->Form->input('child_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));                                
+                echo $this->Form->input('infant_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
+                $this->Form->input('infant_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));
         ?>
         <fieldset class="hotelsActions"> 
             <?php 
                 echo $this->Form->input('id',array('type'=>'hidden'));
                 echo $this->Form->input('product_id',array('type'=>'hidden'));
-                echo $this->Form->submit(__('Save'),array('name'=>'save_hotel'));
+                echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Hotel]'));
                
             ?>  
          </fieldset> 
@@ -100,8 +117,11 @@
                  $img.= $this->Form->input("Image.$i.owner_type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_HOTEL));
                  $del='';
 		if(isset($this->request->data['Image'][$i]['id'])){     
-                    if(!isset($this->request->data['Image'][$i]['urlname'])){
+                    if(!isset($this->request->data['Image'][$i]['urlname'])){//validation                        
                         $this->request->data['Image'][$i]['urlname']=$this->request->data['Image'][$i]['image_name'];
+                    }elseif(is_array($this->request->data['Image'][$i]['image_name'])){//save
+                        $imageName=$this->request->data['Image'][$i]['image_name']['name'];
+                        $this->request->data['Image'][$i]['urlname']=$imageName!=""?$imageName:$this->request->data['Image'][$i]['urlname'];
                     }
                         
                     $img.= '<label>'.$this->request->data['Image'][$i]['urlname'].'</label>';
@@ -109,8 +129,8 @@
                     $img.= $this->Form->input("Image.$i.urlname",array('type'=>'hidden'));
                     
                     
-                    $img.=$this->Html->image("image/".$this->request->data['Image'][$i]['id']."/80x60_".$this->request->data['Image'][$i]['urlname']);
-                    $del.=' '.$this->Form->submit(__('Delete'),array('name'=>'data[Action][DeleteImage]['.$this->request->data['Image'][$i]['id'].']', 'div'=>false));
+                    $img.=$this->Html->image("image/".$this->request->data['Image'][$i]['id']."/90x45_".$this->request->data['Image'][$i]['urlname']);
+                    $del.=' '.$this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Image]['.$this->request->data['Image'][$i]['id'].']', 'div'=>false));
                 }
                 $img.='</div>';
                 
@@ -126,7 +146,7 @@
             <?php 
                 echo $this->Form->input('id',array('type'=>'hidden'));
                 echo $this->Form->input('product_id',array('type'=>'hidden'));
-                echo $this->Form->submit(__('Save'),array('name'=>'save_hotel'));
+                echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Hotel]'));
               
             ?>  
          </fieldset> 
@@ -192,7 +212,7 @@
                 <?php 
                     echo $this->Form->input('id',array('type'=>'hidden'));
                     echo $this->Form->input('product_id',array('type'=>'hidden'));
-                    echo $this->Form->submit(__('Save'),array('name'=>'save_hotel'));
+                    echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Hotel'));
                    
                 ?>  
          </fieldset> 
@@ -245,11 +265,18 @@
                     echo $this->Form->input('Room.'.$i.'.fan');
                     echo $this->Form->input('Room.'.$i.'.make_up_mirror');
                     echo $this->Form->input('Room.'.$i.'.balcony');
-                    echo $this->Form->input('Room.'.$i.'.private_garden');
+                    echo $this->Form->input('Room.'.$i.'.private_garden');                    
+                 
                     
-                    echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][DeleteRoom]['.$room['id'].']'));
+                    echo $this->RipsWeb->getInputI18nAll($indexI18n,
+                        $room['I18nKey'],
+                        'Room.'.$i.'.I18nKey',
+                        TiposGlobal::I18N_TYPE_ROOM_INCLUDE,array('label'=>__('Rates Include'),'div'=>'fulltext'));  
+                    
+                       echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Room]['.$room['id'].']'));
                     
                     echo '</div>';
+                    
                      ?>
                     </div>
                     <?php
@@ -261,9 +288,9 @@
         <?php   
             echo $this->Form->input('id',array('type'=>'hidden'));
             echo $this->Form->input('product_id',array('type'=>'hidden'));    
-	    echo $this->Form->input('Action.AddRooms',array('type'=>'text','label'=>__('New Rooms'),'maxlength'=>2,'div'=>'number','value'=>1));
-            echo $this->Form->submit(__('Add'),array('name'=>'add_rooms'));
-            echo $this->Form->submit(__('Save'),array('name'=>'save_rooms'));
+	    echo $this->Form->input('Action.Add.Rooms_count',array('type'=>'text','label'=>__('New Rooms'),'maxlength'=>2,'div'=>'number','value'=>1));
+            echo $this->Form->submit(__('Add'),array('name'=>'data[Action][Add][Rooms]'));
+            echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Rooms]'));
                
         ?>  
          </fieldset> 
@@ -300,9 +327,9 @@
                         echo '<td>'.$this->Form->input("Season.$x.date_end",array('type'=>'date','label'=>false,'div'=>false)).'</td>';   
                         echo '<td>';   
                            
-                            echo $this->Form->submit(__('Add Exception'),array('name'=>'data[Action][AddSeasonException]['.$season['id'].']','div'=>false));
+                            echo $this->Form->submit(__('Add Exception'),array('name'=>'data[Action][Add][SeasonException]['.$season['id'].']','div'=>false));
                 
-                            echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][DeleteSeason]['.$season['id'].']', 'div'=>false));                                      
+                            echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Season]['.$season['id'].']', 'div'=>false));                                      
                        
                             echo '</td>';
 
@@ -321,7 +348,7 @@
                                 echo '<td>'.$this->Form->input("Season.$x.SeasonException.$n.date_end",array('type'=>'date','label'=>false,'div'=>false, 'selected'=>$exepcion['date_end'])).'</td>';   
                                 echo '<td>';   
 
-                                    echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][DeleteSeason]['.$exepcion['id'].']', 'div'=>false));                                      
+                                    echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Season]['.$exepcion['id'].']', 'div'=>false));                                      
 
                                     echo '</td>';
 
@@ -343,28 +370,25 @@
                     ?> 
              <div class="buttongroup">
                  <?php 
-                    echo $this->Form->input('Action.AddSeasons',array('type'=>'text','label'=>__('New Seasons'),'maxlength'=>2,'div'=>'number','value'=>1));
-                    echo $this->Form->submit(__('Add'),array('name'=>'add_seasons'));
+                    echo $this->Form->input('Action.Add.Seasons_count',array('type'=>'text','label'=>__('New Seasons'),'maxlength'=>2,'div'=>'number','value'=>1));
+                    echo $this->Form->submit(__('Add'),array('name'=>'data[Action][Add][Seasons]'));
                    ?> 
              </div>
                     <?php     
                         
-                        echo $this->Form->submit(__('Save'),array('name'=>'save_seasons'));
+                        echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Seasons]'));
                     ?>  
         </fieldset>
          
  
      </div>  
 
-         <?php  echo $this->Form->end();  ?>
+      
      <div id="tabs-6">  
 
          
          <?php                                      
-            echo $this->Form->input('child_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
-                 $this->Form->input('child_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));                                
-            echo $this->Form->input('infant_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
-                $this->Form->input('infant_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));
+      
         ?>
          
          <div id="divRoomRates">           
@@ -394,8 +418,9 @@
                            $roomRates=$room['RoomRate'];
                            $roomRates=Set::combine($roomRates, array('{0}:{1}', '{n}.season_id', '{n}.room_id'), '{n}');
                            echo $this->Form->input("Room.$i.id",array('type'=>'hidden'));
-                       $c= count($room['RoomRate']);   
-                       foreach($this->data['Season'] as $x=>$season): 
+                       $x= count($room['RoomRate']); 
+                       //$x=$c;
+                       foreach($this->data['Season'] as $season): 
                           $roomRate=array('id'=>'','single'=>'','double'=>'','triple'=>'','quadruple'=>'','child'=>'','infant'=>'');
                           
                         if(isset($roomRates[$season['id'].':'.$room['id']])){
@@ -427,9 +452,8 @@
                                     echo $this->Form->submit(__('Delete'),array('name'=>'delete_roomrate'));                                      
                                 }*/
                             echo '</tr>';
-                            
-                            foreach($season['SeasonException'] as $n=>$exception): 
-                               
+                            if(isset($season['SeasonException']))foreach($season['SeasonException'] as $n=>$exception): 
+                                $x++;
                                 $roomRate=array('id'=>'','single'=>'','double'=>'','triple'=>'','quadruple'=>'','child'=>'','infant'=>'');
 
                                 if(isset($roomRates[$exception['id'].':'.$room['id']])){
@@ -445,25 +469,25 @@
                                     '<td>'.$this->RipsWeb->getStringFromDate($exception['date_end']).'</td>';
 
 
-                                        echo '<td>'.$this->Form->input("Room.$i.RoomRate.$c.id",array('type'=>'hidden','value'=>$roomRate['id']))
-                                                    .$this->Form->input("Room.$i.RoomRate.$c.season_id",array('type'=>'hidden','value'=>$exception['id'])).
-                                                    $this->Form->input("Room.$i.RoomRate.$c.room_id",array('type'=>'hidden','value'=>$room['id']));
+                                        echo '<td>'.$this->Form->input("Room.$i.RoomRate.$x.id",array('type'=>'hidden','value'=>$roomRate['id']))
+                                                    .$this->Form->input("Room.$i.RoomRate.$x.season_id",array('type'=>'hidden','value'=>$exception['id'])).
+                                                    $this->Form->input("Room.$i.RoomRate.$x.room_id",array('type'=>'hidden','value'=>$room['id']));
 
-                                        echo       $this->Form->text("Room.$i.RoomRate.$c.single",array('class'=>'rateNumber','value'=>$roomRate['single'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$c.double",array('class'=>'rateNumber','value'=>$roomRate['double'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$c.triple",array('class'=>'rateNumber','value'=>$roomRate['triple'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$c.quadruple",array('class'=>'rateNumber','value'=>$roomRate['quadruple'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$c.child",array('class'=>'rateNumber','value'=>$roomRate['child'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$c.infant",array('class'=>'rateNumber','value'=>$roomRate['infant'])).'</td>';
+                                        echo       $this->Form->text("Room.$i.RoomRate.$x.single",array('class'=>'rateNumber','value'=>$roomRate['single'])).'</td>'.
+                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.double",array('class'=>'rateNumber','value'=>$roomRate['double'])).'</td>'.
+                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.triple",array('class'=>'rateNumber','value'=>$roomRate['triple'])).'</td>'.
+                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.quadruple",array('class'=>'rateNumber','value'=>$roomRate['quadruple'])).'</td>'.
+                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.child",array('class'=>'rateNumber','value'=>$roomRate['child'])).'</td>'.
+                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.infant",array('class'=>'rateNumber','value'=>$roomRate['infant'])).'</td>';
                                         echo '<td>';
                                     /* if(isset($roomRates[$season['id'].':'.$room['id']])){
                                             echo $this->Form->input($prefijo.'.id',array('type'=>'hidden','name'=>"data[Action][DeleteRoomRate]"));
                                             echo $this->Form->submit(__('Delete'),array('name'=>'delete_roomrate'));                                      
                                         }*/
                                     echo '</tr>';
-                                 $c++;    
+                                    
                                 endforeach;
-                            
+                             $x++;
                             
                             $y++;
                         endforeach;
@@ -474,10 +498,7 @@
                     </table>
                
                      <?php  
-                        echo $this->RipsWeb->getInputI18nAll($indexI18n,
-                            $room['I18nKey'],
-                            'Room.'.$i.'.I18nKey',
-                            TiposGlobal::I18N_TYPE_ROOM_INCLUDE,array('label'=>__('Include'),'div'=>'fulltext'));    
+                     
                     ?>
                 </div>
                 <?php 
@@ -485,14 +506,7 @@
                  endforeach;
                 ?>
           </div>
-              <hr/>
-                <?php
-                echo $this->RipsWeb->getInputI18nAll($indexI18n,
-                                        $this->data['I18nKey'],
-                                'I18nKey',
-                                TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES,array('label'=>__('Notes'),'div'=>'fulltext'));
-      
-                ?>
+             
          
          <fieldset class="hotelsActions"> 
                     <?php   
@@ -507,7 +521,7 @@
              </div>
                     <?php     
                         
-                        echo $this->Form->submit(__('Save'),array('name'=>'save_roomrates'));
+                        echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Roomrates]'));
                     ?>  
         </fieldset>
      </div>
@@ -529,7 +543,7 @@
                                     array('label'=>__('Review'),'type'=>'textarea'));  
                     
                     //echo $this->Form->input('Review.'.$i.'.id',array('type'=>'hidden','name'=>"data[Action][DeleteReview]"));
-                    echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][DeleteReview]['.$review['id'].']'));
+                    echo $this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Review]['.$review['id'].']'));
                     //echo $this->Form->postLink(__('Delete'), array('action' => 'delete',$review['id']), null, __('Are you sure you want to delete # %s?', $review['id'])); 
                     echo '</div>';
                 }
@@ -545,16 +559,16 @@
             echo $this->Form->input('product_id',array('type'=>'hidden')); 
             
             
-                    echo $this->Form->input('Action.AddReviews',array('type'=>'text','label'=>__('New Reviews'),'maxlength'=>2,'div'=>'number','value'=>1));
-                    echo $this->Form->submit(__('Add'),array('name'=>'add_reviews'));
+                    echo $this->Form->input('Action.Add.Reviews_count',array('type'=>'text','label'=>__('New Reviews'),'maxlength'=>2,'div'=>'number','value'=>1));
+                    echo $this->Form->submit(__('Add'),array('name'=>'data[Action][Add][Reviews]'));
             
 	  
-            echo $this->Form->submit(__('Save'),array('name'=>'save_reviews'));
+            echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Reviews]'));
         ?>  
          </fieldset> 
            
         </div>
-      
+         <?php  echo $this->Form->end();  ?>
 </div>
 
     </div>

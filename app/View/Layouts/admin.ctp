@@ -33,7 +33,10 @@
 				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>										
 			</div>
 		</div>
-		<div id="content"> <!-- este es el pagecell1 del template-->						
+		<div id="content"> <!-- este es el pagecell1 del template-->
+                 <?php echo $this->Session->flash('flash', array('element' => 'message')); ?>   
+                 <?php echo $this->Session->flash('error', array('element' => 'error')); ?>       
+                    
 			<?php echo $content_for_layout; ?>
 		</div>
 		<div id="footer">

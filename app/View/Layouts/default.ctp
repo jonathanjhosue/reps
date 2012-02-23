@@ -9,27 +9,43 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-
+        echo $this->Html->css('smoothness/jquery-ui.css');
+	echo $this->Html->script('jquery.js');
+        echo $this->Html->script('jquery-ui.js');
+        echo $this->Html->script('view.js');
 		echo $scripts_for_layout;
+     
+
+         //echo $this->Html->css('nivoslider/themes/default/default.css');
+         /*echo $this->Html->css('nivoslider/themes/pascal/pascal.css');
+         echo $this->Html->css('nivoslider/themes/orman/orman.css');*/
+         // echo $this->Html->css('nivoslider/nivo-slider.css');
+        
+         /* echo $this->Html->script('jquery.nivo.slider.js');*/
+        echo $this->Html->script('galleria/galleria-1.2.6.min.js');   
+        
+
+                
+             echo $this->Html->css('desing_style.css');
+
 	?>
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1 style="float:left;"><?php echo $this->Html->link(__('PanamaReps: Product Catalogue', true), '../'); ?></h1>
-			<div style="float:right;">
+		<!--div id="header">
+			<h1><?php echo $this->Html->link(__('PanamaReps: Product Catalogue', true), '../'); ?></h1>
+                        <div id="menubar">
 				<?php 	
 					if(isset($_SESSION['Auth']['User'])){ 
-							echo $this->Html->link($this->Html->image('_log_out.png', array('alt' => 'Login', 'width'=>'15%')), array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); 
-						}else{ echo $this->Html->link($this->Html->image('_log_in.png', array('alt' => 'Login', 'width'=>'15%')), array('controller' => 'users', 'action' => 'login'), array('escape'=>false)); }
+							echo $this->Html->link($this->Html->image('_log_out.png', array('alt' => 'Login', 'width'=>'24px')), array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); 
+						}else{ echo $this->Html->link($this->Html->image('_log_in.png', array('alt' => 'Login', 'width'=>'15px')), array('controller' => 'users', 'action' => 'login'), array('escape'=>false)); }
 				?>
 				&nbsp;&nbsp;					
-				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Espa�ol', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
+				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Español', 'width'=>'24px')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
 				&nbsp;&nbsp;
-				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>						
+				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'24px')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>						
 			</div>
-		</div>
+		</div-->
 		<div id="content"> <!-- este es el pagecell1 del template-->						
 			<?php echo $content_for_layout; ?>
 		</div>
@@ -39,7 +55,7 @@
 			</div>
 		</div>
 	</div>
-	<?php pr( $this->element('sql_dump')); ?>
-    <?php pr( $this->data); ?>
+	<?php //pr( $this->element('sql_dump')); ?>
+    <?php //pr( $this->data); ?>
 </body>
 </html>

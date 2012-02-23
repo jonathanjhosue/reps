@@ -52,13 +52,22 @@
 		echo $this->Form->label('Product.gpslatitude',__('GPS Coordenates'),'text');
                 echo $this->Form->input('Product.gpslatitude',array('label'=>__('Latitude'),'div'=>'tinyname'));
 		echo $this->Form->input('Product.gpslongitude',array('label'=>__('Longitude'),'div'=>'tinyname'));           
+                echo "<hr/>";
                 
+                echo $this->RipsWeb->getInputI18nAll($indexI18n,
+                                        array(),
+                                'I18nKey',
+                                TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES,array('label'=>__('Note about the rooms'),'div'=>'fulltext'));
+                
+            echo $this->Form->input('child_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
+                 $this->Form->input('child_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));                                
+            echo $this->Form->input('infant_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
+                $this->Form->input('infant_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));
         ?>
        
     </div>
     <div id="tabs-2">
-       <fieldset  id="fieldsetImages">
-	    <legend><?php echo __('Images'); ?></legend>
+       <fieldset  id="fieldsetImages">	  
             <?php
             
             for($i=0;$i<Configure::read('Hotels.TotalImages');$i++){

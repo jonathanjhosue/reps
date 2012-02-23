@@ -11,8 +11,8 @@ class Image extends AppModel
 					'dir' => 'dir'
 				),
 				'thumbsizes' => array(
-					'80x60' => '80x80',
-					'640x480' => '640x480',
+					'90x45' => '90x45',
+					'800x400' => '800x400',
 				),
                             'deleteOnUpdate'=>true,
 				/*'thumbnailMethod'	=> 'php',*/

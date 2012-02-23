@@ -26,8 +26,8 @@ class RipsWebHelper  extends AppHelper  {
     function getLIFeatureDetails($arrayWithFeature,$feature,$details){
         
         return $arrayWithFeature[$feature]? 
-                 '<li>'.$this->Html->image('features/icon/'.$feature.'.png').$feature.
-                 ($arrayWithFeature[$details]?'<input max="50" type="text" value="'.$arrayWithFeature[$details].'"/>':''). 
+                 '<li class="detail">'.$this->Html->image('features/icon/'.$feature.'.png').$feature.
+                 ($arrayWithFeature[$details]?': <span class>'.$arrayWithFeature[$details].'</span>':''). 
                  '</li>'
                :
                '';
@@ -39,7 +39,8 @@ class RipsWebHelper  extends AppHelper  {
              $html.='<ul>';
             foreach (TiposGlobal::$HOTEL_FEATURES as $value) {
                 $html.=$this->getLIFeature($arrayWithList, $value);
-            }         
+            } 
+            $html.='<br/>';
             foreach (TiposGlobal::$HOTEL_FEATURESDETAILS as $key => $value) {
                 $html.=$this->getLIFeatureDetails($arrayWithList, $key,$value);
             }  

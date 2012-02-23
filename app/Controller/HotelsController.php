@@ -77,7 +77,7 @@ class HotelsController extends AppController
 	*/
 	public function view($id)
 	{	
-		$this->layout = 'guest';
+		$this->layout = 'default';
 		$this->helpers[] = 'Js';
 		$this->helpers[] = 'I18nKeys';
                 $this->helpers[] = 'RipsWeb';
@@ -101,8 +101,8 @@ class HotelsController extends AppController
                 $this->Hotel->Product->StaffReview->setLocale($language);
                 $this->Hotel->Product->TravellerReview->setLocale($language);
                  
-                $this->Hotel->unbindModel(array('hasMany' => array('Season')));
-                $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('Activities'))); 
+                $this->Hotel->unbindModel(array('hasMany' => array('Season','Review')));
+                $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('Activities','I18nKey'))); 
                 //$this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'belongsTo'=>array('Location')));
                 $this->Hotel->Product->StaffReview->unbindModel(array('belongsTo'=>array('Product')));
                 $this->Hotel->Product->TravellerReview->unbindModel(array('belongsTo'=>array('Product')));
@@ -250,8 +250,8 @@ class HotelsController extends AppController
                 $this->set('deb', $deb);
 		//Se consultan los Regions Y Locations.
 		//$this->set('regions', $this->Hotel->Product->Location->Region->find('all')); 
-		$this->set('jsGalleryDec', $jsGalleryDec);	
-		$this->set('jsGalleryFunc', $jsGalleryFunc);
+		/*$this->set('jsGalleryDec', $jsGalleryDec);	
+		$this->set('jsGalleryFunc', $jsGalleryFunc);*/
 	}
 	
 	
@@ -410,169 +410,12 @@ class HotelsController extends AppController
 		if (!$this->Hotel->exists()) {
 			throw new NotFoundException(__('Invalid hotel'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if ($this->request->is('post') || $this->request->is('put')) {                    
                     
+                    $this->action_delete($id)|| $this->action_save()|| $this->action_add($id); 
+                    //$this->action_delete($id)|| $this->action_save();
                     
-                    if(isset($this->request->data['Action']['DeleteRoom'])){
-                        //$deleteid=
-                        $this->Hotel->Room->delete(key($this->request->data['Action']['DeleteRoom']));
-                        
-                    }elseif(isset($this->request->data['Action']['DeleteReview'])){
-                        
-                        $this->Hotel->Review->delete(key($this->request->data['Action']['DeleteReview']));
-                        
-                    }elseif(isset($this->request->data['Action']['DeleteSeason'])){
-                        
-                        $this->Hotel->Season->delete(key($this->request->data['Action']['DeleteSeason']));
-                        
-                    }elseif(isset($this->request->data['Action']['DeleteImage'])){
-                        
-                        $this->Hotel->Image->delete(key($this->request->data['Action']['DeleteImage']));
-                        
-                    }elseif(isset($this->request->data['Action']['AddSeasonException']) ){                         
-                        $row=array('hotel_id'=>$id,'parent_id'=>key($this->request->data['Action']['AddSeasonException']));
-                        
-                         $this->Hotel->Season->save($row);
-                         
-                    }elseif(isset($this->request->data['add_seasons']) ){
-                        $c=isset($this->request->data['Action']['AddSeasons'])?$this->request->data['Action']['AddSeasons']:1;
-                        $rows=array();
-                        for($i=0;$i<$c;$i++){
-                            $rows[$i]=array('hotel_id'=>$id);                           
-                        }
-                         $this->Hotel->Season->saveMany($rows);
-                         
-                    }elseif(isset($this->request->data['add_rooms'])){
-                        
-                        $c=isset($this->request->data['Action']['AddRooms'])?$this->request->data['Action']['AddRooms']:1;
-                        $rows=array();
-                        for($i=0;$i<$c;$i++){
-                            $rows[$i]=array('hotel_id'=>$id);
-                           
-                        }
-                         $this->Hotel->Room->saveMany($rows);
-                         
-                    }elseif(isset($this->request->data['add_reviews'])){
-                        $c=isset($this->request->data['Action']['AddReviews'])?$this->request->data['Action']['AddReviews']:1;
-                        $rows=array();
-                        for($i=0;$i<$c;$i++){
-                            $rows[$i]=array('product_id'=>$id,'review_date'=>date("Y-m-d"));
-
-                        }
-                         $this->Hotel->Review->saveMany($rows);
-                    }elseif(isset($this->request->data['save_hotel'])){
-                         
-                         $this->Hotel->unbindModel(array('hasMany'=>array('Room','Season','Review')));     
-                        
-                         if ($this->Hotel->saveAssociated($this->request->data)){                             
-                             
-                         }
-                    }elseif(isset($this->request->data['save_rooms'])){                          
-                        if(isset($this->request->data['Room'])){
-                           $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'),'hasMany'=>array('RoomRate')));
-                           $errores=array();
-                            foreach($this->request->data['Room'] as $h=> $roomData){                                
-                                $this->Hotel->Room->saveAssociated($roomData);
-                                $errores[$h]=$this->Hotel->Room->validationErrors;                               
-                            }  
-                             $this->Hotel->Room->validationErrors=$errores;
-                           //$this->Hotel->Room->saveMany($this->request->data['Room']);
-                           
-                            
-                         }
-                    }elseif(isset($this->request->data['save_reviews'])){
-                           $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product')));
-                           
-                        if(isset($this->request->data['Review'])){
-                             foreach($this->request->data['Review'] as $reviewData){
-                                 
-                                $this->Hotel->Review->saveAssociated($reviewData);                             
-                            }
-                         }
-                    }elseif(isset($this->request->data['save_roomrates'])){
-                          $this->Hotel->unbindModel(array('belongsTo'=>array('Product'),'hasMany'=>array('Room','Season','Review','Image')));     
-                        
-                         if ($this->Hotel->saveAssociated($this->request->data)){                             
-                             
-                         }
-                         if(isset($this->request->data['Room'])){
-                             foreach($this->request->data['Room'] as $h=>$roomData){
-                                 
-                                $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Season','Room')));                                
-                                $this->Hotel->Room->saveAssociated($roomData); 
-                                $this->Hotel->Room->validationErrors[$h]=$this->Hotel->Room->validationErrors;
-                            }
-                         }
-                         /*
-                         if(isset($this->Hotel->validationErrors['Room'])){
-                           $this->Hotel->Room->validationErrors= $this->Hotel->validationErrors['Room'];                         
-                         }*/
-                    }elseif(isset($this->request->data['save_seasons'])){
-                        if(isset($this->request->data['Season'])){
-                             $this->Hotel->Season->setDataArray($this->request->data['Season']);
-                             foreach($this->request->data['Season'] as $reviewData){ 
-                                $this->Hotel->Season->saveAssociated($reviewData);                             
-                            }
-                         } 
-                    }
-                         //$this->Hotel->Room->unbindModel(array('hasMany'=>array('RoomRate'))); 
-                        
-                         /*$roomsData['Hotel']=$this->request->data['Hotel'];*/
-                         
-                         
-                         /*$this->Hotel->unbindModel(array('hasMany'=>array('Room'))); 
-                         //$this->set('roomsData',$roomsData);
-                         if ($this->Hotel->saveAssociated($this->request->data)){
-                             
-                             
-                         }
-                         $roomsData=array();
-                         $roomsData['Room']=$this->request->data['Room'];
-                         if(isset($this->request->data['Room'])){
-                           foreach($this->request->data['Room'] as $roomData){
-                                $this->Hotel->Room->saveAssociated($roomData);
-
-                            }                               
-                         }
-                         if(isset($this->request->data['Review'])){
-                             foreach($this->request->data['Review'] as $reviewData){
-                                $this->Hotel->Review->saveAssociated($reviewData);                             
-                            }
-                         }
-                         
-                         if(isset($this->request->data['RoomRate'])){
-                             foreach($this->request->data['RoomRate'] as $reviewData){
-                                $this->Hotel->Room->RoomRate->saveAssociated($reviewData);                             
-                            }
-                         }*/
-                         
-                         //$this->Hotel->id=$id;
-                        
-                         
-                        
-                        /*if ($this->Hotel->Room->saveMany($this->request->data['Room'])) {
-				$this->Session->setFlash(__('The Rooms have been saved'));
-				$this->redirect(array('action' => 'edit',$id));
-			} else {
-				$this->Session->setFlash(__('The rooms could not be saved. Please, try again.'));
-			}*/
-                    /*}if(isset($this->request->data['save_all'])){
-                        //$rooms=  array_splice($this->request->data['Room'], 0);
-                    //
-                    
-			if ($this->Hotel->saveAssociated($this->request->data)) {
-				$this->Session->setFlash(__('The hotel has been saved'));
-				$this->redirect(array('action' => 'edit',$id));
-			} else {
-				$this->Session->setFlash(__('The hotel could not be saved. Please, try again.'));
-			}
-                        
-                    }*/
-                    //$this->redirect('edit/'.$id);
-                    
-		} else{
-                        //$this->Hotel->unbindModel(array('hasMany' => array('Season')));
-                        //$this->Hotel->SAunbindModel(array('hasMany' => array('Season')));
+		} else{                      
                         $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('I18nKey','Activities','TravellerReview','StaffReview'))); 
                         //$this->Hotel->Product->unbindModel(array('hasMany' => array('Hotel'),'belongsTo'=>array('Location')));
                         $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product')));                        
@@ -636,6 +479,203 @@ class HotelsController extends AppController
 		}else { $this->redirect('/Hotels'); }
                  * */
 	}
+        
+        private function action_delete($id=null){
+            if(isset($this->request->data['Action']['Delete'])){               
+                 
+                   if(isset($this->request->data['Action']['Delete']['Room'])){
+                        //$deleteid=
+                        if($this->Hotel->Room->delete(key($this->request->data['Action']['Delete']['Room']))){
+                            $this->Session->setFlash(__('The Room have been deleted'));                          
+                        }else{
+                            $this->Session->setFlash(__('The Room could not be deleted. Please, try again.'), 'default', array(), 'error');                             
+                        }
+                         $this->redirect('edit/'.$id.'#tabs-4'); 
+                        
+                    }elseif(isset($this->request->data['Action']['Delete']['Review'])){
+                        
+                        if($this->Hotel->Review->delete(key($this->request->data['Action']['Delete']['Review']))){
+                            $this->Session->setFlash(__('The Review data have been deleted'));
+                        }else{
+                            $this->Session->setFlash(__('The Review could not be deleted. Please, try again.'), 'default', array(), 'error');
+                        }
+                          $this->redirect('edit/'.$id.'#tabs-7'); 
+                    }elseif(isset($this->request->data['Action']['Delete']['Season'])){                        
+                        if($this->Hotel->Season->delete(key($this->request->data['Action']['Delete']['Season']))){
+                            $this->Session->setFlash(__('The Season have been deleted'));                         
+                        }else{
+                            $this->Session->setFlash(__('The Season could not be deleted. Please, try again.'), 'default', array(), 'error');
+                        }
+                         $this->redirect('edit/'.$id.'#tabs-5'); 
+                    }elseif(isset($this->request->data['Action']['Delete']['Image'])){                        
+                        if($this->Hotel->Image->delete(key($this->request->data['Action']['Delete']['Image']))){
+                             $this->Session->setFlash(__('The Image have been deleted'));
+                        }else{
+                            $this->Session->setFlash(__('The Image could not be deleted. Please, try again.'), 'default', array(), 'error');
+                        }
+                        $this->redirect('edit/'.$id.'#tabs-2'); 
+                    }  
+                    return true;
+            }  
+            return false;
+        }
+        
+        private function action_add($id=null){
+            if(isset($this->request->data['Action']['Add'])){               
+                 
+                  if(isset($this->request->data['Action']['Add']['SeasonException']) ){                         
+                        $row=array('hotel_id'=>$id,'parent_id'=>key($this->request->data['Action']['Add']['SeasonException']));                        
+                        
+                         if( $this->Hotel->Season->save($row)){
+                             $this->Session->setFlash(__('The season have been added'));
+                             $this->redirect('edit/'.$id.'#tabs-5'); 
+                        }else{
+                             $this->Session->setFlash(__('The season could not be added'));
+                        } 
+                         $this->redirect('edit/'.$id.'#tabs-5'); 
+                    }elseif(isset($this->request->data['Action']['Add']['Seasons']) ){
+                        $c=isset($this->request->data['Action']['Add']['Seasons_count'])?$this->request->data['Action']['Add']['Seasons_count']:1;
+                        $rows=array();
+                        for($i=0;$i<$c;$i++){
+                            $rows[$i]=array('hotel_id'=>$id);                           
+                        }
+                        if($this->Hotel->Season->saveMany($rows) && $c>0){
+                             $this->Session->setFlash(__('The seasons has been added'));
+                             $this->redirect('edit/'.$id.'#tabs-5'); 
+                        }else{
+                             $this->Session->setFlash(__('The seasons could not be added'),'default', array(), 'error');
+                        }                            
+                        
+                    }elseif(isset($this->request->data['Action']['Add']['Rooms'])){                        
+                        $c=isset($this->request->data['Action']['Add']['Rooms_count'])?$this->request->data['Action']['Add']['Rooms_count']:1;
+                        $rows=array();
+                        for($i=0;$i<$c;$i++){
+                            $rows[$i]=array('hotel_id'=>$id);
+                           
+                        }
+                         if($this->Hotel->Room->saveMany($rows) && $c>0){
+                             $this->Session->setFlash(__('The rooms has been added'));
+                             $this->redirect('edit/'.$id.'#tabs-4'); 
+                        }else{
+                             $this->Session->setFlash(__('The rooms could not be added'),'default', array(), 'error');
+                        } 
+                        
+                         
+                    }elseif(isset($this->request->data['Action']['Add']['Reviews'])){
+                        $c=isset($this->request->data['Action']['Add']['Reviews_count'])?$this->request->data['Action']['Add']['Reviews_count']:1;
+                        $rows=array();
+                        for($i=0;$i<$c;$i++){
+                            $rows[$i]=array('product_id'=>$id,'review_date'=>date("Y-m-d"));
+
+                        }
+                         if($this->Hotel->Review->saveMany($rows) && $c>0){
+                             $this->Session->setFlash(__('The reviews has been added'));
+                              $this->redirect('edit/'.$id.'#tabs-7');  
+                        }else{
+                             $this->Session->setFlash(__('The reviews could not be added'),'default', array(), 'error');
+                        } 
+                         
+                    }                    
+            } 
+            return false;
+        }
+
+        private function action_save($id=null){
+            if(isset($this->request->data['Action']['Save'])){   
+                $errores=array();
+                if(isset($this->request->data['Action']['Save']['Hotel'])){                         
+                    $this->Hotel->unbindModel(array('hasMany'=>array('Room','Season','Review')));     
+
+                    if ($this->Hotel->saveAssociated($this->request->data)){                             
+                        $this->Session->setFlash(__('The hotel data have been saved'));                       
+                        //$this->redirect('edit/'.$id.'#tabs-1'); 
+                    }else{
+                        $this->Session->setFlash(__('The hotel could not be saved. Please, try again.'), 'default', array(), 'error');
+                    }
+                       
+                }elseif(isset($this->request->data['Action']['Save']['Rooms'])){                          
+                    if(isset($this->request->data['Room'])){                
+
+                        foreach($this->request->data['Room'] as $h=> $roomData){     
+                             $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'),'hasMany'=>array('RoomRate')));
+                            $this->Hotel->Room->saveAssociated($roomData);
+                            if(!empty($this->Hotel->Room->validationErrors))
+                                $errores[$h]=$this->Hotel->Room->validationErrors;                               
+                        }  
+                        if(!empty($errores)){                               
+                            $this->Hotel->Room->validationErrors=$errores;
+                            $this->Session->setFlash(__('Rooms could not be saved. Please, try again.'), 'default', array(), 'error');
+                            //$this->redirect('edit/'.$id.'#tabs-4'); 
+                        }
+                        else{
+                            $this->Session->setFlash(__('The rooms data have been saved'));
+                        }      
+                    }                          
+               }elseif(isset($this->request->data['Action']['Save']['Reviews'])){                                                 
+                    if(isset($this->request->data['Review'])){      
+                         
+                        foreach($this->request->data['Review'] as $h=>$reviewData){  
+                            $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product'))); 
+                            $this->Hotel->Review->saveAssociated($reviewData);  
+                            if(!empty($this->Hotel->Review->validationErrors))
+                                $errores[$h]=$this->Hotel->Review->validationErrors;  
+                        }
+                        if(!empty($errores)){                               
+                            $this->Hotel->Review->validationErrors=$errores;
+                            $this->Session->setFlash(__('Review could not be saved. Please, try again.'), 'default', array(), 'error');
+                             // $this->redirect(array('edit/'.$id.'#tabs-7'));
+                        }
+                        else{
+                            $this->Session->setFlash(__('The review data have been saved'));
+                        }                           
+                     }
+                       
+              }elseif(isset($this->request->data['Action']['Save']['Roomrates'])){
+                    if(isset($this->request->data['Room'])){
+                        foreach($this->request->data['Room'] as $h=>$roomData){
+
+                            $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Season','Room')));                                
+                            $this->Hotel->Room->RoomRate->saveMany($roomData['RoomRate']); 
+                            if(!empty($this->Hotel->Room->RoomRate->validationErrors))
+                                $errores[$h]==$this->Hotel->Room->RoomRate->validationErrors;
+                        }
+                    
+                        if(!empty($errores)){                               
+                            $this->Hotel->Room->RoomRate->validationErrors=$errores;
+                            $this->Session->setFlash(__('Roomrates could not be saved. Please, try again.'));
+                        }
+                        else{
+                            $this->Session->setFlash(__('Roomrates data have been saved'));
+                        }  
+                    }
+                        
+             }elseif(isset($this->request->data['Action']['Save']['Seasons'])){
+                    $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product')));
+
+                    if(isset($this->request->data['Season'])){
+                        $this->Hotel->Season->setDataArray($this->request->data['Season']);
+                         $this->Hotel->Season->SeasonException->setDataArray($this->request->data['Season']);
+                        foreach($this->request->data['Season'] as $h=>$reviewData){ 
+                            $this->Hotel->Season->saveAssociated($reviewData);
+                            if(!empty($this->Hotel->Season->validationErrors))
+                                $errores[$h]=$this->Hotel->Season->validationErrors;  
+                        }
+                        if(!empty($errores)){                               
+                            $this->Hotel->Season->validationErrors=$errores;
+                            $this->Session->setFlash(__('Season could not be saved. Please, try again.'), 'default', array(), 'error');
+                              //$this->redirect(array('edit/'.$id.'#tabs-5'));
+                        }
+                        else{
+                            $this->Session->setFlash(__('The season data have been saved'));
+                        }  
+                     }
+                        
+              } 
+              return true;
+            }  
+            return false;
+        }
+        
 
 
 }

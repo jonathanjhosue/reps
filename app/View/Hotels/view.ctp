@@ -9,174 +9,198 @@
 
 <?php $altrow = true; //variable para controlar la distinción entre una línea y otra de una tabla. 
 	//incluye en el view las instrucciones JavaScript para el control del tabpanel.
-	echo $this->Html->css('cake.cms.css', null, array("inline"=>false));
-        echo $this->Html->css('smootness/jquery-ui.css', null, array("inline"=>false));
-	echo $this->Html->script('jquery.js');
-        echo $this->Html->script('jquery.ui.js');
-	echo $this->Html->script('tabcontrol.js');
-	echo $this->Html->scriptBlock($jsGalleryDec, array('allowCache'=>true,'safe'=>true,'inline'=>false));
 	
-	echo $this->element('v_nav_regions',array('cache' => array('time' => '+1 day')));
+        echo $this->Html->scriptBlock('
+            /*$(window).load(function() {
+                $("#slider").nivoSlider({
+                pauseTime:5000
+                });
+            });*/
+            $(function() {
+                $( "#tabs" ).tabs(); 
+                
+            });'
+            , array('allowCache'=>true,'safe'=>true,'inline'=>false));
+    echo $this->Html->script('galleria/themes/classic/galleria.classic.min.js');       
+     echo $this->Html->scriptBlock('
+           $(function() {
+            $("#gallery").galleria({
+                    width: 800,
+                    height: 330,
+                    imageCrop: true,
+                    imagePan:true,
+                   /* imagePanSmoothness:12,*/
+                     transition: "fade",
+                     autoplay: 5500,
+                     carousel:true,
+                     imageMargin:0,
+                    /* thumbnails:"empty",*/
+              /*  extend: function(options) {
+
+                        Galleria.log(this) // the gallery instance
+                        Galleria.log(options) // the gallery options
+
+                        // listen to when an image is shown
+                        this.bind("image", function(e) {
+
+                            Galleria.log(e) // the event object may contain custom objects, in this case the main image
+                            Galleria.log(e.imageTarget) // the current image
+
+                            // lets make galleria open a lightbox when clicking the main image:
+                            $(e.imageTarget).click(this.proxy(function() {
+                            this.openLightbox();
+                            }));
+                        });
+                    }*/
+                });
+            })', array('allowCache'=>true,'safe'=>true,'inline'=>false));
+	//echo $this->Html->scriptBlock($jsGalleryDec, array('allowCache'=>true,'safe'=>true,'inline'=>false));
+	
+	//echo $this->element('v_nav_regions',array('cache' => array('time' => '+1 day')));
 	
 	//print_r($_SESSION);
 ?>
 
+
 <div class="hotels view">
-  
-	<div>
-		<p><?php echo $this->Html->image('image/'.$hotel['Image'][0]['dir'].'/640x480_'.$hotel['Image'][0]['image_name'], array('class' => 'serviceImageMain', 'name' => 'slide')); ?></p>
-		<?php echo $this->Html->scriptBlock($jsGalleryFunc, array('allowCache'=>true,'safe'=>true,'inline'=>true)); ?>
-		<div class="serviceImageThumbs">
-			<?php for($i=0;$i<5 && $i<count($hotel['Image']);$i++): ?>
-              
-			<p><?php echo $this->Html->image('image/'.$hotel['Image'][$i]['dir'].'/80x60_'.$hotel['Image'][$i]['image_name'], array('height' => '75px', 'style'=> 'padding-bottom:3px;')); ?></p>
-			<?php endfor; ?>
-		</div>						
-		<div class="serviceName"><span class="label"><?php echo $hotel['Product']['product_name']; ?></span></div>		
-		<table class="serviceHeader">
-			<tr>
-				<td><span class="label">Category:&nbsp;</span><?php echo $hotel['HotelCategory']['category_name']; ?></td>
-				<td><span class="label">Location:&nbsp;</span><?php echo $hotel['Product']['Location']['location_name'].', '.$hotel['Product']['Location']['Region']['region_name']; ?></td>  
-				<td><span class="label">Total Room:</span>&nbsp;<?php echo $hotel['Hotel']['total_rooms']; ?></td>
-		  </tr>
-		</table>
-	</div>  
-	<br />
-	<div class="tab-box"> 
-		<a href="javascript:;" class="tabLink activeLink" id="cont-1">Overview</a> 
-		<a href="javascript:;" class="tabLink " id="cont-2">Rooms</a> 
-		<a href="javascript:;" class="tabLink " id="cont-3">Features</a>
-		<a href="javascript:;" class="tabLink " id="cont-4">Reviews</a>
-		<a href="javascript:;" class="tabLink " id="cont-5">Activities</a>
-		<a href="javascript:;" class="tabLink " id="cont-6">Rates</a> 
-		
-	</div>
+    <div id="viewheader">
+	<div id="gallery">          
+            <?php for($i=0;$i<count($hotel['Image']);$i++): 
+            if($hotel['Image'][$i]['image_name']) 
+                echo '<a title="sdfs" alt="texto esxtesdf s" href="'.$this->request->webroot.'img/image/'.$hotel['Image'][$i]['dir'].'/800x400_'.$hotel['Image'][$i]['image_name'].'">'.
+                    $this->Html->image('image/'.$hotel['Image'][$i]['dir'].'/90x45_'.$hotel['Image'][$i]['image_name']).
+                    "</a>"; 
+            endfor; ?>           	
+        </div>     
+        
+    <h1 style="top: -35px;bottom: -35px;left:10px; display: inline; position: relative;"><?php echo $hotel['Product']['product_name']; ?></h1>
+    </div>
+    <div id="tabs">
+
+				
+    <p>
+    <label><?php echo __('Category')?>:</label><?php echo $hotel['HotelCategory']['category_name']; ?>&nbsp;&nbsp;&nbsp;  
+    <label><?php echo __('Location')?>:</label><?php echo $hotel['Product']['Location']['location_name'].', '.$hotel['Product']['Location']['Region']['region_name']; ?>&nbsp;&nbsp;&nbsp;  
+    <label><?php echo __('Total Rooms')?>:</label><?php echo $hotel['Hotel']['total_rooms']; ?>&nbsp;&nbsp;&nbsp;  
+    </p>
+
+    
+    <ul>
+		<li><a href="#tabs-1"><?php echo __('Overview'); ?></a></li>
+		<li><a href="#tabs-2"><?php echo __('Rooms'); ?></a></li>
+		<li><a href="#tabs-3"><?php echo __('Features'); ?></a></li>
+                <li><a href="#tabs-4"><?php echo __('Reviews'); ?></a></li>
+                <li><a href="#tabs-5"><?php echo __('Activities'); ?></a></li>
+                <li><a href="#tabs-6"><?php echo __('Rates'); ?></a></li>
+	</ul>
+	
 	<!-- overview tab starts -->
-	<div class="tabcontent" id="cont-1-1"> 
-		<br />
-                <div>
-			<div style="text-align:left;">
-				<span class="label">Check in Time: &nbsp;</span><span><?php echo $hotel['Hotel']['check_in']; ?>&nbsp;</span> &nbsp;&nbsp;&nbsp;  
-                                <span class="label">Check Out Time: &nbsp;</span><span><?php echo $hotel['Hotel']['check_out']; ?>&nbsp;</span>   
-			</div>
-			
-		</div>
-		<br />
+	<div id="tabs-1"> 
+            <p>
+            <label><?php echo __('Check in Time') ?>:</label><?php echo $hotel['Hotel']['check_in']; ?>&nbsp;</span> &nbsp;&nbsp;&nbsp;  
+            <label><?php echo __('Check Out Time') ?>:</label><?php echo $hotel['Hotel']['check_out']; ?>&nbsp;</span>   
+            </p>
+           
+                <label><?php echo __('Description') ?>:</label>
+            <p class="texto">
+            <?php echo  $this->I18nKeys->getKeyByType($hotel['I18nKey'],  TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION); ?>
+            </p>
+
+            <label><?php echo __('Directions') ?>:&nbsp;&nbsp;&nbsp;</label>
+                <label><?php echo __('Gps Coordinates')?>:&nbsp;</label>
+                <label>N:&nbsp;</label><?php echo $hotel['Product']['gpslatitude']; ?>&nbsp; 
+                <label>E:&nbsp;</label><?php echo $hotel['Product']['gpslongitude']; ?>&nbsp;
+
+                <p class="texto">
+                <?php echo  $this->I18nKeys->getKeyByType($hotel['I18nKey'],  TiposGlobal::I18N_TYPE_PRODUCT_DIRECTION); ?>
+                </p>
                 
-		<div>
-			<div style="text-align:left;">
-				<span class="label">Description:&nbsp;</span>
-			</div>
-			<div style="border: 1px solid #ddd; min-height:70px;" >
-                            <?php echo  $this->I18nKeys->getKeyByType($hotel['Product']['I18nKey'],  TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION); ?>
-			    <?php //echo  $this->I18nKeys->getKey($hotel['Product']['i18n_description']); ?>
-			</div>
-		</div>
-		<br />
-		<div>
-			<div style="text-align:left; float:left;">
-				<span class="label">Directions&nbsp;</span>
-			</div>
-			<div style="text-align:right;">
-				<span class="label">Gps Coordinates:&nbsp;</span>
-				<span class="label">N:&nbsp;</span><span><?php echo $hotel['Product']['gpslatitude']; ?>&nbsp;</span>   
-				<span class="label">E:&nbsp;</span><span><?php echo $hotel['Product']['gpslongitude']; ?>&nbsp;</span>
-			</div>
-			<div style="border: 1px solid #ddd; min-height:50px;">
-				<?php echo  $this->I18nKeys->getKey($hotel['Product']['i18n_direction']); ?>
-			</div>
-		</div>					
+                <div id="mapaGoogle">
+                <?php if($hotel['Product']['map']!=''): 
+                    $link= str_replace("&","&amp;",$hotel['Product']['map']); 
+                    ?>
+                   <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<?php echo $link.'&amp;output=embed' ?>">
+
+                    </iframe><br />
+                    <small><a href="<?php echo $link.'&amp;source=embed'; ?>" target="_blank" style="color:#0000FF;text-align:left"><?php echo __('Ver mapa más grande') ?></a></small>
+                <?php endif; ?>
+                    </div>
 	</div>
 	<!-- overview tab ends -->
 	
 	<!-- rooms tab starts -->
-	<div class="tabcontent hide" id="cont-2-1"> 
-		<br />		
+	<div id="tabs-2"> 
+		
 		<!-- room category starts -->
 		<?php foreach($hotel['Room'] as $room): ?>
-		<div>
-			<div style="text-align:left;">
-				<span class="label">Category:&nbsp;</span> <span><?php echo $room['category']; ?>&nbsp;</span>		
-				<span class="label">Rooms:&nbsp;</span> <span><?php echo $room['count']; ?>&nbsp;</span>											
-			</div>							
-			<div style="border: 1px solid #ddd;">
-				<div>
-					<span><?php echo  $this->I18nKeys->getKey($room['i18n_description']) ?>&nbsp;</span>	
-				</div>
-				<br />
-                                <div class="clsAmenities">
-					<span class="label">Amenities:&nbsp;</span> 
-					
-                                            <?php echo $this->RipsWeb->getAmenitiesList($room) ?>
-                                           
-						
-				</div>
-			</div>
+		
+                <p class="clsRoom">
+                    <span class="room_title"><label><?php echo __('Category') ?>:</label> <?php echo $room['category']; ?></span >&nbsp;&nbsp;&nbsp;		
+				<label><?php echo __('Rooms') ?>:</label> <?php echo $room['count']; ?>&nbsp;											
+		</p>							
+		<div class="clsRoom">
+			
+                    <p><?php echo  $this->I18nKeys->getKeyByType($room['I18nKey'],  TiposGlobal::I18N_TYPE_ROOM_DESCRIPTION) ?></p>	
+			
+			
+                    <div class="clsAmenities">
+                            <label><?php echo __('Amenities')?>:</label> 					
+                                <?php echo $this->RipsWeb->getAmenitiesList($room) ?>					
+                    </div>
 		</div>
-		<br />
+		
+		<hr />
 		<?php endforeach; ?>
 		<!-- room category ends -->
 	</div> 
 	<!-- rooms tab ends -->			  
 	
 	<!-- features tab starts -->		
-	<div class="tabcontent hide" id="cont-3-1"> 
+	<div id="tabs-3"> 
             <div id="divFeatures" class="">
 		<?php echo $this->RipsWeb->getFeaturesList($hotel['Hotel']) ?>
             </div>
-		
-            
+            <hr/>
             <div id="divDiningAndDrinking">
-                <div style="text-align:left;">
-                    <br />
-                    <span class="label"><?php __('Dining & Drinking')?></span> 
-                        <?php echo $this->RipsWeb->getDiningAndDrinkingList($hotel['Hotel']) ?>
-                    	
-                </div>
-                <div style="border: 1px solid #ddd; min-height:70px;" >
-                                    <?php echo  $this->I18nKeys->getKey($hotel['Hotel']['i18n_dining&drinking']); ?>
-                </div>
+                <label><?php echo __('Dining & Drinking')?></label>                       
+                    <?php echo $this->RipsWeb->getDiningAndDrinkingList($hotel['Hotel']) ?>            
+                <p>
+                     <?php echo  $this->I18nKeys->getKeyByType($hotel['I18nKey'],  TiposGlobal::I18N_TYPE_HOTEL_DININGANDDRINKING); ?>
+                </p>
             </div>
 	</div> 
 	<!-- features tab ends -->		
 	
 	<!-- review tab starts -->		
-	<div class="tabcontent hide" id="cont-4-1"> 
-	  <br />
-		<div>
-			
-                        <fieldset class="tab">
-                                <legend class="tab"><span class="label">Staff Reviews:&nbsp;</span></legend>
-                                <?php foreach($hotel['Product']['StaffReview'] as $review): ?>		
-                                <p><?php echo $review['review_date']; ?></p>
-                                <div style="border: 1px solid #ddd; min-height:35px;"> 
-                                        <p><?php echo  $this->I18nKeys->getKey($review['i18n_review']); ?>&nbsp;</p>	
-                                </div>
-                                <br />
-                                <?php endforeach; ?>
-                        </fieldset>	
-			
-			<fieldset class="tab">
-				<legend class="tab"><span class="label">Traveller Reviews:&nbsp;</span></legend>
-                               
-				<?php foreach($hotel['Product']['TravellerReview'] as $review): ?>	
-                                
-                                
-                                <p><?php echo $review['review_date']; ?></p>
-				<div style="border: 1px solid #ddd; min-height:35px;">
-                                    
-					<p><?php echo  $this->I18nKeys->getKey($review['i18n_review']); ?></p>	
-				</div>
-				<br />
-				<?php endforeach; ?>
-			</fieldset>							
-		</div>
+	<div id="tabs-4"> 
+	  		
+                <fieldset class="jfieldset">
+                        <legend ><?php echo __('Staff Reviews') ?>:</legend>
+                        <?php foreach($hotel['Product']['StaffReview'] as $review): ?>		
+                        <p class='review_texto'>                    
+                            <q><?php echo  $this->I18nKeys->getKeyByType($review['I18nKey'],  TiposGlobal::I18N_TYPE_REVIEW); ?> </q>
+                           <span><?php echo $review['review_date']; ?></span>
+                        </p>  	
+                        
+                        <?php endforeach; ?>
+                </fieldset>	
+
+                <fieldset class="jfieldset">
+                        <legend ><?php echo  __('Traveller Reviews')?>:</legend>
+
+                        <?php foreach($hotel['Product']['TravellerReview'] as $review): ?>	
+                         <p class='review_texto'>                    
+                            <q><?php echo  $this->I18nKeys->getKeyByType($review['I18nKey'],  TiposGlobal::I18N_TYPE_REVIEW); ?> </q>
+                           <span><?php echo $review['review_date']; ?></span>
+                        </p> 
+                        <?php endforeach; ?>
+                </fieldset>							
 	</div>
 	<!-- review tab ends -->
         
         
         <!-- Activities tab starts -->		
-	<div class="tabcontent hide" id="cont-5-1"> 
+	<div id="tabs-5"> 
 	  <br />
 		<div>
 			
@@ -188,28 +212,28 @@
 		
 	<!-- rates tab starts -->	
 
-		<div class="tabcontent hide" id="cont-6-1"> 
-		  <br />
+	<div id="tabs-6"> 
 			<!-- room category starts -->
 			<?php foreach($hotel['Room'] as $room): 
 						$altrow = true;
 			?>
 			<div>			
-				<div style="text-align:left; float:left;">
-					<span class="label">Category:&nbsp;</span> <span><?php echo $room['category']; ?>&nbsp;</span>												
-				</div>							
-				<br />
-				
-				<table class="tab" cellspacing="0" cellpadding="0">
-					<tbody>
+			   <p class="clsRoom">
+                            <span class="room_title"><label><?php echo __('Category') ?>:</label>&nbsp;<?php echo $room['category']; ?></span>&nbsp;&nbsp;&nbsp;												
+				</p>							
+						
+                                <table class="jtable" style="width: 100%;">
+					<thead>
 						<tr>
-							<th></th><th>Sgl</th><th>Dbl</th><th>Tpl</th><th>Qdlp</th>
-                                                        <th>Child <?php echo $hotel['Hotel']['child_age_min'].'-'.$hotel['Hotel']['child_age_max'].' y/o' ?></th>
-                                                        <th>Infant <?php echo $hotel['Hotel']['infant_age_min'].'-'.$hotel['Hotel']['infant_age_max'].' y/o' ?></th>
+							<th><?php echo ('Season') ?></th><th>Sgl</th><th>Dbl</th><th>Tpl</th><th>Qdlp</th>
+                                                        <th><?php echo ('Child') ?> <?php echo $hotel['Hotel']['child_age_min'].'-'.$hotel['Hotel']['child_age_max'].' y/o' ?></th>
+                                                        <th><?php echo ('Infant')?> <?php echo $hotel['Hotel']['infant_age_min'].'-'.$hotel['Hotel']['infant_age_max'].' y/o' ?></th>
                                                 </tr>
+                                        </thead>
+                                                <tbody>
 						<?php foreach($room['RoomRate'] as $roomRate): ?>
 						<tr <?php if($altrow){echo 'class="altrow"'; $altrow = false;}else{$altrow = true;} ?> >
-                                                        <td>From: <?php echo $roomRate['Season']['date_start']; ?> To: <?php echo $roomRate['Season']['date_end']; ?></td>
+                                                        <td> <?php echo __('From: ').$roomRate['Season']['date_start'].' '.__('To: ').$roomRate['Season']['date_end']; ?></td>
 							<td><?php echo $roomRate['single']; ?></td>
 							<td><?php echo $roomRate['double']; ?></td>
 							<td><?php echo $roomRate['triple']; ?></td>
@@ -222,17 +246,20 @@
 				</table>
 			</div>
 			           
-                        <div style="text-align:left; float:left;">
-					<span class="label">Room Rate Includes: </span> <span><?php echo $this->I18nKeys->getKey($room['i18n_include']); ?>&nbsp;</span>												
-				</div>
-                            <br/>
+                        <p>
+                            <label><?php echo __('Room Rate Includes')?>: </label> <span><?php echo $this->I18nKeys->getKeyByType($room['I18nKey'],  TiposGlobal::I18N_TYPE_ROOM_INCLUDE); ?>&nbsp;</span>												
+			</p>
+                        <hr/>
 			<!-- room category ends -->
 			<?php endforeach; ?>	
-                       <br/> 
-		<div style="text-align:left; float:left;">
-                            <span class="label">Notes: </span> <span><?php echo $this->I18nKeys->getKey($hotel['Hotel']['i18n_roomnotes']);//$hotel['I18nKey'][$hotel['Hotel']['i18n_roomnotes']]['value']; ?>&nbsp;</span>												
-                    </div>
-                <br/>
+                       <br/>
+                       
+                       <fieldset class="jfieldset">
+                    <legend class="tab"><?php echo __('Notes') ?>: </legend>
+                    
+                    <?php echo $this->I18nKeys->getKeyByType($hotel['I18nKey'],  TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES);?>												
+                </fieldset>
+              
                         
 	
 	<!-- rates tab ends -->	          	
@@ -250,4 +277,4 @@
 </div>
 <pre><?php //print_r($deb); ?></pre>
 
-  <pre><?php print_r($hotel); ?></pre>
+  <pre><?php //print_r($hotel); ?></pre>

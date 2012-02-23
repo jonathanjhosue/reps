@@ -10,17 +10,55 @@ root {
     display: block;
 }
 
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+#container{
+    margin: 0px;
+    padding: 0px;
+    background:  fixed no-repeat url(images/background.jpg) #DCE5EA  ;
+    font-size: 0.8em;
+
+}
 
 
 #divDiningAndDrinking ul li,#divFeatures ul li {
    display: inline-block;
    width: 250px; 
 }
-.clsAmenities ul li {
-   display: inline-block;
-   width: 170px; 
+
+#divFeatures ul,
+#divDiningAndDrinking ul,
+.clsAmenities ul{
+    padding: 0px;
+    margin: 0px;
 }
-#divDiningAndDrinking ul li input,#divFeatures ul li input{
+#divFeatures ul li ,
+#divDiningAndDrinking ul li,
+.clsAmenities ul li {
+    font-size: 0.9em;
+   display: inline-block;
+   width: 175px; 
+   margin: 3px;
+}
+#divFeatures ul li img,
+#divDiningAndDrinking ul li img,
+.clsAmenities ul li img{
+    padding-right: 3px; 
+}
+
+#divFeatures ul li.detail{
+    width: auto;
+}
+
+#divDiningAndDrinking ul{
+    display: inline;
+}
+
+#divDiningAndDrinking ul li input,
+#divFeatures ul li input{
     display: inline-block;
     height: 20px;
     font-size: 90%;
@@ -28,8 +66,112 @@ root {
 }
 
 
-#divDiningAndDrinking ul li img,#divFeatures ul li img, .clsAmenities ul li img{
+#divDiningAndDrinking ul li img,
+#divFeatures ul li img, 
+.clsAmenities ul li img{
     vertical-align: middle;
     
+}
+
+.theme-default #slider {
+    margin:25px auto 0 auto;
+    width:640px; /* Make sure your images are the same size */
+    height:380px; /* Make sure your images are the same size */
+}
+.theme-pascal.slider-wrapper,
+.theme-orman.slider-wrapper {
+    margin-top:150px;
+}
+
+.theme-default #slider .nivo-controlNav {
+	position:absolute;
+	bottom:-70px; /* Put the nav below the slider */
+}
+.theme-default #slider .nivo-controlNav img {
+	display:inline; /* Unhide the thumbnails */
+	position:relative;
+	margin-right:10px;
+}
+
+
+h1{
+    font-size:1.3em;
+    text-align: center;
+    text-shadow: #888 0px 2px 4px;
+    margin: 0px;
+}
+.room_title{
+    font-size:1.2em;
+    text-shadow: #888 0px 2px 4px;  
+    font-weight: bolder;
+}
+
+.view{
+
+    
+}
+#viewheader{
+       width: 800px;
+    margin: 0px auto; 
+}
+#gallery{
+    position: relative;
+    -moz-box-shadow: 0px 0px 6px 4px  #999;
+-webkit-box-shadow: 0px 0px 6px 4px  #999;
+box-shadow: 0px 0px 6px 4px  #999;
+border-radius: 5px;
+}
+
+/*====================*/
+/*=== Other Styles ===*/
+/*====================*/
+.clear {
+	clear:both;
+}
+
+.view label{
+    font-weight: bolder;
+    margin: 5px 5px 5px 0px;
+}
+.view p{
+    font-size: .9em;   
+}
+
+.view p.texto{
+    padding: 5px; 
+    margin: 5px 0px 8px 0px;
+}
+
+#tabs{
+    
+    margin: -10px auto 10px auto;
+    width: 800px;
+        -moz-box-shadow: 0px 0px 6px 4px #999;
+-webkit-box-shadow: 0px 0px 6px 4px  #999;
+box-shadow: 0px 0px 6px 4px  #999;
+}
+.review_texto{
+    font-style: italic;
+    
+}
+
+.review_texto q{
+quotes: "« " " »" "'" "'";
+}
+
+.view table th{
+    font-weight: bolder;
+    
+}
+
+#mapaGoogle iframe{
+    width: 650px;
+    height:360px;
+    margin: 0px auto;
+   
+    display: block;  
+}
+#mapaGoogle {
+     text-align: center;
 }
 
