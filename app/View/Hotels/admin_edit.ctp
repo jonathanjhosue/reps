@@ -316,7 +316,9 @@
             <tbody>                        
 
                 <?php
+                if(isset($this->data['Season'])){
                   $c=count($this->data['Season']);
+                  
                   foreach($this->data['Season'] as $x=>$season){
                         echo '<tr><td>'.
                                $this->Form->input("Season.$x.id",array('type'=>'hidden')).
@@ -358,6 +360,7 @@
                         }
                         
                     }
+                }
                 ?>
         </tbody>
                     
@@ -415,6 +418,7 @@
                         </thead>
                         <tbody class="ui-widget-content">   
                        <?php
+if(isset($room['RoomRate'])){
                            $roomRates=$room['RoomRate'];
                            $roomRates=Set::combine($roomRates, array('{0}:{1}', '{n}.season_id', '{n}.room_id'), '{n}');
                            echo $this->Form->input("Room.$i.id",array('type'=>'hidden'));
@@ -491,7 +495,7 @@
                             
                             $y++;
                         endforeach;
-                        
+}                       
                         ?>
                        
                         </tbody>
@@ -578,10 +582,13 @@
 			<?php echo $this->Html->link('Delete', array('controller'=>'hotels', 'action'=>'delete', $this->Form->value('Product.id')), null, 'Are you sure you want to delete this Hotel?'); ?>
 		</li>			
 		<li><?php echo $this->Html->link('Back to Hotels', array('action'=>'index')); ?></li>
+                <li>
+			<?php echo $this->Html->link('View', array('admin'=>false,'controller'=>'hotels', 'action'=>'view', $this->Form->value('Product.id'))); ?>
+		</li>
 	</ul>
 </div>
 
 <?php 
-pr($this->validationErrors);
+//pr($this->validationErrors);
 
 ?>

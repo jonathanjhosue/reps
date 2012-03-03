@@ -85,7 +85,7 @@ class RipsWebHelper  extends AppHelper  {
         //$i18n_array=
         $value="";
         if(isset($i18n_array[$type.':'.$language])){              
-             $html.= $this->Form->input("$prefix.$index18n.id",array('type'=>'hidden','value'=> $i18n_array[$type.':'.$language]['id']  ));  
+             $html.= $this->Form->input("$prefix.$index18n.id",array('type'=>'hidden','value'=> (isset($i18n_array[$type.':'.$language]['id']))?$i18n_array[$type.':'.$language]['id']:''  ));  
              $value=$i18n_array[$type.':'.$language]['value'];
             
         }

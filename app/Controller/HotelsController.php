@@ -8,18 +8,22 @@ class HotelsController extends AppController
     public $name = 'Hotels';
     public $helpers = array('Html', 'Form');
 
+   public $paginate = array(
+        'limit' => 12          
+    );
+        
 
-    public function index() {
+    public function index($idlocation=null) {
 
-		$this->layout = 'guest';
+		
 		$this->helpers[] = 'Js';
 		
 		//Consulta todos las instancias de Hotel. Se aisla de Room xq no se necesita mostrar ese modelo.
-		/*$this->Hotel->unbindModel(array(
-				'hasMany' => array('Room')
+	/*	$this->Hotel->unbindModel(array(
+				'hasMany' => array('Room','Season','Image','Review')
 				)
 			);
-		$this->request->data = $this->Hotel->findAll();*/
+		$this->request->data = $this->Hotel->find('all');*/
 		
 		//Consulta la primer imaegn de cada hotel. Primero se aisla el modelo Image antes de consultar.
 		/*for($i=0; $i < count($this->request->data); $i++){
@@ -28,9 +32,21 @@ class HotelsController extends AppController
 		}*/
 		
 		//Se consultan los Regions Y Locations.
-		//$this->set('regions', $this->Hotel->Product->Location->Region->find('all'));  
+	
 		
-		/*$this->set('hotels', $this->request->data);*/
+		//$this->set('hotels', $this->request->data);
+                
+                $this->Hotel->recursive = 1;
+                $this->Hotel->unbindModel(array(
+				'hasMany' => array('Room','Season','Review')
+				)
+			);
+                $conditions=array();
+                if($idlocation>0){
+                    $conditions['Product.location_id']=$idlocation;
+                }          
+		$this->set('hotels', $this->paginate($conditions));
+                $this->set('idlocation', $idlocation);
 	}
 	
 	/*
@@ -259,14 +275,10 @@ class HotelsController extends AppController
 
 	function admin_index()
 	{
-		$this->layout = 'admin';
-		$this->helpers[] = 'Javascript';
-		
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$this->set('regions', $this->Hotel->Product->Location->Region->findAll());  
-		}
-		else { $this->redirect('/Hotels'); }
+            $this->layout = 'admin';
+		$this->Hotel->recursive = 0;
+                $this->paginate=array('limit'=>25);
+		$this->set('hotels', $this->paginate());
 	}
 	
 	/*
@@ -390,13 +402,22 @@ class HotelsController extends AppController
 	*/
 	function admin_delete($id) 
 	{
-		$this->layout = 'admin';
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$this->Hotel->Product->delete($id);
-			$this->Session->setFlash('The Hotel with id: '.$id.' has been deleted.');
-			$this->redirect(array('action'=>'index'));
-		}else { $this->redirect('/Hotels'); }
+		//$this->layout = 'admin';                
+                
+                if (!$this->request->is('post')) {
+			throw new MethodNotAllowedException();
+		}
+		$this->Hotel->id = $id;
+		if (!$this->Hotel->exists()) {
+			throw new NotFoundException(__('Invalid hotel'));
+		}
+		if ($this->Hotel->delete()) {
+                        $this->Hotel->Product->delete($id);
+			$this->Session->setFlash(__('The Hotel with id: '.$id.' has been deleted.'));
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->Session->setFlash(__('Hotel was not deleted'));
+		$this->redirect(array('action' => 'index'));
  	}
 
 	function admin_edit($id = null, $idAction=null)    

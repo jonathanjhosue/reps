@@ -4,6 +4,7 @@ class Hotel extends AppModel
 {  
 	var $scaffold = 'admin';
         
+
         var $primaryKey='product_id';
 	
 	var $name = 'Hotel';
@@ -22,8 +23,7 @@ class Hotel extends AppModel
                                                                 TiposGlobal::I18N_TYPE_HOTEL_ROOMNOTES,
                                                                 TiposGlobal::I18N_TYPE_PRODUCT_DESCRIPTION,
                                                                 TiposGlobal::I18N_TYPE_PRODUCT_DIRECTION
-                                                          )
-                                                   
+                                                          )                                                   
                                               )
                                    )   ,     			
 			'Review' => array('foreignKey'=>'product_id','order'=> array('Review.staff'=>'DESC','Review.review_date'=>'DESC'))	
@@ -32,10 +32,10 @@ class Hotel extends AppModel
         
         
          public $validate = array(
-                                'infant_age_max' =>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.'),
-                                'infant_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.'),
-                                'child_age_max'=>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.'),
-                                'child_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the number of rooms.')             
+                                'infant_age_max' =>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
+                                'infant_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
+                                'child_age_max'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
+                                'child_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true)             
                             );
         
          function setLocale($locale){
@@ -44,10 +44,6 @@ class Hotel extends AppModel
         }
         
 	//var $displayField = 'Product.product_name';  
-        
-      
-        
-    
         
 }  
 ?>

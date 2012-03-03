@@ -78,5 +78,18 @@ class LocationsController extends AppController
 			}
 		}
 	}*/
+        
+        function view($id=null)
+	{
+            //$location = $this->Location->read();
+            
+            $this->Location->id = $id;
+	    $location = $this->Location->read();
+            if (isset($this->params['requested'])) {
+                return $location;
+            } else {
+                $this->set(compact('$location'));
+            }
+	}
 } 
 ?>

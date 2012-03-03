@@ -3,7 +3,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('PanamaReps: Content Management System Home:'); ?>
+		<?php __('Content Management System Home:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -15,24 +15,30 @@
         echo $this->Html->css('smoothness/jquery-ui.css');
 	echo $this->Html->script('jquery.js');
         echo $this->Html->script('jquery-ui.js');
-
+  echo $this->Html->script('view.js');
 		echo $scripts_for_layout;
-                
+         
+         echo $this->Html->css('menu/pro_dropdown_2.css');
+        echo $this->Html->script('menu/stuHover.js');
 
 	?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-			<h1 style="float:left;"><?php echo $this->Html->link(__('PanamaReps: Content Management System', true), '../'); ?></h1>
-			<div style="float:right;">
-				<?php echo $this->Html->link($this->Html->image('_log_out.png', array('alt' => 'Login', 'width'=>'15%')), array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?>
+			<h1><?php echo $this->Html->link(__('Content Management System', true), '../'); ?></h1>
+			<div >
+				<?php echo $this->Html->link($this->Html->image('_log_out.png', array('alt' => 'Login', 'width'=>'20px')), array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?>
 				&nbsp;&nbsp;
-				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Espa�ol', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
+				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Espa�ol', 'width'=>'20px')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
 				&nbsp;&nbsp;
-				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'15%')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>										
+				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'20px')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>										
 			</div>
 		</div>
+            
+            <?php echo $this->element('menu',array('cache' => array('time' => '+4 day'))); ?>
+            
+            <div id="content"> 
 		<div id="content"> <!-- este es el pagecell1 del template-->
                  <?php echo $this->Session->flash('flash', array('element' => 'message')); ?>   
                  <?php echo $this->Session->flash('error', array('element' => 'error')); ?>       
@@ -45,8 +51,8 @@
 			</div>
 		</div>
 	</div>
-	<?php pr( $this->element('sql_dump')); ?>
-    <?php pr( $this->data); ?>
+	<?php //pr( $this->element('sql_dump')); ?>
+    <?php //pr( $this->data); ?>
     
 </body>
 </html>

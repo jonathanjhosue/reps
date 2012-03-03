@@ -15,7 +15,7 @@ body{
     padding: 0px;
 }
 
-#container{
+body{
     margin: 0px;
     padding: 0px;
     background:  fixed no-repeat url(images/background.jpg) #DCE5EA  ;
@@ -175,3 +175,141 @@ quotes: "« " " »" "'" "'";
      text-align: center;
 }
 
+#login{
+    width: 350px;
+       margin: 100px auto;
+        background-color: #111;
+-moz-box-shadow: 0px 0px 6px 4px  #999;
+-webkit-box-shadow: 0px 0px 6px 4px  #999;
+box-shadow: 0px 0px 6px 4px  #999;
+border-radius: 7px;
+  
+}
+#authMessage{
+    padding: 10px;
+    color: red;
+}
+
+#login form {
+   background-color:white;
+    border:solid 1px #aaa;
+    border-radius: 7px;
+    padding: 10px;
+    
+}
+
+
+#login form .submit{
+    text-align: right;
+}
+
+#login form fieldset{
+    margin: 10px
+}
+
+#login form fieldset label{
+    display: inline-block;
+    width: 100px;
+    margin: 10px 5px;
+    font-weight: bolder;
+}
+
+
+
+#HotelIndex{
+    
+    margin: 10px 10px 10px 10px;
+   
+        -moz-box-shadow: 0px 0px 6px 4px #999;
+-webkit-box-shadow: 0px 0px 6px 4px  #999;
+box-shadow: 0px 0px 6px 4px  #999;
+border-radius: 5px;
+padding: 15px 20px;
+background: rgba(255, 255, 255, 0.8);
+    
+}
+
+ul.listicons{
+    padding: 0px 30px;
+    text-align: center;
+}
+
+ul.listicons li.icon{
+    width: 200px;
+    height: 210px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    
+-moz-box-shadow: 0px 0px 6px 4px #999;
+-webkit-box-shadow: 0px 0px 6px 4px  #999;
+box-shadow: 0px 0px 6px 4px  #999;
+
+background: rgba(255, 255, 255, 0.9);
+border-radius: 5px;
+margin: 20px;
+border:solid 1px;
+}
+ul.listicons li.icon a{
+    width: 200px;
+    height: 210px;
+    display: block;
+}
+ul.listicons li.icon:hover a{
+    color: white;
+}
+
+ul.listicons li.icon:hover{
+
+    background: rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: 0px 0px 6px 4px #555;
+-webkit-box-shadow: 0px 0px 6px 4px  #555;
+box-shadow: 0px 0px 6px 4px  #555;
+color: white;    
+}
+
+ul.listicons li.icon img{
+  
+border-radius: 5px 5px 0px 0px;    
+    width: 200px;
+    height: 140px;
+    display: block;
+        
+}
+
+a,
+a:hover,
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.icon .icontitle{
+    display: block;
+      font-size:1.1em;
+      font-weight: bolder;
+    text-align: center;
+    text-shadow: #888 0px 2px 4px;
+    margin: 5px 0px;
+}
+
+.paging{
+    text-align: center;
+    margin: 0px auto;   
+}
+.paging span{
+     margin: 0px 5px;  
+}
+.paging span.current{
+    font-weight: bolder;
+}
+.paging span.prev,
+.paging span.next{
+     margin: 0px 20px;  
+}
+
+.admin_bar{
+    float: right;
+    text-align: right;
+    margin: auto 10px;
+}

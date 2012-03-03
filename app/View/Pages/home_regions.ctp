@@ -4,7 +4,7 @@
 	<h3>Introducci&oacute;n</h3>
 	<p>	
 		Bienvenido al cat&aacute;logo de productos de PanamaReps.<br/>
-		A trav&eacute;s del cat&aacute;logo que le ofrecemos usted podr&aacute; conocer todos los detalles relacionados a cada producto que Panama Reps pone a su disposici&oacute;n, en cada una de las regiones tur�sticas de �st hermoso pa�s.
+		A trav&eacute;s del cat&aacute;logo que le ofrecemos usted podr&aacute; conocer todos los detalles relacionados a cada producto que Panama Reps pone a su disposici&oacute;n, en cada una de las regiones turísticas de este hermoso país.
 	</p>
 	<br/>
 	<p><div class="home_images_div">

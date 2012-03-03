@@ -27,11 +27,13 @@ label.text{
      display: inline-block;
 }
 
-div.tinyname, div.name, div.select,div.text, div.number,div.checkbox,div.time{
+div.tinyname, div.name, div.select,div.text, 
+div.number,div.checkbox,div.time{
      display: inline-block;
     
 }
-div.tinyname input,div.text input,div.number,div.time{
+div.tinyname input,div.text input,
+div.number,div.time, div.password{
    
     width: 200px;
         
@@ -162,4 +164,74 @@ hr{
 #fieldsetImages .error-message{
     display:inline;
     
+}
+
+#nav ul li{
+    margin: 0px 0px;
+    
+}
+
+#nav ul li a{
+    background: none;
+}
+
+body{
+background: -moz-linear-gradient(left,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+background: linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+
+}
+
+#header h1{
+    background: none;
+    
+}
+
+#header h1 a,
+table a,
+#header h1 a:hover,
+table a:hover{
+        background: none;
+        text-decoration: none;
+}
+
+
+a,
+a:hover,
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+
+.paging{
+    text-align: center;
+    margin: 0px auto;   
+}
+.paging span{
+     margin: 0px 5px;  
+}
+.paging span.current{
+    font-weight: bolder;
+}
+.paging span.prev,
+.paging span.next{
+     margin: 0px 20px;  
+}
+
+h2{
+    margin: 0px 0px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+h1{
+    font-size:1.3em;
+    text-align: center;
+    text-shadow: #888 0px 2px 4px;
+    margin: 0px;
 }

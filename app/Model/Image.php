@@ -12,6 +12,7 @@ class Image extends AppModel
 				),
 				'thumbsizes' => array(
 					'90x45' => '90x45',
+                                        '200x140' => '200x140',
 					'800x400' => '800x400',
 				),
                             'deleteOnUpdate'=>true,

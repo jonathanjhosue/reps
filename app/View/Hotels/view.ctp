@@ -81,7 +81,12 @@
     <p>
     <label><?php echo __('Category')?>:</label><?php echo $hotel['HotelCategory']['category_name']; ?>&nbsp;&nbsp;&nbsp;  
     <label><?php echo __('Location')?>:</label><?php echo $hotel['Product']['Location']['location_name'].', '.$hotel['Product']['Location']['Region']['region_name']; ?>&nbsp;&nbsp;&nbsp;  
-    <label><?php echo __('Total Rooms')?>:</label><?php echo $hotel['Hotel']['total_rooms']; ?>&nbsp;&nbsp;&nbsp;  
+    <label><?php echo __('Total Rooms')?>:</label><?php echo $hotel['Hotel']['total_rooms']; ?>&nbsp;&nbsp;&nbsp; 
+    <span class="admin_bar">
+        <?php if ($this->Session->check('Auth.User.id')): 
+            echo $this->Html->link(__('Edit'), array('admin' => true, 'prefix' => 'admin','controller' => 'hotels', 'action' => 'edit',$hotel['Product']['id'])); 
+         endif; ?>
+    </span>
     </p>
 
     

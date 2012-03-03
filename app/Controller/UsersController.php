@@ -9,11 +9,13 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+     public $layout = 'admin';
 /**
  * Components
  *
  * @var array
  */
+    
    public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow( 'logout');
@@ -22,12 +24,18 @@ class UsersController extends AppController {
     public function admin_login() {
             $this->redirect($this->login());
         }
+    public function admin_logout() {
+            $this->redirect($this->logout());
+        }
         
         public function login() {
+            $this->layout = 'default';
             if ($this->Auth->login()) {
+                // $this->Session->setFlash("");
                 $this->redirect($this->Auth->redirect());
+               
             } else {
-                $this->Session->setFlash(__('Invalid username or password, try again'));
+                $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
             }
         }
 
@@ -35,7 +43,7 @@ class UsersController extends AppController {
             $this->redirect($this->Auth->logout());
         }
         
-        
+        /*
         public function add() {
             if ($this->request->is('post')) {
                 $this->User->create();
@@ -46,7 +54,7 @@ class UsersController extends AppController {
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
                 }
             }
-        }
+        }*/
 
         
         
