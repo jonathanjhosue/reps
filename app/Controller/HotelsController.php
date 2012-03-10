@@ -9,7 +9,7 @@ class HotelsController extends AppController
     public $helpers = array('Html', 'Form');
 
    public $paginate = array(
-        'limit' => 12          
+        'limit' => 13          
     );
    
         
