@@ -1,12 +1,15 @@
 <div id="HotelIndex" class="hotels index">
     <h1><?php echo __('Hotels in ');?>    <?php echo $this->element('location_name',  array('idlocation'=>$idlocation)); ?></h1>
    <p> 
-       &nbsp;&nbsp;<span class="admin_bar">
+       &nbsp;&nbsp;      
+       <span class="admin_bar">
         <?php if ($this->Session->check('Auth.User.id')): 
             echo $this->Html->link(__('Edit'), array('admin' => true, 'prefix' => 'admin','controller' => 'hotels', 'action' => 'index',$idlocation)); 
          endif; ?>
     </span>
-   </p>
+   </p>  
+   <?php echo $this->element('search_hotel') ?>
+ 
         <ul class="listicons">
 	<?php foreach ($hotels as $hotel): ?>
             <li class="icon">

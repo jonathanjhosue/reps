@@ -35,5 +35,15 @@ class HotelCategoriesController extends AppController
 		if ($this->Session->read('Auth.User.rol') == 'admin')
 		{
 	*/
+        
+        function index()
+	{
+            $hotelcategories = $this->paginate();
+            if (isset($this->params['requested'])) {
+                return $hotelcategories;
+            } else {
+                $this->set(compact('$hotelcategories'));
+            }
+        }
 } 
 ?>

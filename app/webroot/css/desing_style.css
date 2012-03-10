@@ -313,3 +313,7 @@ a:visited{
     text-align: right;
     margin: auto 10px;
 }
+
+#FormSearch .active{
+      text-shadow: #800 0px 2px 2px;
+}

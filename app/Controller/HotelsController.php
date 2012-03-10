@@ -1,6 +1,6 @@
 <?php
 
-App::import('Model', 'TiposGlobal'); 
+App::uses('Sanitize', 'Utility');
 App::uses('AppController', 'Controller');
 
 class HotelsController extends AppController
@@ -11,6 +11,7 @@ class HotelsController extends AppController
    public $paginate = array(
         'limit' => 12          
     );
+   
         
 
     public function index($idlocation=null) {
@@ -44,7 +45,32 @@ class HotelsController extends AppController
                 $conditions=array();
                 if($idlocation>0){
                     $conditions['Product.location_id']=$idlocation;
-                }          
+                }    
+                
+                if (isset($this->passedArgs['category'])) {                  
+                        
+                        $input = $this->passedArgs['category'];
+                       
+                        $input = Sanitize::escape($input);
+
+                        $conditions['HotelCategory.id']=$input;
+                       
+                } 
+                if(!empty($this->data)) {
+                    Sanitize::clean($this->data);
+                    $searchkey = $this->Session->read('Search.value');
+
+                    if(empty($searchkey)) {
+                            $this->Session->write('Search.value', $this->data['Search']['value']);
+                    }
+                    if($this->data['Search']['value'] != $this->Session->read('Search.value')) {
+                            $this->Session->delete('Search.value');
+                            $this->Session->write('Search.value', $this->data['Search']['value']);
+                    }
+                }
+                $conditions["concat(Product.product_name,HotelCategory.category_name) LIKE "]= "%{$this->Session->read('Search.value')}%";
+                
+                
 		$this->set('hotels', $this->paginate($conditions));
                 $this->set('idlocation', $idlocation);
 	}

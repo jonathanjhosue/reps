@@ -17,7 +17,7 @@ class Image extends AppModel
 				),
                             'deleteOnUpdate'=>true,
 				/*'thumbnailMethod'	=> 'php',*/
-                            'maxSize'=>697152,
+                            'maxSize'=>2597152,
                             'path'=>'{ROOT}webroot{DS}img{DS}{model}{DS}'
 			)
 		)
@@ -31,7 +31,7 @@ class Image extends AppModel
                                                                             'rule' => array('isWritable', false),
                                                                             'message' => 'File upload directory was not writable'
                                                                             ),
-                                                  'isBelowMaxSize'=> array('rule' => array('isBelowMaxSize', 697152, false),
+                                                  'isBelowMaxSize'=> array('rule' => array('isBelowMaxSize', 2697152, false),
                                                                        'message' => 'File is larger than the maximum filesize'
                                                                       )  
                                     )
