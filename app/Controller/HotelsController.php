@@ -33,7 +33,6 @@ class HotelsController extends AppController
 		}*/
 		
 		//Se consultan los Regions Y Locations.
-	
 		
 		//$this->set('hotels', $this->request->data);
                 
@@ -67,6 +66,7 @@ class HotelsController extends AppController
                             $this->Session->delete('Search.value');
                             $this->Session->write('Search.value', $this->data['Search']['value']);
                     }
+                    
                 }
                 $conditions["concat(Product.product_name,HotelCategory.category_name) LIKE "]= "%{$this->Session->read('Search.value')}%";
                 

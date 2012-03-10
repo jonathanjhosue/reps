@@ -5,7 +5,7 @@ class Room extends AppModel
 	var $name = 'Room';
 	var $belongsTo = 'Hotel';
 	var $hasMany = array(
-			'RoomRate' => array('className' => 'RoomRate'),
+			'RoomRate' => array('className' => 'Rate', 'foreignKey'=>'owner_id'),
                         'I18nKey'=>array(
                                             'foreignKey'=>'owner_id',
                                             'conditions'=>array('I18nKey.type'=>array(
