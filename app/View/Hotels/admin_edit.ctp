@@ -322,7 +322,7 @@
                   foreach($this->data['Season'] as $x=>$season){
                         echo '<tr><td>'.
                                $this->Form->input("Season.$x.id",array('type'=>'hidden')).
-                               $this->Form->input("Season.$x.hotel_id",array('type'=>'hidden'));
+                               $this->Form->input("Season.$x.product_id",array('type'=>'hidden'));
                                '</td>';     
                         echo '<td>'.$this->Form->input("Season.$x.name",array('label'=>false,'div'=>false)).'</td>';    
                         echo '<td>'.$this->Form->input("Season.$x.date_start",array('type'=>'date','label'=>false,'div'=>false)).'</td>';              
@@ -342,7 +342,7 @@
                                 $c+=$n;
                                 echo '<tr><td>'.
                                 $this->Form->input("Season.$x.SeasonException.$n.id",array('type'=>'hidden', 'value'=>$exepcion['id']) ).
-                                $this->Form->input("Season.$x.SeasonException.$n.hotel_id",array('type'=>'hidden', 'value'=>$exepcion['hotel_id'])).
+                                $this->Form->input("Season.$x.SeasonException.$n.product_id",array('type'=>'hidden', 'value'=>$exepcion['product_id'])).
                                 $this->Form->input("Season.$x.SeasonException.$n.parent_id",array('type'=>'hidden', 'value'=>$exepcion['parent_id']));
                                 '</td>';  
                                 echo '<td>Exc&rarr;'.$this->Form->input("Season.$x.SeasonException.$n.name",array('label'=>false,'div'=>false, 'value'=>$exepcion['name'])).'</td>';    
@@ -395,13 +395,18 @@
         ?>
          
          <div id="divRoomRates">           
-             <?php $y=0; foreach($this->data['Room'] as $i=>$room): 
+             <?php 
+             if(isset($this->data['Product']['Rate'])){
+                $roomRates=$this->data['Product']['Rate'];
+                $roomRates=Set::combine($roomRates, array('{0}:{1}', '{n}.season_id', '{n}.type_id'), '{n}');
+                $x= count($roomRates); 
+                foreach($this->data['Room'] as $i=>$room): 
                   $titulo=($room['category']!="")?$room['category']:__('Room ').($i+1);
                     echo '<h3><a href="#">'.$titulo.'</a></h3>';
                
-              ?>
-                <div>
-                            <table class="RoomRate ui-widget">
+             ?>
+                    <div>
+                      <table class="Rate ui-widget">
                             <thead class="ui-widget-header">
                                 <tr>
                                     <th><?php echo __('Season') ?></th>
@@ -417,12 +422,9 @@
                             </tr>
                         </thead>
                         <tbody class="ui-widget-content">   
-                       <?php
-if(isset($room['RoomRate'])){
-                           $roomRates=$room['RoomRate'];
-                           $roomRates=Set::combine($roomRates, array('{0}:{1}', '{n}.season_id', '{n}.room_id'), '{n}');
-                           echo $this->Form->input("Room.$i.id",array('type'=>'hidden'));
-                       $x= count($room['RoomRate']); 
+                       <?php                         
+                        //   echo $this->Form->input("Room.$i.id",array('type'=>'hidden'));
+                       //$x= count($room['RoomRate']); 
                        //$x=$c;
                        foreach($this->data['Season'] as $season): 
                           $roomRate=array('id'=>'','single'=>'','double'=>'','triple'=>'','quadruple'=>'','child'=>'','infant'=>'');
@@ -440,16 +442,17 @@ if(isset($room['RoomRate'])){
                             '<td>'.$this->RipsWeb->getStringFromDate($season['date_end']).'</td>';
                                 
 
-                                echo '<td>'.$this->Form->input("Room.$i.RoomRate.$x.id",array('type'=>'hidden','value'=>$roomRate['id']))
-                                            .$this->Form->input("Room.$i.RoomRate.$x.season_id",array('type'=>'hidden','value'=>$season['id'])).
-                                            $this->Form->input("Room.$i.RoomRate.$x.room_id",array('type'=>'hidden','value'=>$room['id']));
+                                echo '<td>'.$this->Form->input("Product.Rate.$x.id",array('type'=>'hidden','value'=>$roomRate['id']))
+                                            .$this->Form->input("Product.Rate.$x.season_id",array('type'=>'hidden','value'=>$season['id']))
+                                        .$this->Form->input("Product.Rate.$x.product_id",array('type'=>'hidden','value'=>$season['product_id']))  
+                                            .$this->Form->input("Product.Rate.$x.type_id",array('type'=>'hidden','value'=>$room['id']));
 
-                                echo       $this->Form->text("Room.$i.RoomRate.$x.single",array('class'=>'rateNumber','value'=>$roomRate['single'])).'</td>'.
-                                    '<td>'.$this->Form->text("Room.$i.RoomRate.$x.double",array('class'=>'rateNumber','value'=>$roomRate['double'])).'</td>'.
-                                    '<td>'.$this->Form->text("Room.$i.RoomRate.$x.triple",array('class'=>'rateNumber','value'=>$roomRate['triple'])).'</td>'.
-                                    '<td>'.$this->Form->text("Room.$i.RoomRate.$x.quadruple",array('class'=>'rateNumber','value'=>$roomRate['quadruple'])).'</td>'.
-                                    '<td>'.$this->Form->text("Room.$i.RoomRate.$x.child",array('class'=>'rateNumber','value'=>$roomRate['child'])).'</td>'.
-                                    '<td>'.$this->Form->text("Room.$i.RoomRate.$x.infant",array('class'=>'rateNumber','value'=>$roomRate['infant'])).'</td>';
+                                echo       $this->Form->text("Product.Rate.$x.single",array('class'=>'rateNumber','value'=>$roomRate['single'])).'</td>'.
+                                    '<td>'.$this->Form->text("Product.Rate.$x.double",array('class'=>'rateNumber','value'=>$roomRate['double'])).'</td>'.
+                                    '<td>'.$this->Form->text("Product.Rate.$x.triple",array('class'=>'rateNumber','value'=>$roomRate['triple'])).'</td>'.
+                                    '<td>'.$this->Form->text("Product.Rate.$x.quadruple",array('class'=>'rateNumber','value'=>$roomRate['quadruple'])).'</td>'.
+                                    '<td>'.$this->Form->text("Product.Rate.$x.child",array('class'=>'rateNumber','value'=>$roomRate['child'])).'</td>'.
+                                    '<td>'.$this->Form->text("Product.Rate.$x.infant",array('class'=>'rateNumber','value'=>$roomRate['infant'])).'</td>';
                                 echo '<td>';
                                /* if(isset($roomRates[$season['id'].':'.$room['id']])){
                                     echo $this->Form->input($prefijo.'.id',array('type'=>'hidden','name'=>"data[Action][DeleteRoomRate]"));
@@ -473,16 +476,17 @@ if(isset($room['RoomRate'])){
                                     '<td>'.$this->RipsWeb->getStringFromDate($exception['date_end']).'</td>';
 
 
-                                        echo '<td>'.$this->Form->input("Room.$i.RoomRate.$x.id",array('type'=>'hidden','value'=>$roomRate['id']))
-                                                    .$this->Form->input("Room.$i.RoomRate.$x.season_id",array('type'=>'hidden','value'=>$exception['id'])).
-                                                    $this->Form->input("Room.$i.RoomRate.$x.room_id",array('type'=>'hidden','value'=>$room['id']));
+                                        echo '<td>'.$this->Form->input("Product.Rate.$x.id",array('type'=>'hidden','value'=>$roomRate['id']))
+                                                    .$this->Form->input("Product.Rate.$x.season_id",array('type'=>'hidden','value'=>$exception['id']))
+                                                .$this->Form->input("Product.Rate.$x.product_id",array('type'=>'hidden','value'=>$exception['product_id']))    
+                                                .$this->Form->input("Product.Rate.$x.type_id",array('type'=>'hidden','value'=>$room['id']));
 
-                                        echo       $this->Form->text("Room.$i.RoomRate.$x.single",array('class'=>'rateNumber','value'=>$roomRate['single'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.double",array('class'=>'rateNumber','value'=>$roomRate['double'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.triple",array('class'=>'rateNumber','value'=>$roomRate['triple'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.quadruple",array('class'=>'rateNumber','value'=>$roomRate['quadruple'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.child",array('class'=>'rateNumber','value'=>$roomRate['child'])).'</td>'.
-                                            '<td>'.$this->Form->text("Room.$i.RoomRate.$x.infant",array('class'=>'rateNumber','value'=>$roomRate['infant'])).'</td>';
+                                        echo       $this->Form->text("Product.Rate.$x.single",array('class'=>'rateNumber','value'=>$roomRate['single'])).'</td>'.
+                                            '<td>'.$this->Form->text("Product.Rate.$x.double",array('class'=>'rateNumber','value'=>$roomRate['double'])).'</td>'.
+                                            '<td>'.$this->Form->text("Product.Rate.$x.triple",array('class'=>'rateNumber','value'=>$roomRate['triple'])).'</td>'.
+                                            '<td>'.$this->Form->text("Product.Rate.$x.quadruple",array('class'=>'rateNumber','value'=>$roomRate['quadruple'])).'</td>'.
+                                            '<td>'.$this->Form->text("Product.Rate.$x.child",array('class'=>'rateNumber','value'=>$roomRate['child'])).'</td>'.
+                                            '<td>'.$this->Form->text("Product.Rate.$x.infant",array('class'=>'rateNumber','value'=>$roomRate['infant'])).'</td>';
                                         echo '<td>';
                                     /* if(isset($roomRates[$season['id'].':'.$room['id']])){
                                             echo $this->Form->input($prefijo.'.id',array('type'=>'hidden','name'=>"data[Action][DeleteRoomRate]"));
@@ -492,10 +496,9 @@ if(isset($room['RoomRate'])){
                                     
                                 endforeach;
                              $x++;
-                            
-                            $y++;
+                         
                         endforeach;
-}                       
+                      
                         ?>
                        
                         </tbody>
@@ -505,9 +508,9 @@ if(isset($room['RoomRate'])){
                      
                     ?>
                 </div>
-                <?php 
-                $y=0;
+                <?php                
                  endforeach;
+             }
                 ?>
           </div>
              

@@ -1,9 +1,9 @@
 <?php
-class RoomRate extends AppModel  
+class Rate extends AppModel  
 {  
-	var $name = 'RoomRate';
+	var $name = 'Rate';
         
-	var $belongsTo = array('Room','Season');
+	var $belongsTo = array('Product','Season');
         
         var $primaryKey='id';//array('season_id','room_id');
         

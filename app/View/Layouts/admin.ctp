@@ -51,8 +51,8 @@
 			</div>
 		</div>
 	</div>
-	<?php //pr( $this->element('sql_dump')); ?>
-    <?php //pr( $this->data); ?>
+	<?php pr( $this->element('sql_dump')); ?>
+    <?php pr( $this->data); ?>
     
 </body>
 </html>

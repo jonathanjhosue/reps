@@ -18,19 +18,8 @@ class HotelsController extends AppController
 
 		
 		$this->helpers[] = 'Js';
+                $language='en';
 		
-		//Consulta todos las instancias de Hotel. Se aisla de Room xq no se necesita mostrar ese modelo.
-	/*	$this->Hotel->unbindModel(array(
-				'hasMany' => array('Room','Season','Image','Review')
-				)
-			);
-		$this->request->data = $this->Hotel->find('all');*/
-		
-		//Consulta la primer imaegn de cada hotel. Primero se aisla el modelo Image antes de consultar.
-		/*for($i=0; $i < count($this->request->data); $i++){
-			$this->Hotel->Product->Image->unbindModel(array('belongsTo'=>array('Product')));
-			$this->request->data[$i]['Product']['image'] = $this->Hotel->Product->Image->find('first', array('conditions' => array( 'Image.product_id'=>$this->request->data[$i]['Product']['id'])));
-		}*/
 		
 		//Se consultan los Regions Y Locations.
 		
@@ -69,7 +58,8 @@ class HotelsController extends AppController
                     
                 }
                 $conditions["concat(Product.product_name,HotelCategory.category_name) LIKE "]= "%{$this->Session->read('Search.value')}%";
-                
+                $this->Hotel->setLocale($language);
+                //$this->Hotel->Product->setLocale($language);
                 
 		$this->set('hotels', $this->paginate($conditions));
                 $this->set('idlocation', $idlocation);
@@ -142,14 +132,15 @@ class HotelsController extends AppController
                 $this->Hotel->Room->setLocale($language);
                 $this->Hotel->Product->StaffReview->setLocale($language);
                 $this->Hotel->Product->TravellerReview->setLocale($language);
-                 
+                $this->Hotel->Product->Rate->unbindModel(array('belongsTo'=>array('Product')));
                 $this->Hotel->unbindModel(array('hasMany' => array('Season','Review')));
-                $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('Activities','I18nKey'))); 
+                $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('Activities','I18nKey','Rate'))); 
                 //$this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'belongsTo'=>array('Location')));
                 $this->Hotel->Product->StaffReview->unbindModel(array('belongsTo'=>array('Product')));
                 $this->Hotel->Product->TravellerReview->unbindModel(array('belongsTo'=>array('Product')));
                 $this->Hotel->Season->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Hotel'))); 
                 $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'))); 
+                $this->Hotel->Room->bindModel(array('hasMany'=>array('RoomRate'=>array('className'=>'Rate','foreignKey'=>'type_id','conditions'=>array('product_id'=>$id))))); 
                 $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Room'))); 
       
                 $this->Hotel->recursive = 3;               
@@ -465,10 +456,11 @@ class HotelsController extends AppController
 		} else{                      
                         $this->Hotel->Product->unbindModel(array('hasOne' => array('Hotel'),'hasMany' => array('I18nKey','Activities','TravellerReview','StaffReview'))); 
                         //$this->Hotel->Product->unbindModel(array('hasMany' => array('Hotel'),'belongsTo'=>array('Location')));
+                          $this->Hotel->Product->Rate->unbindModel(array('belongsTo'=>array('Product','Season')));
                         $this->Hotel->Review->unbindModel(array('belongsTo'=>array('Product')));                        
                         $this->Hotel->Season->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Hotel','Parent'))); 
                         $this->Hotel->Room->unbindModel(array('belongsTo'=>array('Hotel'))); 
-                        $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Room','Season'))); 
+                        //$this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Room','Season'))); 
                         $this->Hotel->Season->SeasonException->unbindModel(array('hasMany' => array('RoomRate'),'belongsTo'=>array('Parent','Hotel'))); 
                     
                         $this->Hotel->recursive = 3; 
@@ -678,17 +670,10 @@ class HotelsController extends AppController
                      }
                        
               }elseif(isset($this->request->data['Action']['Save']['Roomrates'])){
-                    if(isset($this->request->data['Room'])){
-                        foreach($this->request->data['Room'] as $h=>$roomData){
-
-                            $this->Hotel->Room->RoomRate->unbindModel(array('belongsTo'=>array('Season','Room')));                                
-                            $this->Hotel->Room->RoomRate->saveMany($roomData['RoomRate']); 
-                            if(!empty($this->Hotel->Room->RoomRate->validationErrors))
-                                $errores[$h]==$this->Hotel->Room->RoomRate->validationErrors;
-                        }
-                    
-                        if(!empty($errores)){                               
-                            $this->Hotel->Room->RoomRate->validationErrors=$errores;
+                 
+                    if(isset($this->request->data['Product']['Rate'])){                                                
+                        
+                        if(!$this->Hotel->Product->Rate->saveMany($this->request->data['Product']['Rate'])){
                             $this->Session->setFlash(__('Roomrates could not be saved. Please, try again.'));
                         }
                         else{

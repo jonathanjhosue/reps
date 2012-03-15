@@ -2,13 +2,13 @@
 class Season extends AppModel
 {
 	var $name = 'Season';
-	var $belongsTo = array('Hotel',
+	var $belongsTo = array('Product',
                                'Parent' => array(
                                     'className' => 'Season',
                                     'foreignKey' => 'parent_id'
                                 )
                             );
-        var $hasMany = array('RoomRate',
+        var $hasMany = array('Rate',
                               'SeasonException' => array(
                                     'className' => 'Season',
                                     'foreignKey' => 'parent_id'

@@ -52,7 +52,10 @@
 		echo $this->Form->label('Product.gpslatitude',__('GPS Coordenates'),'text');
                 echo $this->Form->input('Product.gpslatitude',array('label'=>__('Latitude'),'div'=>'tinyname'));
 		echo $this->Form->input('Product.gpslongitude',array('label'=>__('Longitude'),'div'=>'tinyname'));           
-                echo "<hr/>";
+                  
+                echo $this->Form->input('Product.map',array('label'=>__('Map URL'))); 
+                
+                 echo "<hr/>";
                 
                 echo $this->RipsWeb->getInputI18nAll($indexI18n,
                                         array(),
@@ -63,6 +66,7 @@
                  $this->Form->input('child_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));                                
             echo $this->Form->input('infant_age_min',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber')).                 
                 $this->Form->input('infant_age_max',array('size'=>'3','maxlength'=>'2','class'=>'rateNumber'));
+            
         ?>
        
     </div>

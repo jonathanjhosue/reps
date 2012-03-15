@@ -44,22 +44,22 @@ div.checkbox{
 input.rateNumber{
     width: 30px;
 }
-table.RoomRate input.rateNumber{
+table.Rate input.rateNumber{
     width: 40px;
     font-size: 12px;
 }
 
-table.RoomRate thead th input.rateNumber{
+table.Rate thead th input.rateNumber{
     width: 25px;
     font-size: 12px;
 }
 
-table.RoomRate, table.RoomRate select{
+table.Rate, table.Rate select{
  
     font-size: 12px;
 }
 
-table.RoomRate .submit, table.RoomRate .submit input{
+table.Rate .submit, table.Rate .submit input{
  
    margin: 0px;
    padding: 0px;

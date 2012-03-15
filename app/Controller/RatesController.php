@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
  *
  * @property RoomRate $RoomRate
  */
-class RoomRatesController extends AppController {
+class RatesController extends AppController {
 
 
 /**

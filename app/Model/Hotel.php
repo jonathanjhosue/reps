@@ -2,7 +2,7 @@
 App::import('Model','TiposGlobal');
 class Hotel extends AppModel  
 {  
-	var $scaffold = 'admin';
+	//var $scaffold = 'admin';
         
 
         var $primaryKey='product_id';
@@ -15,7 +15,7 @@ class Hotel extends AppModel
 	var $hasMany = array(
                         'Room',
                         'Image'=>array('foreignKey'=>'owner_id','conditions'=>array('Image.owner_type'=>TiposGlobal::PRODUCT_TYPE_HOTEL)),
-                        'Season'=>array('conditions'=>array('Season.parent_id'=>null)),
+                        'Season'=>array('foreignKey'=>'product_id','conditions'=>array('Season.parent_id'=>null)),
                         'I18nKey'=>array(
                                 'foreignKey'=>'owner_id',
                                 'conditions'=>array('I18nKey.type'=>array(
@@ -35,7 +35,7 @@ class Hotel extends AppModel
                                 'infant_age_max' =>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
                                 'infant_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
                                 'child_age_max'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
-                                'child_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true)             
+                                'child_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true)                                 
                             );
         
          function setLocale($locale){

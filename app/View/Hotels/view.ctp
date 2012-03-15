@@ -282,4 +282,4 @@
 </div>
 <pre><?php //print_r($deb); ?></pre>
 
-  <pre><?php //print_r($hotel); ?></pre>
+  <pre><?php print_r($hotel); ?></pre>

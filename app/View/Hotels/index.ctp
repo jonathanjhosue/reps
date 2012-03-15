@@ -1,4 +1,4 @@
-<div id="HotelIndex" class="hotels index">
+<div id="viewIndex" class="hotels index">
     <h1><?php echo __('Hotels in ');?>    <?php echo $this->element('location_name',  array('idlocation'=>$idlocation)); ?></h1>
    <p> 
        &nbsp;&nbsp;      
@@ -48,4 +48,4 @@
 	</div>
 </div>
 
-  <?php //pr( $hotels); ?>
+  <?php pr( $hotels); ?>
