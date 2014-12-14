@@ -2,82 +2,134 @@
 class LocationsController extends AppController
 {
 	var $name = 'Locations';
+        var $layout='admin';
 	var $scaffold;
 	
 	/*============BEGINS ADMIN METHODS===================*/
 	
-	/*
-	 * Descripcion: Registrar un nuevo Location. Las variables de sesi�n 'regionId' y podr�an contener
-	 * el identificador de Region al cuel pertenece el Location.
-	*/
-        /*
-	function admin_add()
-	{	
-		$this->layout = 'admin';
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$regionId = $this->Session->read('regionId');
-			$regionName = $this->Session->read('regionName');
-			$controller = 'Regions';
-						
-			if (!empty($this->data))
-			{
-				if ($this->Location->save($this->data))
-				{
-					$this->Session->setFlash('Location Saved!!');
-					$this->redirect(array('controller'=>$controller, 'action'=>'view', 'id'=>$regionId));	
-				}
-			}
-			else{				
-				$this->set('regionId', $regionId);				
-				$this->set('regionName', $regionName);
-				$this->set('controller', $controller);
-			}
-		}
-		else { $this->redirect('/'); }
+            function index()
+	{
+            $locations = $this->paginate();
+            if (isset($this->params['requested'])) {
+            return $locations;
+            } else {
+            $this->set(compact('$locations'));
+            }
+
+			//$this->Location->unbindModel(array('hasMany'=>array('Location')));
+			//$this->set('locations', $this->Location->find('all'));
+
 	}
 	
-	function admin_delete($id)
-	{
-		$this->layout = 'admin';
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$controller = 'Regions';
-			$regionId = $this->Session->read('regionId');
-			
-			$this->Location->delete($id);
-			$this->Session->setFlash('The Location with id: '.$id.' has been deleted.');
-			$this->redirect(array('controller'=>$controller, 'action'=>'view', 'id'=>$regionId));		
-		}
-		else { $this->redirect('/'); }	
+        public function admin_index() {
+		$this->Location->recursive = 0;
+                $this->set('locations', $this->paginate());
 	}
 
-	function admin_edit($id = null)
-	{
-		$this->layout = 'admin';
+    
+/**
+ * admin_view method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_view($id = null) {
 		$this->Location->id = $id;
-
-		$regionId = $this->Session->read('regionId');
-		$regionName = $this->Session->read('regionName');
-		$controller = 'Regions';
-
-		if (empty($this->data))
-		{
-			$this->Location->unbindModel(array('belongsTo'=>array('Region')));
-			$this->data = $this->Location->read();
-			$this->set('regionName', $regionName);
-			$this->set('controller', $controller);
-			$this->set('regionId', $regionId);
-			
+		if (!$this->Location->exists()) {
+			throw new NotFoundException(__('Invalid Location'));
 		}
-		else{
-			if ($this->Location->save($this->data))
-			{
-				$this->Session->setFlash('Location Saved!!');
-				$this->redirect(array('controller'=>$controller, 'action'=>'view', 'id'=>$regionId));	
+		$this->set('location', $this->Location->read(null, $id));
+	}
+
+/**
+ * admin_add method
+ *
+ * @return void
+ */
+	public function admin_add() {
+            
+		if ($this->request->is('post')) {
+			$this->Location->create();
+			$idRegion=$this->request->data['Location']['region_id'];			
+			$this->Location->Region->recursive=0;
+			$region=$this->Location->Region->read(null,$idRegion);	
+			$this->request->data['Location']['country']=$region['Region']['country'];
+			if ($this->Location->save($this->request->data)) {
+				$this->Session->setFlash(__('The Location has been saved'));
+                                $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The Location could not be saved. Please, try again.'));
 			}
 		}
-	}*/
+                $regions = $this->Location->Region->find('list');
+		$this->set(compact('regions'));
+	}
+
+/**
+ * admin_edit method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_edit($id = null) {
+		$this->Location->id = $id;
+		if (!$this->Location->exists()) {
+			throw new NotFoundException(__('Invalid Location'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$idRegion=$this->request->data['Location']['region_id'];
+			//$this->Location->Region->id=$idRegion;
+			$this->Location->Region->recursive=0;
+			$region=$this->Location->Region->read(null,$idRegion);
+			//pr($region);
+			//throw new NotFoundException(__('Invalid Location')+$idRegion['Region']['country']);
+			$this->request->data['Location']['country']=$region['Region']['country'];
+			if ($this->Location->save($this->request->data)) {
+				$this->Session->setFlash(__('The Location has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The Location could not be saved. Please, try again.'));
+			}
+		} else {
+			$this->request->data = $this->Location->read(null, $id);
+		}
+                   $regions = $this->Location->Region->find('list');
+		$this->set(compact('regions'));
+	}
+
+/**
+ * admin_delete method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_delete($id = null) {
+		if (!$this->request->is('post')) {
+			throw new MethodNotAllowedException();
+		}
+		$this->Location->id = $id;
+		if (!$this->Location->exists()) {
+			throw new NotFoundException(__('Invalid Location'));
+		}
+                $c=$this->Location->Product->find('count',array("conditions"=>array("location_id"=>$id)));
+               
+                if (0==$c) {
+                    if ($this->Location->delete()) {
+                            $this->Session->setFlash(__('Location deleted'));
+                            $this->redirect(array('action' => 'index'));
+                    }
+                    else{
+                          $this->Session->setFlash(__('Location was not deleted'));
+                    }
+                }
+                else{
+                    $this->Session->setFlash(__('Location was not deleted, because has Products'));
+                }
+		
+		$this->redirect(array('action' => 'index'));
+	}
+    
+        
         
         function view($id=null)
 	{

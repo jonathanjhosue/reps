@@ -3,7 +3,7 @@ if(isset($this->data['Product']['Rate'])){
     $rates=$this->data['Product']['Rate'];
     $rates=Set::combine($rates, '{n}.season_id', '{n}');
     $x= count($rates);    
-    echo '<tr><td>'.pr($rates).'</td></tr>'; 
+   // echo '<tr><td>'.pr($rates).'</td></tr>'; 
 ?>
 
    <table class="Rate ui-widget">

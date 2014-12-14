@@ -1,4 +1,5 @@
 <?php
+App::import('Model','TiposGlobal');
 class AdminController extends AppController
 {
 	var $name = 'Admin';

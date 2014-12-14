@@ -54,7 +54,7 @@
             <?php
             
             for($i=0;$i<Configure::read('Hotels.TotalImages');$i++){
-                    echo $this->Form->input("Image.$i.image_name",array('label'=>_('Image ').($i+1),'type'=>'file'));
+                    echo $this->Form->input("Image.$i.image_name",array('label'=>__('Image ').($i+1),'type'=>'file'));
                     echo $this->Form->input("Image.$i.owner_type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_ACTIVITY));
             }
             ?>
@@ -109,9 +109,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List Activities'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Products'), array('controller' => 'products', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Product'), array('controller' => 'products', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Activities'), array('action' => 'index'));?></li>		
 		<li><?php echo $this->Html->link(__('List Activity Types'), array('controller' => 'activity_types', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Activity Type'), array('controller' => 'activity_types', 'action' => 'add')); ?> </li>
 	</ul>

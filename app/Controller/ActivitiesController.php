@@ -14,12 +14,35 @@ class ActivitiesController extends AppController {
     public $paginate = array(
         'limit' => 12          
     );
+    
+    public function details($ids=null) {
+        $this->layout = 'default';
+        $this->helpers[] = 'I18nKeys';
+        $this->helpers[] = 'RipsWeb';
+        //$language = $this->Session->read('language');
+
+        $language='en';
+
+
+        //$this->Activity->id = $ids;      
+       
+        $this->Activity->setLocale($language);
+   
+        $this->Activity->unbindModel(array('hasMany' => array('Season','Review')));
+        $this->Activity->recursive = 1;               
+        $this->request->data = $this->Activity->find('all',array('conditions'=>array('Activity.product_id'=>array(50,49))));
+
+    
+        $this->set('activities', $this->request->data); 
+        
+        
+    }
  
     public function index($idlocation=null) {
 
 		
 		$this->helpers[] = 'Js';
-                $language='en';
+                $language=$this->getLanguageOnly();
 	 
                 $this->Activity->recursive = 1;
                 $this->Activity->unbindModel(array(
@@ -39,22 +62,23 @@ class ActivitiesController extends AppController {
 
                         $conditions['ActivityType.id']=$input;
                        
-                } 
+                }                 
+              
+                $searchValue=$this->Session->read("Search.{$this->name}.value");
                 if(!empty($this->data)) {
-                    Sanitize::clean($this->data);
-                    $searchkey = $this->Session->read('Search.value');
+                    Sanitize::clean($this->data);                    
 
-                    if(empty($searchkey)) {
-                            $this->Session->write('Search.value', $this->data['Search']['value']);
+                    if(isset($this->data['Search']['value'])) {
+                        $searchValue=$this->data['Search']['value'];
+                          
                     }
-                    if($this->data['Search']['value'] != $this->Session->read('Search.value')) {
-                            $this->Session->delete('Search.value');
-                            $this->Session->write('Search.value', $this->data['Search']['value']);
-                    }
+                   
+                    $this->Session->write("Search.{$this->name}.value", $searchValue);
                     
                 }
-                $conditions["concat(Product.product_name,ActivityType.activity_type_name) LIKE "]= "%{$this->Session->read('Search.value')}%";
-                $this->Activity->setLocale($language);
+                
+                $conditions["concat(Product.product_name,ActivityType.activity_type_name) LIKE "]= "%{$searchValue}%";
+                $this->Activity->setLocale($language, $this->getCountryOnly());
                 //$this->Hotel->Product->setLocale($language);
                 
 		$this->set('activities', $this->paginate($conditions));
@@ -63,7 +87,7 @@ class ActivitiesController extends AppController {
  
  /*
 	 * Description: Permite recuperar toda la informaci�n para la vista de usuario visitante.
-	 * $id: identificador del hotel
+	 * $id: identificador de actividad
 	 * $language: identificador del lenguage en que se requiere la informaci�n.
 	*/
 	public function view($id)
@@ -74,23 +98,25 @@ class ActivitiesController extends AppController {
                 $this->helpers[] = 'RipsWeb';
 		//$language = $this->Session->read('language');
                 
-                $language='en';
+                $language=$this->getLanguageOnly();
 		
 		
                  $this->Activity->id = $id;
                 $this->Activity->recursive = 0;  
                 /*el verificar si existe se hace antes de los unbind ya que si no se borrarían*/
                 if (!$this->Activity->exists()) {
-			throw new NotFoundException(__('Invalid hotel'));
+			throw new NotFoundException(__('Invalid activity'));
 		}          
                 
-                $this->Activity->Product->setLocale($language);
+                
+                $this->Activity->Product->setLocale($language,$this->getCountryOnly());
                 $this->Activity->setLocale($language);
                 //$this->Activity->Room->setLocale($language);
                 $this->Activity->Product->StaffReview->setLocale($language);
                 $this->Activity->Product->TravellerReview->setLocale($language);
                 
-                
+                $this->Activity->ActivityType->unbindModel(array('hasMany'=>array('Activity')));               
+                $this->Activity->Product->Location->unbindModel(array('hasMany'=>array('Product')));
                 $this->Activity->Product->Rate->unbindModel(array('belongsTo'=>array('Product')));
                  
                 $this->Activity->unbindModel(array('hasMany' => array('Season','Review')));
@@ -105,19 +131,8 @@ class ActivitiesController extends AppController {
                 $this->Activity->recursive = 3;               
 		$this->request->data = $this->Activity->find('first',array('conditions'=>array('Activity.product_id'=>$id)));
                 
-               // $deb=$this->Hotel->hasMany;
-
-
-                /*
-                $totalRooms = 0;
-              
-                foreach ($this->request->data['Room'] as $room){
-                    $totalRooms+=$room['count'];   
-                    //$i18n_array=array_merge($i18n_array,Set::combine($room['I18nKey']  , '{n}.key','{n}'));
-                }
-                
-                $this->request->data['Activity']['total_rooms']=$totalRooms;
-                    */
+           
+                  
 		//--Se env�an las variables hacia el View.
 		$this->set('activity', $this->request->data);         
 		
@@ -131,9 +146,12 @@ class ActivitiesController extends AppController {
  * @return void
  */
 	public function admin_index() {
+            $paginate = array('limit' => 20) ;
               $this->layout="admin";
-		$this->Activity->recursive = 0;
+		$this->Activity->recursive = 1;
+		$this->Activity->setLocale($this->getLanguageOnly(), $this->getCountryOnly());
 		$this->set('activities', $this->paginate());
+		
 	}
 
 /**
@@ -180,7 +198,7 @@ class ActivitiesController extends AppController {
                 
                
                 
-                $locations = $this->Activity->Product->Location->find('list');
+                $locations = $this->Activity->Product->Location->findByCountry($this->getCountryOnly());
                 
 		$this->set(compact('products', 'activityTypes','locations'));
                 
@@ -210,7 +228,8 @@ class ActivitiesController extends AppController {
 		} else {
 			                        
                         
-                        
+                        $this->Activity->ActivityType->unbindModel(array('hasMany'=>array('Activity')));               
+                        $this->Activity->Product->Location->unbindModel(array('hasMany'=>array('Product')));
                         $this->Activity->Product->unbindModel(array('hasMany' => array('I18nKey','Activities','TravellerReview','StaffReview'))); 
                         $this->Activity->Review->unbindModel(array('belongsTo'=>array('Product'))); 
                          $this->Activity->Season->unbindModel(array('hasMany' => array('Rate'),'belongsTo'=>array('Product','Parent'))); 
@@ -230,7 +249,7 @@ class ActivitiesController extends AppController {
 		$activityTypes = $this->Activity->ActivityType->find('list',array('fields' => array('ActivityType.id', 'ActivityType.activity_type_name', 'ActivityType.category')));
                 //$activityTypes = Set::combine($activityTypes, '{n}.category', '{n}');
                  
-                $locations = $this->Activity->Product->Location->find('list');
+                $locations = $this->Activity->Product->Location->findByCountry($this->getCountryOnly());
 		$this->set(compact('products', 'activityTypes','locations'));
 	}
 
@@ -342,9 +361,11 @@ class ActivitiesController extends AppController {
                 if(isset($this->request->data['Action']['Save']['Activity'])){                         
                     $this->Activity->unbindModel(array('hasMany'=>array('Season','Review')));     
 
-                    if ($this->Activity->saveAssociated($this->request->data)){                             
+                    if ($this->Activity->saveAssociated($this->request->data)){   
+                       
                         $this->Session->setFlash(__('The Activity data have been saved'));                       
-                        //$this->redirect('edit/'.$id.'#tabs-1'); 
+                        //$this->redirect('edit/'.$id.'#tabs-1');
+                        // $this->request->data['postSave']=$this->Activity;
                     }else{
                         $this->Session->setFlash(__('The activity could not be saved. Please, try again.'), 'default', array(), 'error');
                     }

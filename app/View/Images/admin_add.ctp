@@ -5,7 +5,7 @@
 	<?php
 
 		echo $this->Form->input('owner_id',array('type'=>'hidden','value'=>  '33'));
-                echo $this->Form->input("image_name",array('label'=>_('Image '),'type'=>'file'));
+                echo $this->Form->input("image_name",array('label'=>__('Image '),'type'=>'file'));
 		echo $this->Form->input("owner_type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_HOTEL));
 	?>
 	</fieldset>

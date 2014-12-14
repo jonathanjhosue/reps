@@ -1,7 +1,7 @@
  <div id="divReviews">
     <?php
 
-    foreach($this->data['Review'] as $i=>$review){
+    if(isset($this->data['Review']))foreach($this->data['Review'] as $i=>$review){
         $titulo=($i+1).'=>'.$review['review_date'];
         echo '<h3><a href="#">'.$titulo.'</a></h3>';
         echo "<div>";

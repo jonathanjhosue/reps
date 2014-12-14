@@ -75,7 +75,7 @@
             <?php
             
             for($i=0;$i<Configure::read('Hotels.TotalImages');$i++){
-                    echo $this->Form->input("Image.$i.image_name",array('label'=>_('Image ').($i+1),'type'=>'file'));
+                    echo $this->Form->input("Image.$i.image_name",array('label'=>__('Image ').($i+1),'type'=>'file'));
                     echo $this->Form->input("Image.$i.owner_type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_HOTEL));
             }
             ?>

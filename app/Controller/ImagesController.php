@@ -14,9 +14,21 @@ class ImagesController extends AppController {
  *
  * @return void
  */
-	public function admin_index() {
+    
+    public $layout = "admin";
+    
+    
+	public function admin_index($type=null) {
 		$this->Image->recursive = 0;
-		$this->set('images', $this->paginate());
+                $options=array();
+                if ($type != null)
+                    {
+                    $options=array('owner_type'=>$type);
+                    //$table=$type==TiposGlobal::PRODUCT_TYPE_HOTEL?'Hotel':$type==TiposGlobal::PRODUCT_TYPE_ACTIVITY?'Activity':'Product';
+                    $this->Image->bindModel(array('belongsTo' => array('Product'=>array('foreignKey'=>'owner_id')))); 
+                    }
+                       
+		$this->set('images', $this->paginate($options));
 	}
 
 /**
@@ -30,6 +42,7 @@ class ImagesController extends AppController {
 		if (!$this->Image->exists()) {
 			throw new NotFoundException(__('Invalid image'));
 		}
+                $this->Image->bindModel(array('belongsTo' => array('Product'=>array('foreignKey'=>'owner_id')))); 
 		$this->set('image', $this->Image->read(null, $id));
 	}
 
@@ -70,6 +83,7 @@ class ImagesController extends AppController {
 				$this->Session->setFlash(__('The image could not be saved. Please, try again.'));
 			}
 		} else {
+                    $this->Image->bindModel(array('belongsTo' => array('Product'=>array('foreignKey'=>'owner_id'))));
 			$this->request->data = $this->Image->read(null, $id);
 		}
 	}

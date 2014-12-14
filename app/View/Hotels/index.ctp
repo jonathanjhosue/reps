@@ -1,3 +1,4 @@
+
 <div id="viewIndex" class="hotels index">
     <h1><?php echo __('Hotels in ');?>    <?php echo $this->element('location_name',  array('idlocation'=>$idlocation)); ?></h1>
    <p> 
@@ -9,12 +10,20 @@
     </span>
    </p>  
    <?php echo $this->element('search_hotel') ?>
+   
+	<div class="paging">
+	<?php
+		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+		echo $this->Paginator->numbers(array('separator' => ''));
+		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+	?>
+	</div>
  
         <ul class="listicons">
 	<?php foreach ($hotels as $hotel): ?>
             <li class="icon">
-                <a  href="<?php echo $this->Html->url(array('action' => 'view', $hotel['Hotel']['product_id'])); ?>">
-                   
+                <a  href="<?php echo $this->Html->url(array('action' => 'view', $hotel['Hotel']['product_id'])); ?>" class="iframeBig">
+                  
                             <?php 
                             if(isset($hotel['Image'][0]['image_name'])){
                                 echo $this->Html->image("image/".$hotel['Image'][0]['id']."/200x140_".$hotel['Image'][0]['image_name']);
@@ -31,12 +40,15 @@
                       
              </li>
         <?php endforeach; ?>
+              <?php if (count($hotels)==0 ): ?>
+             <li><?php echo __("Your search did not match any results. ") ?></li>
+        <?php endif; ?>
         </ul>
 	<p>
 	<?php
-	echo $this->Paginator->counter(array(
+	/*echo $this->Paginator->counter(array(
 	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
+	));*/
 	?>	</p>
 
 	<div class="paging">
@@ -48,4 +60,4 @@
 	</div>
 </div>
 
-  <?php pr( $hotels); ?>
+  <?php //pr( $hotels); ?>

@@ -17,4 +17,3 @@ class I18nKey extends AppModel
                             );
 }  
 ?>
-

@@ -9,11 +9,19 @@
     </span>
    </p>  
     <?php echo $this->element('search_activity') ?>
+    
+     <div class="paging">
+	<?php
+		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+		echo $this->Paginator->numbers(array('separator' => ''));
+		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+	?>
+	</div>
    
      <ul class="listicons">
 	<?php foreach ($activities as $activity): ?>
             <li class="icon">
-                <a  href="<?php echo $this->Html->url(array('action' => 'view', $activity['Activity']['product_id'])); ?>">
+                <a  href="<?php echo $this->Html->url(array('action' => 'view', $activity['Activity']['product_id'])); ?>"  class="iframeBig">
                    
                             <?php 
                             if(isset($activity['Image'][0]['image_name'])){
@@ -31,12 +39,15 @@
                       
              </li>
         <?php endforeach; ?>
+        <?php if (count($activities)==0 ): ?>
+             <li><?php echo __("Your search did not match any results. ") ?></li>
+        <?php endif; ?>
         </ul>
         <p>
             <?php
-            echo $this->Paginator->counter(array(
+           /* echo $this->Paginator->counter(array(
             'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-            ));
+            ));*/
             ?>	
         </p>
         

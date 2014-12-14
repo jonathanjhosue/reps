@@ -13,9 +13,19 @@ class ReviewsController extends AppController {
  *
  * @return void
  */
-	public function admin_index() {
-		$this->Review->recursive = 0;
-		$this->set('reviews', $this->paginate());
+    public $layout = "admin";
+    
+	public function admin_index($type=null) {
+            
+             $this->Review->recursive = 0;
+             $conditions=array();
+                if ($type != null)
+                    {
+                    $conditions=array('owner_type'=>$type);
+                    }
+		$this->set('reviews', $this->paginate($conditions));
+   
+		
 	}
 
 /**
@@ -25,6 +35,8 @@ class ReviewsController extends AppController {
  * @return void
  */
 	public function admin_view($id = null) {
+               $this->helpers[] = 'I18nKeys';
+                $this->helpers[] = 'RipsWeb';
 		$this->Review->id = $id;
 		if (!$this->Review->exists()) {
 			throw new NotFoundException(__('Invalid review'));
@@ -37,18 +49,26 @@ class ReviewsController extends AppController {
  *
  * @return void
  */
-	public function admin_add() {
+	public function admin_add($productId = null) {
+            
+             $this->helpers[] = 'I18nKeys';
+            $this->helpers[] = 'RipsWeb';
+            
 		if ($this->request->is('post')) {
 			$this->Review->create();
-			if ($this->Review->save($this->request->data)) {
+			if ($this->Review->saveAssociated($this->request->data)) {
 				$this->Session->setFlash(__('The review has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The review could not be saved. Please, try again.'));
 			}
 		}
+                else {
+                    $this->request->data['Review']['product_id']=$productId;
+                            }
 		$products = $this->Review->Product->find('list');
 		$this->set(compact('products'));
+             
 	}
 
 /**
@@ -58,14 +78,16 @@ class ReviewsController extends AppController {
  * @return void
  */
 	public function admin_edit($id = null) {
+               $this->helpers[] = 'I18nKeys';
+            $this->helpers[] = 'RipsWeb';
 		$this->Review->id = $id;
 		if (!$this->Review->exists()) {
 			throw new NotFoundException(__('Invalid review'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Review->save($this->request->data)) {
+			if ($this->Review->saveAssociated($this->request->data)) {
 				$this->Session->setFlash(__('The review has been saved'));
-				$this->redirect(array('action' => 'index'));
+                                $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The review could not be saved. Please, try again.'));
 			}

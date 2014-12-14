@@ -16,11 +16,11 @@ class Season extends AppModel
                             );
         
            public $validate = array(
-                                'date_start' =>array('rule'=>'dateNotColision',
-                                                    'message' => 'Date Colision'
+                                'date_start' =>array('rule'=>'dateNotCollision',
+                                                    'message' => 'Date Collision'
                                                     ),
-                                'date_end' =>array('rule'=>'dateNotColision',
-                                                    'message' => 'Date Colision'
+                                'date_end' =>array('rule'=>'dateNotCollision',
+                                                    'message' => 'Date Collision'
                                                     )
                             );
               
@@ -30,7 +30,7 @@ class Season extends AppModel
                   $this->dataArray=$array;
               }  
               
-      function dateNotColision($check) {
+      function dateNotCollision($check) {
                 $field = key($check);
                 $value = $check[$field];
                 foreach($this->dataArray as $row){                    
@@ -75,5 +75,23 @@ class Season extends AppModel
 
         return true;
     }
+    
+    
+    
+     function getSeasons($product_id){
+         $this->Behaviors->attach('Containable');
+        //$this->Vehicle->bindModel(array('hasMany'=>array('Rate'=>array('foreignKey'=>'product_id'))));
+        $contain=array('SeasonException');
+        $this->contain($contain);
+         
+         
+         $options=array('recursive'=>1);
+             if($product_id!=null){
+              $options['conditions']=array('Season.product_id'=>$product_id,'Season.parent_id'=>null);
+             } 
+           return $this->find('all',$options);
+            
+        }
+    
 }
 ?>

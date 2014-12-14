@@ -4,10 +4,27 @@
 		<legend><?php echo __('Admin Edit Image'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('image_name');
-		echo $this->Form->input('type');
-		echo $this->Form->input('owner_id');
-	?>
+		$img='<div class="img">';
+                 $img.= $this->Form->input("Image.owner_id",array('type'=>'hidden'));
+                 $img.= $this->Form->input("Image.owner_type",array('type'=>'hidden','value'=>  TiposGlobal::PRODUCT_TYPE_HOTEL));
+                 if(isset($this->request->data['Image']['id'])){     
+                    if(!isset($this->request->data['Image']['urlname'])){//validation                        
+                        $this->request->data['Image']['urlname']=$this->request->data['Image']['image_name'];
+                    }elseif(is_array($this->request->data['Image']['image_name'])){//save
+                        $imageName=$this->request->data['Image']['image_name']['name'];
+                        $this->request->data['Image']['urlname']=$imageName!=""?$imageName:$this->request->data['Image']['urlname'];
+                    }
+                        
+                    $img.= '<label>'.$this->request->data['Image']['urlname'].'</label>';
+                    $img.= $this->Form->input("Image.id",array('type'=>'hidden'));
+                    $img.= $this->Form->input("Image.urlname",array('type'=>'hidden'));
+                    $img.=$this->Html->image("image/".$this->request->data['Image']['id']."/200x140_".$this->request->data['Image']['urlname']);
+                                   }
+                $img.='</div>';
+                
+                  echo $this->Form->input("Image.image_name",array( 'before'=>$img,'label'=>__('Image '),'type'=>'file'));
+                echo __("Product Name: ").h($this->request->data['Product']['product_name']);
+                ?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
 </div>

@@ -22,10 +22,10 @@ class UsersController extends AppController {
     }   
     
     public function admin_login() {
-            $this->redirect($this->login());
+            $this->redirect(array('admin'=>false,'controller'=>'users','action'=>'login'));
         }
     public function admin_logout() {
-            $this->redirect($this->logout());
+             $this->redirect(array('admin'=>false,'controller'=>'users','action'=>'logout'));
         }
         
         public function login() {

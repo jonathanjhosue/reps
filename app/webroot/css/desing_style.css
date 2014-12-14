@@ -18,7 +18,7 @@ body{
 body{
     margin: 0px;
     padding: 0px;
-    background:  fixed no-repeat url(images/background.jpg) #DCE5EA  ;
+    background:  fixed repeat-x url(images/mapamusgo2.jpg) #87B750 center top  ;
     font-size: 0.8em;
 
 }
@@ -38,6 +38,7 @@ body{
 #divFeatures ul li ,
 #divDiningAndDrinking ul li,
 .clsAmenities ul li {
+    text-align: left;
     font-size: 0.9em;
    display: inline-block;
    width: 175px; 
@@ -99,6 +100,19 @@ h1{
     text-align: center;
     text-shadow: #888 0px 2px 4px;
     margin: 0px;
+    
+   
+    z-index: 10;
+    background: rgba(36,36,36,0.7);
+    display: block;
+    padding: 5px;
+    color: #fff;
+
+    border-radius: 5px;
+-moz-box-shadow: 0px 0px 4px 2px #999;
+-webkit-box-shadow: 0px 0px 4px 2px  #999;
+box-shadow: 0px 0px 4px 2px  #999;
+    
 }
 .room_title{
     font-size:1.2em;
@@ -120,6 +134,11 @@ h1{
 -webkit-box-shadow: 0px 0px 6px 4px  #999;
 box-shadow: 0px 0px 6px 4px  #999;
 border-radius: 5px;
+background-color: #EEEEEE;
+}
+
+#gallery div.galleria-container{
+    margin: 0px auto; 
 }
 
 /*====================*/
@@ -144,8 +163,8 @@ border-radius: 5px;
 
 #tabs{
     
-    margin: -10px auto 10px auto;
-    width: 800px;
+    margin: -10px auto 10px auto;    
+    max-width: 800px;
         -moz-box-shadow: 0px 0px 6px 4px #999;
 -webkit-box-shadow: 0px 0px 6px 4px  #999;
 box-shadow: 0px 0px 6px 4px  #999;
@@ -314,6 +333,265 @@ a:visited{
     margin: auto 10px;
 }
 
+.admin_bar a{
+    
+    margin: auto 10px;
+}
+
 #FormSearch .active{
-      text-shadow: #800 0px 2px 2px;
+      text-shadow: #666 0px 2px 2px;
+}
+
+#FormSearch .sort li a.asc:before{
+ content: "↑";   
+}
+
+#FormSearch li a.desc:before{
+     
+   content: "↓";
+}
+
+#FormSearch ul.filter li,#FormSearch ul.sort li{
+    margin: 0px 4px;
+   
+}
+
+#FormSearch ul.filter,#FormSearch ul.sort {
+    padding-left: 2px;
+    margin: 0px;
+}
+#FormSearch ul.filter li a:hover{
+    color: #777;
+}
+#FormSearch #filter:hover {
+    
+    /*float: left;*/
+    position: absolute;
+    /*display:inline-block;*/
+    width: 400px;
+}
+#FormSearch #filter:hover{
+    background-color: white;
+}
+
+#FormSearch .input,#FormSearch fieldset, #FormSearch .filter li,#FormSearch ul.sort li{
+    display: inline;
+    
+}
+
+#FormSearch #filter li.active{
+    display: inline;    
+}
+#FormSearch #filter li{
+    display: none;
+    
+}
+
+#FormSearch #filter:hover li{
+    display: inline;
+    
+}
+
+ul.activitylist{
+    padding: 0px;
+    margin: 10px;
+    list-style: none;
+}
+
+ul.activitylist li{
+        background: rgba(240, 240, 240, 0.9);
+    -moz-box-shadow: 0px 0px 4px 2px #999;
+    -webkit-box-shadow: 0px 0px 2px 4px  #999;
+    box-shadow: 0px 0px 4px 2px  #999;
+    border-radius: 5px 5px 5px 5px;   
+    margin: 15px 0px;
+    min-height: 100px;
+}
+
+ul.activitylist li img{
+    height: 100px;
+    width: 140px;
+border-radius: 5px 0px 0px 5px; 
+float: left;
+
+margin-right: 15px;
+
+}
+
+ul.activitylist li label,ul.activitylist li span{
+    display: inline;
+    vertical-align: top;
+    padding: 10px;
+    
+}
+
+ul.activitylist li label{
+    
+}
+
+ul.activitylist li p{
+    display: block;
+   /*padding: 10px;*/
+   margin: 0px;
+   padding: 0px 10px;
+   min-height: 60px;
+    
+}
+
+ul.activitylist li .spanlink{
+    display: inline;
+    float: right;
+    padding: 0px 10px;
+}
+
+.jtable tbody .ui-widget-content{
+    text-align: center;
+    
+}
+
+
+
+#contentProducts{
+    margin: 5px auto 10px auto;
+    background: rgba(255, 255, 255, 0.9);
+   width: 900px;
+   -moz-box-shadow: 0px 0px 6px 4px #999;
+-webkit-box-shadow: 0px 0px 6px 4px  #999;
+box-shadow: 0px 0px 6px 4px  #999;
+  border-radius: 5px 5px 5px 5px;   
+}
+
+#footer{
+    text-align: center;
+      margin: 0px auto 0px auto;
+}
+
+p{
+    padding: 0px 10px;
+}
+
+#sliderProducts .title{
+    position: absolute;
+    
+    z-index: 10;
+    background: rgba(36,36,36,0.7);
+    display: block;
+
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+    width: 100%;
+    border: solid 1px #000;
+        
+}
+#contentProducts h1{
+    padding: 10px;
+}
+
+#sliderProducts ol li div{
+    border: solid 1px #000;
+       -moz-box-shadow: 0px 0px 4px 2px #999;
+-webkit-box-shadow: 0px 0px 4px 2px  #999;
+box-shadow: 0px 0px 4px 2px  #999;
+  border-radius: 5px 5px 5px 5px;  
+}
+
+
+#FormSearch{
+     margin-left: 30px;
+     
+
+}
+
+#divItinerary h3{
+    margin-bottom: 5px;
+    padding-left: 30px;
+}
+
+#divItinerary div{
+    padding: 5px;
+}
+#divItinerary div p{
+    margin: 5px;
+}
+
+#divItinerary .spanEat{
+    float: right;
+    margin-right: 10px;
+}
+
+label.price{
+    color: #bb0000;
+    text-shadow: #888 0px 2px 4px;
+}
+
+
+.pagination {list-style:none; margin:10px 0px 0px 0px; padding:0px; clear:both;}
+.pagination li{float:left; margin:3px;}
+.pagination li a{   display:block; padding:3px 5px; color:#fff; background-color:#777; text-decoration:none;}
+.pagination li a.active {border:1px solid #000; color:#000; background-color:#fff;}
+.pagination li a.inactive {background-color:#eee; color:#777; border:1px solid #ccc;}
+
+div.box{
+background: none repeat scroll 0 0 #F1F1F1;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 1px #777777;
+    color: #555555;
+    list-style: none outside none;
+    margin: 5px 4px;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+}
+    
+.clsRoom p{
+text-align: left;
+}
+
+table.tableVehicles{
+    width: 100%;
+}
+
+.divLigthbox{
+    /*width:800px;*/
+    min-width: 600px;
+    max-width: 800px;
+    margin: 0px auto; 
+}
+
+.descriptionLabels label {
+    display: inline;
+    line-height: 1.8em;
+}
+
+#formReserve fieldset{
+    min-width: 250px;
+line-height: 1.8em;
+}
+
+#formReserve fieldset div{
+    display: inline-block;
+    margin-right: 10px;
+   
+}
+
+fieldset#fieldsetAditionalService{
+    float: right;
+    width: 220px;
+}
+
+#fieldsetAditionalService ul{
+    padding-left: 0px;
+    list-style: none;
+    margin: 0px;
+}
+
+div.number input{
+    width: 50px;
+}
+
+
+div.bar a img.selected{
+background-color:#CCC;
+
 }

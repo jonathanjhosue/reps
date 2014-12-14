@@ -16,7 +16,7 @@ class Image extends AppModel
 					'800x400' => '800x400',
 				),
                             'deleteOnUpdate'=>true,
-				/*'thumbnailMethod'	=> 'php',*/
+				'thumbnailMethod'	=> 'php',
                             'maxSize'=>2597152,
                             'path'=>'{ROOT}webroot{DS}img{DS}{model}{DS}'
 			)
@@ -37,6 +37,30 @@ class Image extends AppModel
                                     )
                             );
         
+        
+         function getRandomImages($limit=5, $type=null){
+           /* $options['joins'] = array(
+                array('table' => 'package_includes',
+                    'alias' => 'PackageInclude',
+                    'type' => 'LEFT',
+                    'conditions' => array(
+                        'PackageInclude.include_id = IncludeNote.id',
+                    )
+                )
+            );
+            $options['conditions'] = array(
+                'PackageInclude.package_id' => null
+            );*/
+              /*como no son muchas fotos de rentacars se hace así*/
+             if($type!=null){
+              $options['conditions']=array('Image.owner_type'=>$type);
+             }
+              $options['order']=' rand()';
+             // $options['offset']=rand(0,20000);  
+            $options['limit']=$limit;  
+           return $this->find('all',$options);
+            
+        }
         
 /*
 	function isUploadedFile($params){

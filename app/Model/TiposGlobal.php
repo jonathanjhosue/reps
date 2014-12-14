@@ -14,13 +14,21 @@
 class TiposGlobal {
      const  PRODUCT_TYPE_HOTEL="HOTEL";    
      const  PRODUCT_TYPE_ACTIVITY="ACTIVITY";    
+     const  PRODUCT_TYPE_PACKAGE="PACKAGE";    
+     const  PRODUCT_TYPE_RENTACAR="RENTACAR"; 
+     const  PRODUCT_TYPE_VEHICLE="VEHICLE";    
      
+     const  I18N_TYPE_PACKAGE_INFORMATION="INFORMATION";
      
      const  I18N_TYPE_HOTEL_ROOMNOTES="HOTEL_ROOMNOTES";
      const  I18N_TYPE_HOTEL_DININGANDDRINKING="HOTEL_DININGANDDRINKING";
      const  I18N_TYPE_PRODUCT_DIRECTION="PRODUCT_DIRECTION";
      const  I18N_TYPE_PRODUCT_DESCRIPTION="PRODUCT_DESCRIPTION";
      const  I18N_TYPE_REVIEW="REVIEW";
+     const  I18N_TYPE_INCLUDE_NOTE="INCLUDE_NOTE";
+     
+     const  I18N_TYPE_ITENERARY_DESCRIPTION='ITINERARY_DESCRIPTION';
+     const  I18N_TYPE_ITENERARY_HEADLINE='ITINERARY_HEADLINE';
 
      
      const  I18N_TYPE_ROOM_DESCRIPTION="ROOM_DESCRIPTION";
@@ -32,6 +40,23 @@ class TiposGlobal {
      const  I18N_TYPE_ACTIVITY_POLICIES="ACTIVITY_POLICIES";
      const  I18N_TYPE_ACTIVITY_SHEDULE="ACTIVITY_SHEDULE";
      
+     const  I18N_TYPE_RENTACAR_SERVICENOTES="RENTACAR_SERVICENOTES";
+     const  I18N_TYPE_RENTACAR_TIPSANDSAFETY="RENTACAR_TIPSANDSAFETY";
+     
+     
+     static  $DOMAIN_COUNTRY=array('PANAMAREPS'=>'PA','COSTARICAREPS'=>'CR','GUATEMALAREPS'=>'GT','NICARAGUAREPS'=>'NI');
+     
+     
+     static function getCountry(){
+	 
+         $domain=$_SERVER['SERVER_NAME'];
+         return TiposGlobal::getCountryByDomain($domain);
+     }
+     
+     static function getCountryByDomain($domain){
+         //return TiposGlobal::$DOMAIN_COUNTRY['PANAMAREPS'];
+         return (isset(TiposGlobal::$DOMAIN_COUNTRY[$domain]))?TiposGlobal::$DOMAIN_COUNTRY[$domain]:'CR';
+     }
      
      static $HOTEL_FEATURES=array('restaurant','bar',
                                 'business_center',
@@ -67,6 +92,17 @@ class TiposGlobal {
                                 'kosher'
                                 ); 
     
+    
+      static $PACKAGE_SUITABLEFOR=array(
+                                'solo_travellers',
+                                'women_only_trips',
+                                'independent_travellers',
+                                'physically_challenged',
+                                'families_with_small_children',
+                                'honeymoon_anniversary_trip',
+                                'seniors',
+                                'groups'
+                                ); 
     
     static $ROOM_AMENITIES=array(
                             'air_conditioning',

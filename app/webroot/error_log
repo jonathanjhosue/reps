@@ -1,0 +1,134 @@
+[05-Sep-2013 05:38:21] PHP Warning:  unlink(/home2/crreps/public_html/hoteles2/app/tmp/cache/persistent/myapp_cake_core_cake_es-mx) [<a href='function.unlink'>function.unlink</a>]: No such file or directory in /home2/crreps/public_html/hoteles2/lib/Cake/Cache/Engine/FileEngine.php on line 255
+[15-Sep-2013 22:59:22] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 42
+[15-Sep-2013 22:59:27] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 42
+[15-Sep-2013 22:59:34] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 42
+[15-Sep-2013 23:00:04] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 42
+[15-Sep-2013 23:00:14] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 42
+[15-Sep-2013 23:00:20] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 42
+[15-Sep-2013 23:01:58] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:02:13] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:02:30] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:02:51] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:04:43] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:04:45] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:04:55] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:05:30] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:05:34] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:06:17] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:06:43] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:06:58] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:07:03] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:07:11] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:07:37] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:07:48] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:07:52] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:08:49] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:08:53] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:13:30] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[15-Sep-2013 23:13:54] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 00:28:37] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 00:28:45] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 00:28:46] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 01:08:55] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 01:18:48] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 04:30:44] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:25:37] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:32:51] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:37:25] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:38:27] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:38:38] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:38:46] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:38:50] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:38:51] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:40:58] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:50:24] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:50:29] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 14:53:22] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/prototyp/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/prototyp/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  set_error_handler() expects the argument (ErrorHandler::handleError) to be a valid callback in /home2/crreps/public_html/prototyp/lib/Cake/Core/Configure.php on line 424
+[16-Sep-2013 14:53:22] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/prototyp/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/prototyp/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  set_exception_handler() expects the argument (ErrorHandler::handleException) to be a valid callback in /home2/crreps/public_html/prototyp/lib/Cake/Core/Configure.php on line 427
+[16-Sep-2013 14:53:22] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Core/CakePlugin.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Core/CakePlugin.php' for inclusion (include_path='/home2/crreps/public_html/prototyp/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/prototyp/lib/Cake/Core/App.php on line 547
+[16-Sep-2013 14:53:22] PHP Fatal error:  Class 'CakePlugin' not found in /home2/crreps/public_html/prototyp/app/Config/bootstrap.php on line 74
+[16-Sep-2013 14:53:55] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[16-Sep-2013 16:26:23] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[17-Sep-2013 04:05:30] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[17-Sep-2013 04:06:07] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home2/crreps/public_html/hoteles2/app/Controller/AppController.php on line 48
+[17-Sep-2013 04:09:26] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/hoteles1/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/hoteles1/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  set_error_handler() expects the argument (ErrorHandler::handleError) to be a valid callback in /home2/crreps/public_html/hoteles1/lib/Cake/Core/Configure.php on line 424
+[17-Sep-2013 04:09:26] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/hoteles1/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Error/ErrorHandler.php' for inclusion (include_path='/home2/crreps/public_html/hoteles1/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  set_exception_handler() expects the argument (ErrorHandler::handleException) to be a valid callback in /home2/crreps/public_html/hoteles1/lib/Cake/Core/Configure.php on line 427
+[17-Sep-2013 04:09:26] PHP Warning:  include(/home2/crreps/public_html/hoteles2/lib/Cake/Core/CakePlugin.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home2/crreps/public_html/hoteles2/lib/Cake/Core/CakePlugin.php' for inclusion (include_path='/home2/crreps/public_html/hoteles1/lib:.:/usr/lib/php:/usr/local/lib/php') in /home2/crreps/public_html/hoteles1/lib/Cake/Core/App.php on line 547
+[17-Sep-2013 04:09:26] PHP Fatal error:  Class 'CakePlugin' not found in /home2/crreps/public_html/hoteles1/app/Config/bootstrap.php on line 74
+[18-Sep-2013 14:33:03] PHP Fatal error:  Call to undefined method CatsController::change() in /home2/crreps/public_html/hoteles2/app/Controller/CatsController.php on line 23
+[01-Oct-2013 04:57:00] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/ActivitiesController.php on line 152
+[01-Oct-2013 05:07:01] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home2/crreps/public_html/hoteles2/app/View/Regions/admin_add.ctp on line 11
+[01-Oct-2013 05:08:12] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home2/crreps/public_html/hoteles2/app/View/Regions/admin_add.ctp on line 11
+[01-Oct-2013 05:09:32] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home2/crreps/public_html/hoteles2/app/View/Regions/admin_add.ctp on line 11
+[02-Oct-2013 01:36:08] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/VehiclesController.php on line 141
+[02-Oct-2013 01:36:42] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/VehiclesController.php on line 141
+[02-Oct-2013 01:37:19] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/VehiclesController.php on line 141
+[02-Oct-2013 02:38:38] PHP Parse error:  syntax error, unexpected ';' in /home2/crreps/public_html/hoteles2/app/Controller/VehiclesController.php on line 142
+[02-Oct-2013 02:45:34] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/VehiclesController.php on line 141
+[02-Oct-2013 04:06:19] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home2/crreps/public_html/hoteles2/app/Controller/HotelsController.php on line 297
+[02-Oct-2013 04:13:23] PHP Parse error:  syntax error, unexpected ')' in /home2/crreps/public_html/hoteles2/app/Controller/HotelsController.php on line 297
+[02-Oct-2013 04:13:41] PHP Parse error:  syntax error, unexpected '}' in /home2/crreps/public_html/hoteles2/app/Model/Location.php on line 28
+[12-Dec-2013 19:52:17] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[11-Apr-2014 06:02:38] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Jun-2014 08:46:22 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[28-Jul-2014 06:49:16 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[28-Jul-2014 06:49:24 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[28-Jul-2014 06:49:27 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[31-Jul-2014 06:38:54 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[31-Jul-2014 06:58:53 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[20-Aug-2014 14:49:42 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[26-Aug-2014 17:41:52 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[26-Aug-2014 17:41:53 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[26-Aug-2014 17:42:09 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[26-Aug-2014 17:42:29 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[26-Aug-2014 17:55:24 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[28-Aug-2014 05:28:20 UTC] PHP Warning:  unlink(/home2/crreps/public_html/hoteles2/app/tmp/cache/persistent/myapp_cake_core_cake_dev_ja): No such file or directory in /home2/crreps/public_html/hoteles2/lib/Cake/Cache/Engine/FileEngine.php on line 255
+[30-Aug-2014 15:28:53 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[01-Sep-2014 21:37:33 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[01-Sep-2014 21:38:29 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[01-Sep-2014 21:40:22 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[01-Sep-2014 21:41:07 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[01-Sep-2014 21:41:57 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[01-Sep-2014 21:42:21 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[02-Sep-2014 08:08:41 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[02-Sep-2014 08:09:50 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[02-Sep-2014 16:25:51 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[02-Sep-2014 23:51:53 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[02-Sep-2014 23:54:49 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 00:03:27 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 00:03:45 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 00:04:36 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 00:06:55 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 03:57:46 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 05:55:50 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 06:18:31 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 06:39:21 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 15:45:22 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[03-Sep-2014 19:27:04 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Sep-2014 03:32:44 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Sep-2014 03:33:16 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Sep-2014 03:50:35 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Sep-2014 03:52:29 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Sep-2014 03:54:22 UTC] PHP Fatal error:  Call to a member function setLocale() on a non-object in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 49
+[05-Sep-2014 04:43:37 UTC] PHP Fatal error:  Undefined class constant 'TiposGlobal::I18N_TYPE_FLIGHT_SERVICENOTES' in /home2/crreps/public_html/hoteles2/lib/Cake/Utility/ClassRegistry.php on line 168
+[05-Sep-2014 04:59:28 UTC] PHP Parse error:  syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) in /home2/crreps/public_html/hoteles2/app/Controller/FlightsController.php on line 329
+[07-Sep-2014 19:59:11 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home2/crreps/public_html/hoteles2/app/View/Pages/home_products.ctp on line 39
+[07-Sep-2014 20:02:02 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home2/crreps/public_html/hoteles2/app/View/Pages/home_products.ctp on line 39

@@ -4,6 +4,7 @@ class Product extends AppModel
 {
 	var $name = 'Product';
 	var $belongsTo = 'Location';
+        public $displayField = 'product_name';
         
         var $arreglo=array();
        
@@ -32,9 +33,9 @@ class Product extends AppModel
                                             )
                             );
         
-        function setLocale($locale){
+        function setLocale($locale, $country){
             $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;
-            
+            $this->belongsTo['Location']['conditions']['country']=$country;
         }
         
 	//var $hasOne = 'Hotel';

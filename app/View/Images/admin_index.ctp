@@ -3,6 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
+                        <th><?php echo __('Image');?></th>
 			<th><?php echo $this->Paginator->sort('image_name');?></th>
 			<th><?php echo $this->Paginator->sort('type');?></th>
 			<th><?php echo $this->Paginator->sort('owner_id');?></th>
@@ -12,9 +13,11 @@
 	foreach ($images as $image): ?>
 	<tr>
 		<td><?php echo h($image['Image']['id']); ?>&nbsp;</td>
+                <td><?php echo $this->Html->image('image/'.$image['Image']['dir'].'/90x45_'.$image['Image']['image_name']);                 
+                ?>&nbsp;</td>
 		<td><?php echo h($image['Image']['image_name']); ?>&nbsp;</td>
-		<td><?php echo h($image['Image']['type']); ?>&nbsp;</td>
-		<td><?php echo h($image['Image']['owner_id']); ?>&nbsp;</td>
+		<td><?php echo h($image['Image']['owner_type']); ?>&nbsp;</td>
+		<td><?php echo h($image['Product']['product_name']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $image['Image']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $image['Image']['id'])); ?>
@@ -41,6 +44,10 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Image'), array('action' => 'add')); ?></li>
+		
 	</ul>
 </div>
+
+<?php
+pr($images);
+?>

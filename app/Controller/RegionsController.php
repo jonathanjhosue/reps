@@ -2,7 +2,7 @@
 class RegionsController extends AppController
 {
 	var $name = 'Regions';
-	//var $layout='admin';
+	var $layout='admin';
 	//var $scaffold;
 
 	/*============BEGINS ADMIN METHODS===================*/
@@ -21,81 +21,99 @@ class RegionsController extends AppController
 
 	}
 	
-	function admin_index()
-	{
+        public function admin_index() {
+        
+		$this->Region->recursive = 0;
+                $this->set('regions', $this->paginate());
+	}
+
+    
+/**
+ * admin_view method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_view($id = null) {
+		$this->Region->id = $id;
+		if (!$this->Region->exists()) {
+			throw new NotFoundException(__('Invalid Region'));
+		}
+		$this->set('region', $this->Region->read(null, $id));
+	}
+
+/**
+ * admin_add method
+ *
+ * @return void
+ */
+	public function admin_add() {
             
-
-			//$this->Region->unbindModel(array('hasMany'=>array('Location')));
-			$this->set('regions', $this->Region->find('all'));
-
-	}
-/*
-	function admin_view($id)
-	{
-            
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$this->Region->id = $id;
-			$this->data = $this->Region->read();
-			$this->set('region', $this->data);
-			
-			$this->Session->write('regionId', $id);
-			$this->Session->write('regionName', $this->data['Region']['name_region']);
-		}
-		else { $this->redirect('/'); }	
-	}
-
-	function admin_add()    
- 	{  
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			if (!empty($this->data))    
-			{    
-				if($this->Region->save($this->data))    
-				{
-					$this->Session->setFlash('Region Saved!!');
-					$this->redirect(array('action'=>'view', 'id'=>$this->Region->id));
-				}    
+		if ($this->request->is('post')) {
+			$this->Region->create();
+			if ($this->Region->save($this->request->data)) {
+				$this->Session->setFlash(__('The Region has been saved'));
+                                $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The Region could not be saved. Please, try again.'));
 			}
 		}
-		else { $this->redirect('/'); }
 	}
 
-	function admin_delete($id) 
-	{
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$this->Region->delete($id);
-			$this->Session->setFlash('The region with id: '.$id.' has been deleted.');
-			$this->redirect(array('action'=>'index'));
+/**
+ * admin_edit method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_edit($id = null) {
+		$this->Region->id = $id;
+		if (!$this->Region->exists()) {
+			throw new NotFoundException(__('Invalid Region'));
 		}
-		else { $this->redirect('/'); }	
- 	}
-	
-	function admin_edit($id = null)    
-	{
-		if ($this->Session->read('Auth.User.rol') == 'admin')
-		{
-			$this->Region->id = $id; 
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Region->save($this->request->data)) {
+				$this->Session->setFlash(__('The Region has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The Region could not be saved. Please, try again.'));
+			}
+		} else {
+			$this->request->data = $this->Region->read(null, $id);
+		}
+	}
 
-			if (empty($this->data))
-			{
-				$this->Region->unbindModel(array('hasMany'=>array('Location')));
-				$this->data = $this->Region->read();
-			}
-			else{
-				if($this->Region->save($this->data))
-				{
-					$this->Session->setFlash('Region Saved!!');
-					$this->redirect(array('action'=>'view', 'id'=>$this->Region->id));    
-				}
-			}
+/**
+ * admin_delete method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_delete($id = null) {
+		if (!$this->request->is('post')) {
+			throw new MethodNotAllowedException();
 		}
-		else { 
-                    $this->redirect('/'); 
-                    
-                }		  
-	}*/
+		$this->Region->id = $id;
+		if (!$this->Region->exists()) {
+			throw new NotFoundException(__('Invalid Region'));
+		}
+                $c=$this->Region->Location->find('count',array("conditions"=>array("region_id"=>$id)));
+               
+                if (0==$c) {
+                    if ($this->Region->delete()) {
+                            $this->Session->setFlash(__('Region deleted'));
+                            $this->redirect(array('action' => 'index'));
+                    }
+                    else{
+                          $this->Session->setFlash(__('Region was not deleted'));
+                    }
+                }
+                else{
+                    $this->Session->setFlash(__('Region was not deleted, because has Locations'));
+                }
+		
+		$this->redirect(array('action' => 'index'));
+	}
+    
 }
 ?>
-

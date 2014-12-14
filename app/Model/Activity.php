@@ -63,8 +63,30 @@ class Activity extends AppModel {
                         
                         );
         
-          function setLocale($locale){
-            $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$locale;
+        
+        public $validate = array(
+                        'age_min' =>array('rule'    => 'numeric','message' => 'Please supply the age min.','allowEmpty' => true),
+                        'age_max' =>array('rule'    => 'numeric','message' => 'Please supply the age max.','allowEmpty' => true),
+                        'pax_min' =>array('rule'    => 'numeric','message' => 'Please supply the pax min.','allowEmpty' => true),
+                        'pax_max' =>array('rule'    => 'numeric','message' => 'Please supply the pax max.','allowEmpty' => true),
+            
+                        'infant_age_max' =>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
+                        'infant_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
+                        'child_age_max'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true),
+                        'child_age_min'=>array('rule'    => 'numeric','message' => 'Please supply the age.','allowEmpty' => true)                                 
+                    );
+        
+           function setLocale($language, $country=null){
+            $this->hasMany['I18nKey']['conditions']['I18nKey.language']=$language;
+																
+	if($country!=null ){
+																
+			$this->belongsTo['Location']['foreignKey']=false;
+			$this->belongsTo['Location']['type']='INNER';
+			//'conditions'=>array('Product.location_id=Location.id','Product.location_id=Location.id')
+			$this->belongsTo['Location']['conditions'][0]='Product.location_id=Location.id';
+			$this->belongsTo['Location']['conditions']['country']=$country;
+		}
             
         }
 }

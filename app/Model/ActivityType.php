@@ -11,4 +11,5 @@ class ActivityType extends AppModel {
  * @var string
  */
 	public $displayField = 'activity_type_name';
+        var $hasMany = "Activity";
 }

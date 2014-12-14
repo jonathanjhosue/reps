@@ -1,7 +1,11 @@
 
     <?php $altrow = true; //variable para controlar la distinción entre una línea y otra de una tabla. 
 	//incluye en el view las instrucciones JavaScript para el control del tabpanel.
-	
+	//echo $this->Html->script('easypaginate/easypaginate.min.js');  
+         echo $this->Html->css('easypaginate/easypaginate.css');
+         
+           echo $this->Html->script('jPaginate.js');    
+        
         echo $this->Html->scriptBlock('
             /*$(window).load(function() {
                 $("#slider").nivoSlider({
@@ -10,6 +14,21 @@
             });*/
             $(function() {
                 $( "#tabs" ).tabs(); 
+                $( "#tabsRate" ).tabs(); 
+                
+            $("#staffReviews").jPaginate({cookies:false, pagination_class: "paginateReviews",items: 6,next:"'.__('Next').'",previous:"'.__('Previous').'"});
+            $("#travellerReviews").jPaginate({cookies:false,pagination_class: "paginateTravellers", items: 6,next:"'.__('Next').'",previous:"'.__('Previous').'"});
+
+
+                /* $("ul#travellerReviews").easyPaginate({
+                    step: 4,
+                    nextprev:false
+                });  
+                    
+                $("ul#staffReviews").easyPaginate({
+                    step: 4,
+                    nextprev:false
+                }); */
                 
             });'
             , array('allowCache'=>true,'safe'=>true,'inline'=>false));
@@ -21,11 +40,12 @@
                     height: 330,
                     imageCrop: true,
                     imagePan:true,
+                    debug:false,
                    /* imagePanSmoothness:12,*/
                      transition: "fade",
                      autoplay: 5500,
                      carousel:true,
-                     imageMargin:0,
+                     imageMargin:0
                     /* thumbnails:"empty",*/
               /*  extend: function(options) {
 
@@ -55,6 +75,7 @@
 <div class="activities view">    
     
      <div id="viewheader">
+         <h1><?php echo __('Activity'); ?></h1>
 	<div id="gallery">          
             <?php for($i=0;$i<count($activity['Image']);$i++): 
             if($activity['Image'][$i]['image_name']) 
@@ -76,8 +97,11 @@
 
     <span class="admin_bar">
         <?php if ($this->Session->check('Auth.User.id')): 
+             echo $this->Html->link(__('Add Review'), array('admin' => true, 'prefix' => 'admin','controller' => 'reviews', 'action' => 'add',$activity['Product']['id'])); 
+            
             echo $this->Html->link(__('Edit'), array('admin' => true, 'prefix' => 'admin','controller' => 'activities', 'action' => 'edit',$activity['Product']['id'])); 
-         endif; ?>
+           
+        endif; ?>
     </span>
     </p>
  
@@ -121,7 +145,7 @@
         <label><?php echo __('Duration') ?>:</label><span><?php echo   h($activity['Activity']['duration']);  ?>&nbsp;</span> &nbsp;&nbsp;&nbsp;  
         <label><?php echo __('Age Min') ?>:</label><span><?php echo  h($activity['Activity']['age_min']); ?>&nbsp;</span> &nbsp;&nbsp;&nbsp;
          <label><?php echo __('Age Max') ?>:</label><span><?php echo h($activity['Activity']['age_max']);  ?>&nbsp;</span> 
-          <label><?php echo __('Operational Capacity:') ?>:</label>
+          <label><?php echo __('Operational Capacity') ?>:</label>
           <label><?php echo __('Min # Pax') ?>:</label><span><?php echo h($activity['Activity']['pax_min']);  ?>&nbsp;</span>
           <label><?php echo __('Max # Pax') ?>:</label><span><?php echo h($activity['Activity']['pax_max']);  ?>&nbsp;</span>
         </p>
@@ -142,28 +166,36 @@
          
     </div>
     <div id="tabs-3"> 
-	  		
+	  <?php if(count($activity['Product']['StaffReview'])>0):?>  		
                 <fieldset class="jfieldset">
                         <legend ><?php echo __('Staff Reviews') ?>:</legend>
-                        <?php foreach($activity['Product']['StaffReview'] as $review): ?>		
+                        <ul class="paginate" id="staffReviews">
+                        <?php foreach($activity['Product']['StaffReview'] as $review): ?>
+                            <li>
                         <p class='review_texto'>                    
                             <q><?php echo  $this->I18nKeys->getKeyByType($review['I18nKey'],  TiposGlobal::I18N_TYPE_REVIEW); ?> </q>
                            <span><?php echo $review['review_date']; ?></span>
                         </p>  	
-                        
+                            </li>
                         <?php endforeach; ?>
-                </fieldset>	
-
+                        </ul>
+                </fieldset>
+          <?php endif; ?>
+  <?php if(count($activity['Product']['TravellerReview'])>0):?>
                 <fieldset class="jfieldset">
                         <legend ><?php echo  __('Traveller Reviews')?>:</legend>
-
-                        <?php foreach($activity['Product']['TravellerReview'] as $review): ?>	
+                        <ul class="paginate" id="travellerReviews">
+                        <?php foreach($activity['Product']['TravellerReview'] as $review): ?>
+                        <li>
                          <p class='review_texto'>                    
                             <q><?php echo  $this->I18nKeys->getKeyByType($review['I18nKey'],  TiposGlobal::I18N_TYPE_REVIEW); ?> </q>
                            <span><?php echo $review['review_date']; ?></span>
                         </p> 
+                        </li>
                         <?php endforeach; ?>
-                </fieldset>							
+                        </ul>
+                </fieldset>	
+           <?php endif; ?>
 	</div>
     
 <div id="tabs-4"> 
@@ -207,4 +239,3 @@
 </div>
   
    </div>
-  <pre><?php print_r($activity); ?></pre>

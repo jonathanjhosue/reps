@@ -1,0 +1,70 @@
+/* 
+    Document   : ie.css
+    Created on : 05/05/2012, 12:19:17 PM
+    Author     : jonathan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body{
+   
+}
+
+div#viewIndex{
+      background-color: #F1F1F1;  
+}
+
+ul.listicons{
+
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.listicons li.icon{
+    display: inline;
+}
+ul.listicons li.icon:hover{
+    background-color: #000;
+}
+
+li.icon a:active, li.icon a:visited{
+    border: none;
+}
+
+li.icon img{
+    border: none;
+}
+
+h1{
+    background-color: #555;
+}
+
+#divItinerary h3 a{
+   
+    display: inline;
+}
+
+#divItinerary h3 a span{
+    margin-top:-15px;
+
+}
+
+ul.activitylist li{
+    background-color: #eee;
+}
+
+#divFeatures ul li{
+    display: inline;
+}
+
+.clsAmenities ul li{
+    display: inline;
+    
+}
+
+#sliderProducts .title{
+    background-color: #555
+}

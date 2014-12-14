@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Easy Paginate - simple demo</title>	
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />    
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/easypaginate.js"></script>
+	<script type="text/javascript">
+	
+jQuery(function($){
+	
+	$('ul#items').easyPaginate({
+		step:3
+	});
+	
+});    
+    
+    </script>
+    
+<style>
+
+/* HTML elements  */		
+
+	html,body{margin:0;padding:0;}
+	h1, h2, h3, h4, h5, h6{
+		font-weight:normal;
+		margin:0;
+		line-height:1em;
+		}	
+	h1{font-size:2em;margin-bottom:.5em;}	
+	h2{font-size:1.75em;margin-bottom:.5142em;padding-top:.2em;}	
+	h3{font-size:1.5em;margin-bottom:.7em;padding-top:.3em;}
+	h4{font-size:1.25em;margin-bottom:.6em;}
+	h5,h6{font-size:1em;margin-bottom:.5em;font-weight:bold;}
+	
+	p, blockquote, ul, ol, dl, form, table, pre{line-height:inherit;margin:0 0 1.5em 0;}
+	ul, ol, dl{padding:0;}
+	ul ul, ul ol, ol ol, ol ul, dd{margin:0;}
+	li{margin:0 0 0 2em;padding:0;display:list-item;list-style-position:outside;}	
+	blockquote, dd{padding:0 0 0 2em;}
+	pre, code, samp, kbd, var{font:100% mono-space,monospace;}
+	pre{overflow:auto;}
+	abbr, acronym{
+		text-transform:uppercase;
+		border-bottom:1px dotted #000;
+		letter-spacing:1px;
+		}
+	abbr[title], acronym[title]{cursor:help;}
+	small{font-size:.9em;}
+	sup, sub{font-size:.8em;}
+	em, cite, q{font-style:italic;}
+	img{border:none;}			
+	hr{display:none;}	
+	table{width:100%;border-collapse:collapse;}
+	th,caption{text-align:left;}
+	form div{margin:.5em 0;clear:both;}
+	label{display:block;}
+	fieldset{margin:0;padding:0;border:none;}
+	legend{font-weight:bold;}
+	input[type="radio"],input[type="checkbox"], .radio, .checkbox{margin:0 .25em 0 0;}
+
+/* //  HTML elements */	
+
+/* base */
+	
+	body, table, input, textarea, select, li, button{
+		font:1em Helvetica, Arial, Sans-Serif;
+		line-height:1.5em;
+		color:#333;
+		}		
+	body{
+		font-size:12px;
+		background:#fff;
+		margin:0;
+		padding:20px;		
+		}	
+	a, a:visited{
+		text-decoration:none;
+		color:#06C;
+		}
+	a:hover{color:#999;}
+
+/* base */
+
+/* content */
+		
+	ul#items{		
+		margin:0;
+		height:120px;
+		width:auto;
+		overflow:hidden;
+		}
+	ul#items li{
+		list-style:none;
+		float:left;
+		width:200px;
+		height:120px;
+		overflow:hidden;
+		margin:0 0 0 1px;
+		background:#999;
+		color:#fff;
+		text-align:center;
+		}
+	ol#pagination{overflow:hidden;}
+	ol#pagination li{
+		float:left;
+		list-style:none;
+		cursor:pointer;
+		margin:0 0 0 .5em;
+		}
+	ol#pagination li.current{color:#f00;font-weight:bold;}
+	
+/* // content */
+
+</style>
+    
+</head>
+<body>
+
+
+<h1>Easy Paginate</h1>
+<p>Click on the links below to navigate through items</p>    
+		
+<ul id="items">
+    <li>Page 1</li>
+    <li>Page 2</li>
+    <li>Page 3</li>
+    <li>Page 4</li>
+    <li>Page 5</li>
+    <li>Page 6</li>
+    <li>Page 7</li>
+    <li>Page 8</li>
+    <li>Page 9</li>
+    <li>Page 10</li>
+    <li>Page 11</li>
+    <li>Page 12</li>
+    <li>Page 13</li>
+    <li>Page 14</li>
+</ul>
+
+<p><a href="http://cssglobe.com/post/9801/easy-paginate-jquery-plugin-for-pagination" title="read more about this plugin">back to the article</a></p>
+
+<p><strong>Easy Paginate plugin</strong> is brought to you by <a href="http://cssglobe.com" title="web standards magazine and css news">Css Globe</a>, <a href="http://easyframework.com">Easy front-end framework</a> and supported by <a href="http://templatica.com">Css Templates</a> by Templatica</p>
+
+</body>
+</html>

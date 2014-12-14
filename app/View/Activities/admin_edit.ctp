@@ -87,12 +87,16 @@
                     
                     
                     $img.=$this->Html->image("image/".$this->request->data['Image'][$i]['id']."/90x45_".$this->request->data['Image'][$i]['urlname']);
-                    $del.=' '.$this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Image]['.$this->request->data['Image'][$i]['id'].']', 'div'=>false));
+                
+                    if($this->request->data['Image'][$i]['urlname']!=""){
+                        $del.=' '.$this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Image]['.$this->request->data['Image'][$i]['id'].']', 'div'=>false));
+             
+                    }                    
                 }
                 $img.='</div>';
                 
                  
-                echo $this->Form->input("Image.$i.image_name",array( 'before'=>$img,'label'=>_('Image ').($i+1),'type'=>'file', 
+                echo $this->Form->input("Image.$i.image_name",array( 'before'=>$img,'label'=>__('Image ').($i+1),'type'=>'file', 
                     'after'=>$del));
             
          }
@@ -190,4 +194,4 @@
 </div>
 
     
-    <?php pr($activityTypes); ?>
+  <pre><?php print_r($activityTypes); ?></pre>

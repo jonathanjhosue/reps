@@ -26,7 +26,7 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('admin'=>false,'action' => 'view', $hotel['Hotel']['product_id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $hotel['Hotel']['product_id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hotel['Hotel']['product_id']), null, __('Are you sure you want to delete # %s?', $hotel['Hotel']['product_id'])); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hotel['Hotel']['product_id']), null, __('Are you sure you want to delete # %s?', $hotel['Hotel']['product_id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

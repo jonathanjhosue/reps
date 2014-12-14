@@ -1,15 +1,21 @@
 <?php	
     echo $this->Html->scriptBlock(
             '$(function() {
-		$( "#divRooms" ).accordion({autoHeight: false,navigation: true,collapsible: true});
+		$( "#divRooms" ).accordion({autoHeight: false,navigation: true,collapsible: true, active:false});               
+               
                 $( "#divReviews" ).accordion({autoHeight: false,navigation: true,collapsible: true});
                 $( "#divRoomRates" ).accordion({autoHeight: false,navigation: true,collapsible: true});
-                $( "#tabs" ).tabs();
+                $( "#tabs" ).tabs({
+                   // cookie: {  expires: 1 }
+                });
                 $( "input:submit" ).button();
+                
+               
                 
             });'
             , array('allowCache'=>true,'safe'=>true,'inline'=>false));
 ?>
+
 
 <h1><?php echo __('Edit Hotel'); ?></h1>
 
@@ -28,7 +34,8 @@
                 <li><a href="#tabs-4"><?php echo __('Rooms'); ?></a></li>
                 <li><a href="#tabs-5"><?php echo __('Seasons'); ?></a></li>
                 <li><a href="#tabs-6"><?php echo __('Room Rates'); ?></a></li>
-                <li><a href="#tabs-7"><?php echo __('Reviews'); ?></a></li>
+                <li><a href="#tabs-7"><?php echo __('Activities'); ?></a></li>
+                <li><a href="#tabs-8"><?php echo __('Reviews'); ?></a></li>
 	</ul>
      <?php echo $this->Form->create('Hotel', array('type' => 'file')); ?>
     <div id="tabs-1">
@@ -36,6 +43,8 @@
 
 	<?php
 		echo $this->Form->input('Product.id',array('readonly'=>true));
+                echo $this->Form->input('Product.Location.id',array('type'=>'hidden'));
+                echo $this->Form->input('Product.Location.region_id',array('type'=>'hidden'));
                         
                 echo $this->Form->input('Product.product_name',array('label'=>__('Hotel Name'),'div'=>'name'));                
               
@@ -130,12 +139,16 @@
                     
                     
                     $img.=$this->Html->image("image/".$this->request->data['Image'][$i]['id']."/90x45_".$this->request->data['Image'][$i]['urlname']);
-                    $del.=' '.$this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Image]['.$this->request->data['Image'][$i]['id'].']', 'div'=>false));
+                    
+                    if($this->request->data['Image'][$i]['urlname']!=""){
+                        $del.=' '.$this->Form->submit(__('Delete'),array('name'=>'data[Action][Delete][Image]['.$this->request->data['Image'][$i]['id'].']', 'div'=>false));
+             
+                    }
                 }
                 $img.='</div>';
                 
                  
-                echo $this->Form->input("Image.$i.image_name",array( 'before'=>$img,'label'=>_('Image ').($i+1),'type'=>'file', 
+                echo $this->Form->input("Image.$i.image_name",array( 'before'=>$img,'label'=>__('Image ').($i+1),'type'=>'file', 
                     'after'=>$del));
                // echo $this->Form->input('hotels/'.$hotel['Image'][$i]['image_name'], array('height' => '75px', 'style'=> 'padding-bottom:3px;'));
          }
@@ -233,6 +246,7 @@
                     echo $this->Form->input('Room.'.$i.'.hotel_id',array('type'=>'hidden','value'=>$room['hotel_id']));
                     echo $this->Form->input('Room.'.$i.'.category');
                     echo $this->Form->input('Room.'.$i.'.count',array('size'=>'4','maxlength'=>'3','div'=>'number'));
+					 echo $this->Form->input('Room.'.$i.'.max_people',array('size'=>'4','maxlength'=>'3','div'=>'number'));
                     
                     
                     echo $this->RipsWeb->getInputI18nAll($indexI18n,
@@ -250,7 +264,7 @@
                     echo $this->Form->input('Room.'.$i.'.free_internet');
                     echo $this->Form->input('Room.'.$i.'.air_conditioning');
                     echo $this->Form->input('Room.'.$i.'.orthopedic_matresses');
-                    echo $this->Form->input('Room.'.$i.'.telephone');
+                    echo $this->Form->input('Room.'.$i.'.telephone',array('type'=>'checkbox'));
                     echo $this->Form->input('Room.'.$i.'.alarm_clock');
                     echo $this->Form->input('Room.'.$i.'.cable_tv');
                     echo $this->Form->input('Room.'.$i.'.desk_&_chair');
@@ -290,7 +304,7 @@
             echo $this->Form->input('product_id',array('type'=>'hidden'));    
 	    echo $this->Form->input('Action.Add.Rooms_count',array('type'=>'text','label'=>__('New Rooms'),'maxlength'=>2,'div'=>'number','value'=>1));
             echo $this->Form->submit(__('Add'),array('name'=>'data[Action][Add][Rooms]'));
-            echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Rooms]'));
+            echo $this->Form->submit(__('Save'),array('id'=>'submitSaveRoom','name'=>'data[Action][Save][Rooms]'));
                
         ?>  
          </fieldset> 
@@ -532,11 +546,40 @@
                     ?>  
         </fieldset>
      </div>
-    <div id="tabs-7">  	       
+    <div id="tabs-7">
+        
+        <div id="divActivities">
+
+            
+                <?php
+                 //foreach($this->data['Review'] as $i=>$review){
+                echo $this->Form->input("Activity",array('label'=>__('Activities in Region'),'options'=>$activities,'size'=>'10', 'class'=>'selectmultiple', 'title'=>'Ctrl + click'));
+               
+                 echo $this->Form->input("Activity",array('label'=>__('Activities in other Regions'),'options'=>$activitiesOthers,'name'=>'data[Activity][ActivityOthers]','size'=>'10', 'class'=>'selectmultiple', 'title'=>'Ctrl + click'));
+                
+                ?>
+          
+            <div id="activityDescription">
+            
+            </div>
+            
+         </div>
+         <fieldset class="hotelsActions"> 
+                    <?php   
+                        echo $this->Form->input('id',array('type'=>'hidden'));
+                        echo $this->Form->input('product_id',array('type'=>'hidden'));    
+                                
+                        echo $this->Form->submit(__('Save'),array('name'=>'data[Action][Save][Hotel]'));
+                    ?>  
+        </fieldset>
+        
+    </div>
+        
+    <div id="tabs-8">  	       
                      <div id="divReviews">
                 <?php
                 
-                foreach($this->data['Review'] as $i=>$review){
+                if(isset($this->data['Review'])) foreach($this->data['Review'] as $i=>$review){
                     $titulo=($i+1).'=>'.$review['review_date'];
                     echo '<h3><a href="#">'.$titulo.'</a></h3>';
                     echo "<div>";
@@ -582,7 +625,7 @@
 <div class="actions">
 	<ul>
 		<li>
-			<?php echo $this->Html->link('Delete', array('controller'=>'hotels', 'action'=>'delete', $this->Form->value('Product.id')), null, 'Are you sure you want to delete this Hotel?'); ?>
+			<?php echo $this->Form->postLink('Delete', array('controller'=>'hotels', 'action'=>'delete', $this->Form->value('Product.id')), null, 'Are you sure you want to delete this Hotel?'); ?>
 		</li>			
 		<li><?php echo $this->Html->link('Back to Hotels', array('action'=>'index')); ?></li>
                 <li>
@@ -592,6 +635,6 @@
 </div>
 
 <?php 
-//pr($this->validationErrors);
+
 
 ?>

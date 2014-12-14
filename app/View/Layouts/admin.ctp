@@ -24,15 +24,39 @@
 	?>
 </head>
 <body>
+<?php 
+//echo $this->Session->read("Config.country") ;
+$localLanguage=$this->Session->read("Config.language_only") ;
+$localCountry =$this->Session->read("Config.country") ;
+
+?>
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $this->Html->link(__('Content Management System', true), '../'); ?></h1>
-			<div >
+			<div id="barLanguage" class="bar">
 				<?php echo $this->Html->link($this->Html->image('_log_out.png', array('alt' => 'Login', 'width'=>'20px')), array('controller' => 'users', 'action' => 'logout'), array('escape'=>false)); ?>
 				&nbsp;&nbsp;
-				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Espa�ol', 'width'=>'20px')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>1), array('escape'=>false)); ?>
+				<?php echo $this->Html->link($this->Html->image('_espanol_flag.png', array('alt' => 'Español', 'width'=>'20px', 'class'=>('es'==$localLanguage)?'selected':'')), array('controller' => 'Languages', 'action' => 'change', 'id'=>1), array('escape'=>false)); ?>
 				&nbsp;&nbsp;
-				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'20px')), array('controller' => 'Languages', 'action' => 'changeLanguage', 'id'=>2), array('escape'=>false));?>										
+				<?php	echo $this->Html->link($this->Html->image('_english_flag.png', array('alt' => 'English', 'width'=>'20px', 'class'=>('en'==$localLanguage)?'selected':'')), array('controller' => 'Languages', 'action' => 'change', 'id'=>2), array('escape'=>false));?>										
+										
+			</div>
+			<div id="barCountry" class="bar">				
+				&nbsp;&nbsp;
+				<?php echo $this->Html->link($this->Html->image('flag_countries/cr.png', array('alt' => 'Costa Rica', 'width'=>'48px', 'class'=>('CR'==$localCountry?'selected':''))), array('controller' => 'Countries', 'action' => 'change', 'CR'), array('escape'=>false)); ?>
+				&nbsp;&nbsp;
+				<?php	echo $this->Html->link($this->Html->image('flag_countries/pa.png', array('alt' => 'Panamá', 'width'=>'48px', 'class'=>'PA'==$localCountry?'selected':'')), array('controller' => 'Countries', 'action' => 'change', 'PA'), array('escape'=>false));?>										
+				&nbsp;&nbsp;
+				<?php	echo $this->Html->link($this->Html->image('flag_countries/gt.png', array('alt' => 'Guatemala', 'width'=>'48px', 'class'=>'GT'==$localCountry?'selected':'')), array('controller' => 'Countries', 'action' => 'change', 'GT'), array('escape'=>false));?>										
+				&nbsp;&nbsp;
+				<?php	echo $this->Html->link($this->Html->image('flag_countries/sv.png', array('alt' => 'Salvador', 'width'=>'48px', 'class'=>'SV'==$localCountry?'selected':'')), array('controller' => 'Countries', 'action' => 'change', 'SV'), array('escape'=>false));?>										
+				&nbsp;&nbsp;
+				<?php	echo $this->Html->link($this->Html->image('flag_countries/hn.png', array('alt' => 'Honduras', 'width'=>'48px', 'class'=>'HN'==$localCountry?'selected':'')), array('controller' => 'Countries', 'action' => 'change', 'HN'), array('escape'=>false));?>										
+				&nbsp;&nbsp;
+				<?php	echo $this->Html->link($this->Html->image('flag_countries/ni.png', array('alt' => 'Nicaragua', 'width'=>'48px', 'class'=>'NI'==$localCountry?'selected':'')), array('controller' => 'Countries', 'action' => 'change', 'NI'), array('escape'=>false));?>										
+			
+			
+			
 			</div>
 		</div>
             

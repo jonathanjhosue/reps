@@ -235,3 +235,89 @@ h1{
     text-shadow: #888 0px 2px 4px;
     margin: 0px;
 }
+
+select optgroup[label]{
+   font-size: 1.2em;
+   
+}
+select option{
+   font-size: 0.8em;   
+}
+
+.selectmultiple{
+    min-width: 300px;
+    
+}
+
+#divActivities div.select{
+    
+    
+}
+
+#divActivities div.select select[multiple="multiple"]{
+    width: 200px;
+}
+
+
+.search_select{
+    width: 450px;
+}
+.search_select .filter{
+   max-width: 88%;
+}
+.search_select input{
+  margin: 0px; 
+}
+.search_select select{
+   width: auto;
+   min-height: 100px;
+   min-width: 400px;
+
+}
+
+#divItinerary div {
+    margin: 0px;
+}
+
+.divLocationRentacar{
+    
+
+}
+
+.divLocationRentacar table tfoot td{
+    text-align: right;
+}
+
+.fieldsetLocationRentacars table th div, .fieldsetLocationRentacars table th div label{
+    display: inline;
+    
+    
+}
+
+
+.pagination {list-style:none; margin:10px 0px 0px 0px; padding:0px; clear:both;}
+.pagination li{float:left; margin:3px;}
+.pagination li a{   display:block; padding:3px 5px; color:#fff; background-color:#777; text-decoration:none;}
+.pagination li a.active {border:1px solid #000; color:#000; background-color:#fff;}
+.pagination li a.inactive {background-color:#eee; color:#777; border:1px solid #ccc;}
+
+.fieldsetLocationRentacars  table tbody input{
+    width: 90%;
+    text-align: center;
+}
+
+.divAditionalServices  table tbody input{
+    width: 90%;
+    text-align: center;
+}
+
+td.subtitle{
+    font-size: 1.2em;
+    background-color: #ddd;
+}
+
+div.bar a img.selected{
+background-color:#CCC;
+
+}
+
